@@ -398,7 +398,7 @@ $session_data = $this->session->userdata('logged_in');
                                 <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
 
 
-                                <h4 style="font-size: 15px">{{<?php echo $value->price; ?>|currency:" "}}</h4>
+                                <h4 style="font-size: 15px">{{<?php echo $value->price|0; ?>|currency:" "}}</h4>
                                 <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
                                 <P>
                                     <?php
@@ -453,7 +453,7 @@ $session_data = $this->session->userdata('logged_in');
                                         <div class="media-body">
                                             <h4 class="media-heading"><?php echo $value->title; ?></h4>
                                             <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price; ?>|currency:" "}}</p>
+                                            <p >{{<?php echo $value->price|0; ?>|currency:" "}}</p>
                                             <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
                                         </div>
                                     </div>
@@ -495,7 +495,7 @@ $session_data = $this->session->userdata('logged_in');
                                         <div class="media-body">
                                             <h4 class="media-heading"><?php echo $value->title; ?></h4>
                                             <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price; ?>|currency:" "}}</p>
+                                            <p >{{<?php echo $value->price|0; ?>|currency:" "}}</p>
                                             <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
                                         </div>
                                     </div>
