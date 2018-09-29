@@ -128,7 +128,7 @@ $session_data = $this->session->userdata('logged_in');
                                         <h3><?php echo $product_obj->title; ?></h3>
                                         <p>SKU:<?php echo $product_obj->sku; ?></p>
                                         <p><?php echo $product_obj->short_description; ?></p>
-                                        <h4><small>Price</small> {{<?php echo $product_obj->price; ?>|currency:'<?php echo globle_currency;?>'}}</h4>
+                                        <h4><small>Price</small> {{<?php echo $product_obj->price ? $product_obj->price | 0; ?>|currency:'<?php echo globle_currency;?>'}}</h4>
 
                                         <h4><small>Credit Limit </small> {{<?php echo $product_obj->credit_limit | 0; ?>|currency:'<?php echo globle_currency;?>'}}</h4>
 
@@ -251,8 +251,8 @@ $session_data = $this->session->userdata('logged_in');
                                         </div>
                                         <div class="form-group">
                                             <label >Final Price</label>
-                                            <span class="final_price form-control" id='finalprice'><?php echo $product_obj->price; ?></span>
-                                            <input type="hidden" class="form-control price_tag_text" id='finalprice1' name="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->price; ?>"> 
+                                            <span class="final_price form-control" id='finalprice'><?php echo $product_obj->price ? $product_obj->price | 0; ?></span>
+                                            <input type="hidden" class="form-control price_tag_text" id='finalprice1' name="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->price ? $product_obj->price | 0; ?>"> 
                                         </div>
 
                                         <div class="form-group">
