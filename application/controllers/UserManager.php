@@ -179,10 +179,7 @@ class UserManager extends CI_Controller {
             $this->db->set('image', $picture);
             $this->db->set('last_name', $this->input->post('last_name'));
             $this->db->set('contact_no', $this->input->post('contact_no'));
-            $this->db->set('address', $this->input->post('address'));
-            $this->db->set('state', $this->input->post('state'));
-            $this->db->set('city', $this->input->post('city'));
-            $this->db->set('pincode', $this->input->post('pincode'));
+
             $this->db->where('id', $uid); //set column_name and value in which row need to update
             $this->db->update('admin_users');
             redirect('UserManager/profile_update_info');

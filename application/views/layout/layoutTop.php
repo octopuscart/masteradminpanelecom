@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?php echo sitename;?></title>
+        <title><?php echo sitename; ?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -16,7 +16,7 @@
 
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/AdminLTE.css">
-         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/customstyle.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/customstyle.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
@@ -52,9 +52,9 @@
                 <!-- Logo -->
                 <a href="<?php echo base_url(); ?>index.php/ProductManager/productReport" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b><?php echo sitename;?></b></span>
+                    <span class="logo-mini"><b><?php echo sitename; ?></b></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg" style="font-size: 12px"><b><?php echo sitename;?></span>
+                    <span class="logo-lg" style="font-size: 12px"><b><?php echo sitename; ?></span>
                 </a>
 
                 <!-- Header Navbar: style can be found in header.less -->
@@ -70,13 +70,13 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="<?php echo base_url(); ?>index.php/QueryHandler/user_post" class="dropdown-toggle" data-toggle="dropdown">
-                                    <?php if ($session_data['image']) { ?>
+                                    <?php if ($session_data['image1']) { ?>
                                         <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $session_data['image']; ?>" class="user-image" alt="User Image">
 
                                         <?php
                                     } else {
                                         ?>
-                                        <img src="<?php echo base_url(); ?>assets_main/image/logo.png" class="user-image" alt="User Image">
+                                        <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" class="user-image" alt="User Image">
                                     <?php } ?>    
 
                                     <span class="hidden-xs"><?php echo $session_data['first_name']; ?> </span>
@@ -91,11 +91,11 @@
                                             <?php
                                         } else {
                                             ?>
-                                            <img src="<?php echo base_url(); ?>assets_main/image/logo.png" class="img-circle" alt="User Image">
+                                            <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" class="img-circle" alt="User Image">
                                         <?php } ?> 
 
 
-                                       
+
                                         <p>
                                             <?php echo $session_data['first_name']; ?>  <?php echo $session_data['last_name']; ?> 
                                             <small> <?php echo $session_data['username']; ?> </small>
@@ -108,7 +108,7 @@
                                         <div class="pull-left">
                                             <a href="<?php echo base_url(); ?>index.php/UserManager/profile_update_info" class="btn btn-default btn-flat">Profile</a>
                                         </div>
-                                        
+
                                         <div class="pull-right">
                                             <a href="<?php echo base_url('index.php/LoginAndLogout/logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
                                         </div>

@@ -42,6 +42,10 @@ class LoginAndLogout extends CI_Controller {
             }
             $usr = $data[0]['email'];
             $pwd = $data[0]['password'];
+          
+            if($data[0]['user_type']==''){
+                redirect('LoginAndLogout/login_admin/');
+            }
             
             if ($username == $usr && md5($password) == $pwd) {
                 $sess_data = array(

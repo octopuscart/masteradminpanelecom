@@ -31,6 +31,8 @@ define('sku_prefix', 'JPF');
 define('default_image', 'image/default_image.jpg');
 define('globle_currency', $configuration['currency']);
 define('sitename', $configuration['site_name']);
+define('site_logo', $configuration['site_logo']);
+
 define('siteurl', $configuration['site_url']);
 define('product_image_base', $configuration['product_images_url']);
 
