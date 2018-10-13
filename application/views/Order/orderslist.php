@@ -90,6 +90,12 @@ $this->load->view('layout/layoutTop');
                                                                 View Order <i class="fa fa-arrow-right"></i>
                                                             </a>
                                                         </div>
+                                                        <div class="col-md-6 orderlist_stylemes">
+                                                            <b>Items:</b>  <span style="font-weight: 500"><?php echo $value->items; ?></span>
+                                                        </div>
+                                                        <div class="col-md-6 orderlist_stylemes">
+                                                            <b>Sizes:</b>  <span style="font-weight: 500"><?php echo $value->measurement_style; ?></span>
+                                                        </div>
                                                         <div style="clear: both"></div>
                                                     </article>
                                                 </div>

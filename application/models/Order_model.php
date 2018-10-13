@@ -26,7 +26,7 @@ class Order_model extends CI_Model {
             $this->db->where('order_id', $order_details->id);
             $query = $this->db->get('cart');
             $cart_items = $query->result();
-            
+
             $this->db->order_by('display_index', 'asc');
             $this->db->where('order_id', $order_details->id);
             $query = $this->db->get('custom_measurement');
@@ -46,11 +46,6 @@ class Order_model extends CI_Model {
                     $customdata[$value1['style_key']] = $value1['style_value'];
                 }
                 $value->custom_dict = $customdata;
-
-//                $this->db->where('order_id', $order_id);
-//                $this->db->where('vendor_id', $vendor_id);
-//                $query = $this->db->get('vendor_order_status');
-//                $orderstatus = $query->result();
                 $value->product_status = array();
             }
             $order_data['cart_data'] = $cart_items;
@@ -58,7 +53,6 @@ class Order_model extends CI_Model {
         return $order_data;
     }
 
-    
     public function getOrderDetailsV2($key_id, $is_key = 0) {
         $order_data = array();
         if ($is_key === 'key') {
@@ -129,8 +123,7 @@ class Order_model extends CI_Model {
         }
         return $order_data;
     }
-    
-    
+
     public function getVendorsOrder($key_id) {
         $order_data = array();
         $this->db->where('order_key', $key_id);
@@ -148,15 +141,15 @@ class Order_model extends CI_Model {
                 $vid = $value->vendor_id;
                 $order_data['vendor'][$vid] = array();
                 $order_data['vendor'][$vid]['vendor'] = $value;
-                
+
                 $this->db->order_by('id', 'desc');
                 $this->db->where('vendor_order_id', $value->id);
                 $query = $this->db->get('vendor_order_status');
                 $status = $query->row();
-                
+
                 $order_data['vendor'][$vid]['status'] = $status ? $status->status : $value->status;
                 $order_data['vendor'][$vid]['remark'] = $status ? $status->remark : $value->status;
-                
+
                 $this->db->where('order_id', $order_id);
                 $this->db->where('vendor_id', $vid);
                 $query = $this->db->get('cart');
@@ -165,6 +158,48 @@ class Order_model extends CI_Model {
         }
 
         return $order_data;
+    }
+
+    function order_mail($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->getOrderDetails($order_id, 0);
+        $emailsender = email_sender;
+        $sendername = email_sender_name;
+        $email_bcc = email_bcc;
+
+        if ($order_details) {
+
+            $order_no = $order_details['order_data']->order_no;
+//            $this->email->from($emailsender, $sendername);
+//            $this->email->to($order_details['order_data']->email);
+//            $this->email->bcc(email_bcc);
+            //$subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [" . $order_no . "] has been successfully placed!";
+            //  $this->email->subject($subject);
+//
+            echo $this->load->view('Email/order_mail', $order_details, true);
+//            $this->email->message($this->load->view('Email/order_mail', $order_details, true));
+//            $this->email->print_debugger();
+//            // echo $result = $this->email->send();
+        }
+    }
+
+    function order_pdf($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->getOrderDetails($order_id, 0);
+        if ($order_details) {
+            $order_no = $order_details['order_data']->order_no;
+            $html = $this->load->view('Email/order_pdf', $order_details, true);
+            $pdfFilePath = "output_pdf_name.pdf";
+
+            //load mPDF library
+            $this->load->library('m_pdf');
+
+            //generate the PDF from the given html
+            $this->m_pdf->pdf->WriteHTML($html);
+
+            //download it.
+            $this->m_pdf->pdf->Output($pdfFilePath, "D");
+        }
     }
 
 }

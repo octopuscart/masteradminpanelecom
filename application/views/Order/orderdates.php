@@ -16,7 +16,7 @@
         }
         ?>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-right">
         <h4> Orders from <small><?php echo $daterange; ?></small></h4>
     </div>
 

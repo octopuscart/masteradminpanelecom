@@ -90,6 +90,15 @@ class Order extends CI_Controller {
         $this->load->view('Order/orderdetails', $data);
     }
 
+    function order_mail_send($order_id) {
+        $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
+        $this->Order_model->order_mail($order_id, $subject);
+    }
+    
+    function order_pdf($order_id) {
+        $this->Order_model->order_pdf($order_id);
+    }
+
     public function remove_order_status($status_id, $orderkey) {
         $this->db->delete('user_order_status', array('id' => $status_id));
         redirect("Order/orderdetails/$orderkey");
@@ -120,6 +129,16 @@ class Order extends CI_Controller {
                 $query = $this->db->get('user_order_status');
                 $status = $query->row();
                 $value->status = $status ? $status->status : $value->status;
+                $this->db->order_by('id', 'desc');
+                $this->db->where('order_id', $value->id);
+                $query = $this->db->get('cart');
+                $cartdata = $query->result();
+                $tempdata = array();
+                foreach ($cartdata as $key1 => $value1) {
+                    array_push($tempdata, $value1->item_name. "(".$value1->quantity.")");
+                }
+                
+                $value->items = implode(", ", $tempdata);
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;
@@ -209,6 +228,18 @@ class Order extends CI_Controller {
                 $query = $this->db->get('user_order_status');
                 $status = $query->row();
                 $value->status = $status ? $status->status : $value->status;
+//                array_push($orderslistr, $value);
+           
+                $this->db->order_by('id', 'desc');
+                $this->db->where('order_id', $value->id);
+                $query = $this->db->get('cart');
+                $cartdata = $query->result();
+                $tempdata = array();
+                foreach ($cartdata as $key1 => $value1) {
+                    array_push($tempdata, $value1->item_name. "(".$value1->quantity.")");
+                }
+                
+                $value->items = implode(", ", $tempdata);
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;

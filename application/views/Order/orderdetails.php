@@ -157,7 +157,7 @@ $this->load->view('layout/layoutTop');
 
     <div class="col-md-12">
 
-      
+
 
 
 
@@ -237,7 +237,7 @@ $this->load->view('layout/layoutTop');
                             <b  style="color:#c0c0c0">Order Description</b><br/>
                         </td>
                     </tr>
-                       <tr style="font-weight: bold">
+                    <tr style="font-weight: bold">
                         <td style="width: 20px;text-align: right">S.No.</td>
                         <td colspan="2"  style="text-align: center">Product</td>
 

@@ -34,7 +34,7 @@ define('sitename', $configuration['site_name']);
 define('siteurl', $configuration['site_url']);
 define('product_image_base', $configuration['product_images_url']);
 
-
+define('site_mail_logo', 'http://www.bespoketailorshk.com/assets/images/logo73.png');
 
 
 

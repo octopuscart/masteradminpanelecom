@@ -39,7 +39,7 @@ $this->load->view('layout/layoutTop');
                             <th style="width:50px;">Image</th>
                             <th style="width: 75px;">Category</th>
                             <th style="width: 100px;">Product</th>
-                            
+
                             <th style="width: 75px;">Stock Status</th>
                             <th style="width: 75px;">Edit</th>
                         </tr>
@@ -53,7 +53,7 @@ $this->load->view('layout/layoutTop');
                                 <tr>
                                     <td><?php echo $count; ?></td>
                                     <td>
-                                        <img src="<?php echo product_image_base.'coman/output/'. $value['folder']; ?>/cutting20001.png" style="height:51px;">
+                                        <img src="<?php echo product_image_base . 'coman/output/' . $value['folder']; ?>/cutting20001.png" style="height:51px;">
                                     </td>
                                     <td >
                                         <span class="">
@@ -68,14 +68,14 @@ $this->load->view('layout/layoutTop');
                                         <br/>
                                         <span class="product_description product_text"><?php echo $value['short_description']; ?></span>
                                     </td>
-                                   
+
                                     <td >
                                         <span class="">
                                             <?php echo $value['stock_status']; ?>
                                         </span>
                                     </td>
                                     <td >
-                                        <a href="<?php echo site_url('ProductManager/edit_product/'.$value['id']); ?>" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value['id']); ?>" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>
                                     </td>
                                 </tr>
                                 <?php
