@@ -189,7 +189,7 @@ class Order_model extends CI_Model {
         if ($order_details) {
             $order_no = $order_details['order_data']->order_no;
             $html = $this->load->view('Email/order_pdf', $order_details, true);
-            echo $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
+             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . ".pdf";
 

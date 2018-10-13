@@ -71,17 +71,11 @@ class User_model extends CI_Model {
     //get user detail by id
     function user_reports($user_type) {
 
-        switch ($user_type) {
-            case 'Blocked':
-                $this->db->where(array('status=' => 'Blocked'));
-                break;
-            case 'All':
-                $this->db->where(array('status!=' => 'Blocked'));
-                break;
-            default:
+      
+          
                 $this->db->where(array('user_type' => "", 'status!=' => 'Blocked'));
-                break;
-        }
+           
+        
         $query = $this->db->get('admin_users');
         return $query->result();
     }

@@ -12,12 +12,15 @@
 </tr>
 
 </table>
+<h3 style="text-align: center">Your Appointment
+</h3>
 
 <hr/>
 
-Hello,<br/>
-As one of Hong Kong's leading custom tailors, we are proud of our international reputation for making the highest quality tailored clothing. Since past three decades, we are known across the globe for professionally hand-crafted suits, shirts, leather jackets, sports jackets and ladies dresses from Hong Kong.
-
+Dear ------,
+<br/>
+We have booked your appointment to see our  Tailor,  in London on Friday, 12 Dec 2018, 05:00 PM at the InterContinental London Park Lane.
+On the day of your appointment, <br/>please call us on his contact no. (UK: +44 00000000) and he will give you his suite number.
 
 <hr/>
 <div style="height: 200px;">Kindest Regards,<br />

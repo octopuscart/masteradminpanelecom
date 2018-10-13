@@ -46,7 +46,7 @@ $this->load->view('layout/layoutTop');
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table id="tableData" class="table table-bordered table-striped">
+                    <table id="tableDataOrder" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -127,14 +127,7 @@ $this->load->view('layout/layoutFooter');
 <script>
     $(function () {
 
-        $('#tableData').DataTable({
-//      'paging'      : true,
-//      'lengthChange': false,
-//      'searching'   : false,
-//      'ordering'    : true,
-//      'info'        : true,
-//      'autoWidth'   : false
-        })
+
     })
 
 
@@ -173,6 +166,10 @@ $this->load->view('layout/layoutFooter');
         }, function (start, end, label) {
             $('input[name=daterange]').val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
-        $(".data_table").DataTable();
+        $('#tableDataOrder').DataTable({
+            "language": {
+                "search": "Search Order By Email, Order No., Order Date Etc."
+            }
+        })
     })
 </script>

@@ -142,21 +142,37 @@ function checkPermission($session_data) {
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
-                        <span>User Management</span>
+                        <span>Client Management</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <!--Admin Access-->
-                        <li>
-                            <a href="<?php echo base_url(); ?>index.php/UserManager/addVendor">
-                                <i class="active fa fa-plus "></i> <span>Add User</span>
-                            </a>
-                        </li>   
+                   
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/UserManager/usersReport">
-                                <i class="active fa fa-plus "></i> <span>Users Reports</span>
+                                <i class="active fa fa-plus "></i> <span>Clients Reports</span>
+                            </a>
+                        </li>   
+                        <!--end of admin access-->
+                    </ul>
+                </li>
+                
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-envelope"></i>
+                        <span>Message Book</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!--Admin Access-->
+                   
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Services/newslatter/1">
+                                <i class="active fa fa-plus "></i> <span>Send Mail/Newsletter</span>
                             </a>
                         </li>   
                         <!--end of admin access-->

@@ -34,7 +34,7 @@ $this->load->view('layout/layoutTop');
 
 function userReportFunction($users) {
     ?>
-    <table id="tableData" class="table table-bordered table-striped">
+    <table id="tableDataOrder" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th style="width: 20px;">S.N.</th>
@@ -83,17 +83,17 @@ function userReportFunction($users) {
                                 <span class="seller_tag">
                                     <?php echo $value->email; ?>
                                 </span>
-                                
+
                             </span>
                         </td>
                         <td>
                             <span class="">
-                                
+
                                 <?php echo $value->contact_no; ?>
                             </span>
                         </td>
 
-                        
+
 
                         <td>
                             <span class="">
@@ -159,13 +159,10 @@ $this->load->view('layout/layoutFooter');
 <script>
     $(function () {
 
-        $('#tableData').DataTable({
-//      'paging'      : true,
-//      'lengthChange': false,
-//      'searching'   : false,
-//      'ordering'    : true,
-//      'info'        : true,
-//      'autoWidth'   : false
+        $('#tableDataOrder').DataTable({
+            language: {
+                "search": "Apply filter _INPUT_ to table"
+            }
         })
     })
 

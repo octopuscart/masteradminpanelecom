@@ -66,7 +66,7 @@ class UserManager extends CI_Controller {
         $config['upload_path'] = 'assets_main/userimages';
         $config['allowed_types'] = '*';
         $data["message"] = "";
-        $data['user_type'] = $this->user_type ;
+        $data['user_type'] = $this->user_type;
         if (isset($_POST['submit'])) {
             $picture = '';
             if (!empty($_FILES['picture']['name'])) {
@@ -197,7 +197,29 @@ class UserManager extends CI_Controller {
         $this->db->where('user_id', $user_id);
         $query = $this->db->get('user_order');
         $orderlist = $query->result();
-        $data['orderslist'] = $orderlist;
+$orderslistr = [];
+        foreach ($orderlist as $key => $value) {
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('user_order_status');
+            $status = $query->row();
+            $value->status = $status ? $status->status : $value->status;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('cart');
+            $cartdata = $query->result();
+            $tempdata = array();
+            foreach ($cartdata as $key1 => $value1) {
+                array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
+            }
+
+            $value->items = implode(", ", $tempdata);
+            array_push($orderslistr, $value);
+        }
+
+        $data['orderslist'] = $orderslistr;
+
+
 
         $this->db->where('user_id', $user_id);
         $this->db->order_by('status', 'desc');
@@ -265,10 +287,10 @@ class UserManager extends CI_Controller {
             $this->db->set('image', $picture);
             $this->db->set('last_name', $this->input->post('last_name'));
             $this->db->set('contact_no', $this->input->post('contact_no'));
-            $this->db->set('address', $this->input->post('address'));
-            $this->db->set('state', $this->input->post('state'));
-            $this->db->set('city', $this->input->post('city'));
-            $this->db->set('pincode', $this->input->post('pincode'));
+            $this->db->set('profession', $this->input->post('profession'));
+            $this->db->set('country', $this->input->post('country'));
+            $this->db->set('gender', $this->input->post('gender'));
+            $this->db->set('birth_date', $this->input->post('birth_date'));
             $this->db->where('id', $uid); //set column_name and value in which row need to update
             $this->db->update('admin_users');
             redirect('UserManager/user_details/' . $user_id);

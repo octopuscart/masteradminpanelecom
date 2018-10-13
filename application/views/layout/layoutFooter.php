@@ -235,6 +235,10 @@
 <script src="<?php echo base_url(); ?>assets_main/treejs/jstree.min.js"></script>
 <!--end of tree js-->
 
+<!-- InputMask -->
+<script src="<?php echo base_url(); ?>assets_main/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url(); ?>assets_main/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url(); ?>assets_main/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <!--datepicker-->
 <script src="<?php echo base_url(); ?>assets_main/plugins/datepicker/moment.min.js"></script>

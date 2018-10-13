@@ -126,7 +126,7 @@ $this->load->view('layout/layoutTop');
                                 if ($user_details->image) {
                                     echo base_url() . 'assets_main/userimages/' . $user_details->image;
                                 } else {
-                                    echo (base_url() . "assets_main/" . default_image);
+                                    echo ( base_url()."assets_main/dist/img/avatar5.png");
                                 }
                                 ?>)">
                                 </div>
