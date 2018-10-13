@@ -66,7 +66,7 @@ $this->load->view('layout/layoutTop');
                                                             <h6 style="font-weight: bold;">
                                                                 Order No. #<?php echo $value->order_no; ?>
                                                             </h6>
-                                                            Total Amount: {{<?php echo $value->total_price; ?>|currency:"Rs. "}}
+                                                            Total Amount: {{<?php echo $value->total_price; ?>|currency:" "}}
                                                             <br/>
                                                             Total Products: {{<?php echo $value->total_quantity; ?>}}
                                                         </div>

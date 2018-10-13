@@ -112,7 +112,7 @@ $this->load->view('layout/layoutTop');
 
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">Vendor Id:<?php echo $user_details->email; ?></h3>
+                <h3 class="box-title">User Id:<?php echo $user_details->email; ?></h3>
             </div>
             <div class="box-body">
 
