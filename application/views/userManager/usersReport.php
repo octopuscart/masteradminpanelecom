@@ -40,8 +40,8 @@ function userReportFunction($users) {
                 <th style="width: 20px;">S.N.</th>
                 <th style="width:50px;">Image</th>
                 <th style="width: 75px;">Name</th>
-                <th style="width: 100px;">Email / Contact No.</th>
-                <th style="width: 100px;">Address</th>
+                <th style="width: 100px;">Email </th>
+                <th style="width: 100px;">Contact No.</th>
                 <th style="width: 75px;">Registration Date Time</th>
                 <th style="width: 75px;">Edit</th>
             </tr>
@@ -57,12 +57,22 @@ function userReportFunction($users) {
                         <td><?php echo $count; ?></td>
 
                         <td>
-                            <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
+                            <?php
+                            if ($value->image) {
+                                ?>
+                                <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
+                            <?php } else {
+                                ?>
+                                <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" style="height:51px;">
+
+                            <?php }
+                            ?>
+
                         </td>
 
                         <td>
                             <span class="">
-                                <span class="seller_tag"><?php echo $value->first_name; ?><?php echo $value->last_name; ?></span>
+                                <span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span>
                                 <br/>
                                 <b><?php echo $value->user_type; ?></b>
                             </span>
@@ -73,24 +83,21 @@ function userReportFunction($users) {
                                 <span class="seller_tag">
                                     <?php echo $value->email; ?>
                                 </span>
-                                <br/>
+                                
+                            </span>
+                        </td>
+                        <td>
+                            <span class="">
+                                
                                 <?php echo $value->contact_no; ?>
                             </span>
                         </td>
 
-                        <td>
-                            <span class="" style="font-size: 12px;">
-                                <span class="">
-                                    <?php echo $value->address; ?>
-                                </span>
-                                <br/>
-                                <?php echo $value->city; ?> <?php echo $value->state; ?> <?php echo $value->pincode; ?>
-                            </span>
-                        </td>
+                        
 
                         <td>
                             <span class="">
-                                <?php echo $value->op_date_time; ?>
+                                <?php echo $value->registration_datetime; ?>
                             </span>
                         </td>
 
@@ -105,9 +112,9 @@ function userReportFunction($users) {
             ?>
         </tbody>
     </table>
-            <?php
-        }
-        ?>
+    <?php
+}
+?>
 
 
 <section class="content">
@@ -116,65 +123,26 @@ function userReportFunction($users) {
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">Users Reports</h3>
+                <div class="box-tools pull-right">
+                    <a class="btn btn-success " href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
+                        Export Data
+                    </a>
+                </div>
+
             </div>
             <div class="box-body">
 
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#allusers" aria-controls="home" role="tab" data-toggle="tab">All Users</a></li>
-                    <li role="presentation"><a href="#vendors" aria-controls="profile" role="tab" data-toggle="tab">Vendors</a></li>
-                    <li role="presentation"><a href="#manager" aria-controls="manager" role="tab" data-toggle="tab">Manager</a></li>
-                    <li role="presentation"><a href="#customers" aria-controls="messages" role="tab" data-toggle="tab">Customers</a></li>
-                    <li role="presentation"><a href="#blockedusers" aria-controls="settings" role="tab" data-toggle="tab">Blocked</a></li>
-                </ul>
+
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="allusers">
-                        <a class="btn btn-success exportdata" href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
-                            Export Data
-                        </a>
-                        <div class="" style="padding:20px">
-<?php userReportFunction($users_all); ?>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="vendors">
-                        <a class="btn btn-success exportdata" href="<?php echo site_url('userManager/user_profile_record_xls/vendor'); ?>"  targer="_blank">
-                            Export Data
-                        </a>
-                        <div class="" style="padding:20px">
-<?php userReportFunction($users_vendor); ?>
-                        </div>
-                    </div>
-                    
-                    <div role="tabpanel" class="tab-pane" id="manager">
-                        <a class="btn btn-success exportdata" href="<?php echo site_url('userManager/user_profile_record_xls/manager'); ?>"  targer="_blank">
-                            Export Data
-                        </a>
-                        <div class="" style="padding:20px">
-<?php userReportFunction($users_manager); ?>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    <div role="tabpanel" class="tab-pane" id="customers">
-                        <a class="btn btn-success exportdata" href="<?php echo site_url('userManager/user_profile_record_xls/customers'); ?>"  targer="_blank">
-                            Export Data
-                        </a>
-                        <div class="" style="padding:20px">
-<?php userReportFunction($users_customer); ?>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="blockedusers">
-                        <a class="btn btn-success exportdata" href="<?php echo site_url('userManager/user_profile_record_xls/blocked'); ?>" targer="_blank">
-                            Export Data
-                        </a>
-                        <div class="" style="padding:20px">
-<?php userReportFunction($users_blocked); ?>
-                        </div>
+
+
+                    <div class="" style="padding:20px">
+                        <?php userReportFunction($users_all); ?>
                     </div>
                 </div>
+
 
 
             </div>

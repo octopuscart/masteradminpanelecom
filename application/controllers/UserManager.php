@@ -51,16 +51,14 @@ class UserManager extends CI_Controller {
 
     public function user_profile_record_xls($user_type) {
         $data['user_type'] = $user_type;
-        $data['users_vendor'] = $this->User_model->user_reports("Vendor");
-        $data['users_customer'] = $this->User_model->user_reports("Customer");
-        $data['users_all'] = $this->User_model->user_reports("All");
-        $data['users_blocked'] = $this->User_model->user_reports("Blocked");
-        $data['users_manager'] = $this->User_model->user_reports("Manager");
+
+        $data['users_all'] = $this->User_model->user_reports("User");
+
         $filename = 'customers_report_' . $user_type . "_" . date('Ymd') . ".xls";
         $html = $this->load->view('userManager/userProfileRecordXls', $data, TRUE);
         ob_clean();
-        header("Content-Disposition: attachment; filename='$filename'");
-        header("Content-Type: application/vnd.ms-excel");
+//        header("Content-Disposition: attachment; filename='$filename'");
+//        header("Content-Type: application/vnd.ms-excel");
         echo $html;
     }
 

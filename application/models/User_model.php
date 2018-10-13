@@ -79,7 +79,7 @@ class User_model extends CI_Model {
                 $this->db->where(array('status!=' => 'Blocked'));
                 break;
             default:
-                $this->db->where(array('user_type' => $user_type, 'status!=' => 'Blocked'));
+                $this->db->where(array('user_type' => "", 'status!=' => 'Blocked'));
                 break;
         }
         $query = $this->db->get('admin_users');
