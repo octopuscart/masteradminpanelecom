@@ -70,7 +70,7 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="<?php echo base_url(); ?>index.php/QueryHandler/user_post" class="dropdown-toggle" data-toggle="dropdown">
-                                    <?php if ($session_data['image1']) { ?>
+                                    <?php if ($session_data['image']) { ?>
                                         <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $session_data['image']; ?>" class="user-image" alt="User Image">
 
                                         <?php
