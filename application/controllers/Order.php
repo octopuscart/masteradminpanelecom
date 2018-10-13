@@ -20,7 +20,7 @@ class Order extends CI_Controller {
         $this->user_type = $this->session->logged_in['user_type'];
     }
 
-    //list of data according to date list
+//list of data according to date list
     public function date_graph_data($date1, $date2, $datalist) {
         $period = new DatePeriod(
                 new DateTime($date1), new DateInterval('P1D'), new DateTime($date2)
@@ -47,7 +47,16 @@ class Order extends CI_Controller {
         redirect('/');
     }
 
-    //order details
+    public function orderPrint($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->Order_model->getOrderDetails($order_id, 0);
+        if ($order_details) {
+            $order_no = $order_details['order_data']->order_no;
+            echo $html = $this->load->view('Email/order_pdf', $order_details, true);
+        }
+    }
+
+//order details
     public function orderdetails($order_key) {
         if ($this->user_type == 'Customer') {
             redirect('UserManager/not_granted');
@@ -78,11 +87,11 @@ class Order extends CI_Controller {
             }
             try {
                 $order_id = $order_id;
-                // $this->Product_model->order_mail($order_id);
-                //redirect("Order/orderdetails/$order_key");
+// $this->Product_model->order_mail($order_id);
+//redirect("Order/orderdetails/$order_key");
             } catch (customException $e) {
-                //display custom message
-                // redirect("Order/orderdetails/$order_key");
+//display custom message
+// redirect("Order/orderdetails/$order_key");
             }
         } else {
             redirect('/');
@@ -94,7 +103,7 @@ class Order extends CI_Controller {
         $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
         $this->Order_model->order_mail($order_id, $subject);
     }
-    
+
     function order_pdf($order_id) {
         $this->Order_model->order_pdf($order_id);
     }
@@ -104,7 +113,7 @@ class Order extends CI_Controller {
         redirect("Order/orderdetails/$orderkey");
     }
 
-    //order list accroding to user type
+//order list accroding to user type
     public function orderslist() {
         $data['exportdata'] = 'yes';
         $date1 = date('Y-m-') . "01";
@@ -135,9 +144,9 @@ class Order extends CI_Controller {
                 $cartdata = $query->result();
                 $tempdata = array();
                 foreach ($cartdata as $key1 => $value1) {
-                    array_push($tempdata, $value1->item_name. "(".$value1->quantity.")");
+                    array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
                 }
-                
+
                 $value->items = implode(", ", $tempdata);
                 array_push($orderslistr, $value);
             }
@@ -171,7 +180,7 @@ class Order extends CI_Controller {
         }
     }
 
-    //order list accroding to user type
+//order list accroding to user type
     public function orderslistvendor() {
         $data['exportdata'] = 'yes';
         $date1 = date('Y-m-') . "01";
@@ -209,7 +218,7 @@ class Order extends CI_Controller {
         }
     }
 
-    //order list xls 
+//order list xls 
     public function orderslistxls($daterange) {
         $datelist = explode(" to ", urldecode($daterange));
         $date1 = $datelist[0];
@@ -229,16 +238,16 @@ class Order extends CI_Controller {
                 $status = $query->row();
                 $value->status = $status ? $status->status : $value->status;
 //                array_push($orderslistr, $value);
-           
+
                 $this->db->order_by('id', 'desc');
                 $this->db->where('order_id', $value->id);
                 $query = $this->db->get('cart');
                 $cartdata = $query->result();
                 $tempdata = array();
                 foreach ($cartdata as $key1 => $value1) {
-                    array_push($tempdata, $value1->item_name. "(".$value1->quantity.")");
+                    array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
                 }
-                
+
                 $value->items = implode(", ", $tempdata);
                 array_push($orderslistr, $value);
             }
@@ -276,7 +285,7 @@ class Order extends CI_Controller {
         echo $html;
     }
 
-    //vendor order details
+//vendor order details
     public function vendor_order_details($order_id) {
         $this->db->where('id', $order_id);
         $query = $this->db->get('vendor_order');
@@ -326,11 +335,11 @@ class Order extends CI_Controller {
             }
             try {
                 $order_id = $order_id;
-                // $this->Product_model->order_mail($order_id);
-                //redirect("Order/orderdetails/$order_key");
+// $this->Product_model->order_mail($order_id);
+//redirect("Order/orderdetails/$order_key");
             } catch (customException $e) {
-                //display custom message
-                // redirect("Order/orderdetails/$order_key");
+//display custom message
+// redirect("Order/orderdetails/$order_key");
             }
         } else {
             redirect('/');
@@ -338,13 +347,13 @@ class Order extends CI_Controller {
         $this->load->view('Order/vendororderdetails', $data);
     }
 
-    //vendor order status
+//vendor order status
     public function remove_vendor_order_status($status_id, $order_id) {
         $this->db->delete('vendor_order_status', array('id' => $status_id));
         redirect("Order/vendor_order_details/$order_id");
     }
 
-    //order analisys
+//order analisys
     public function orderAnalysis() {
         $data['exportdata'] = 'no';
         if ($this->user_type == 'Vendor' || $this->user_type == 'Customer') {
@@ -405,7 +414,7 @@ class Order extends CI_Controller {
 
 
 
-        //order graph date
+//order graph date
         $dategraphdata = $this->date_graph_data($date1, $date2, $orderdate);
         $data['order_date_graph'] = $dategraphdata;
 
@@ -426,7 +435,7 @@ class Order extends CI_Controller {
         $this->load->view('Order/orderanalysis', $data);
     }
 
-    //order analisys
+//order analisys
     public function orderAnalysisVendor() {
         $data['exportdata'] = 'no';
         if ($this->user_type != 'Vendor') {

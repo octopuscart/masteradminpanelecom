@@ -27,7 +27,7 @@ $this->load->view('layout/layoutTop');
         float: left;
     }
     .fr_value{
-        font-size: 12px;
+        font-size: 15px;
         margin-top: -7px;
         float: left;
     }
@@ -156,18 +156,18 @@ $this->load->view('layout/layoutTop');
 <section class="content "  style="min-height: auto;">
 
     <div class="col-md-12">
-
-
-
-
-
         <!-- Table row -->
         <div class="col-md-12" style=" margin-top: 10px;">
             <article class="" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12" style="padding:5px 20px;">
+                        <a class="btn btn-success pull-right" href="<?php echo  site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-download"></i> Download</a>
+                    </div>
+                </div>
 
                 <table class="table table-bordered"  align="center" border="0" cellpadding="0" cellspacing="0"  style="background: #fff">
                     <tr>
-                        <td style="font-size: 12px;width: 50%" >
+                        <td style="font-size: 15px;width: 50%" >
                             <b style="color:#c0c0c0">Shipping Address</b><br/>
                             <span style="text-transform: capitalize;margin-top: 10px;"> 
                                 <?php echo $ordersdetails['order_data']->name; ?>
@@ -194,7 +194,7 @@ $this->load->view('layout/layoutTop');
 
 
                         </td>
-                        <td style="font-size: 12px;width: 50%" >
+                        <td style="font-size: 15px;width: 50%" >
                             <b  style="color:#c0c0c0">Order Information</b><br/>
                             <table class="gn_table">
                                 <tr>
@@ -264,7 +264,7 @@ $this->load->view('layout/layoutTop');
 
                             <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
                             <br/>
-                            <small style="font-size: 12px;">(<?php echo $product->sku; ?>)</small>
+                            <small style="font-size: 15px;">(<?php echo $product->sku; ?>)</small>
 
                             <h4 class="panel-title">
                                 <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $product->id; ?>" aria-expanded="true" aria-controls="collapseOne">
@@ -368,7 +368,7 @@ $this->load->view('layout/layoutTop');
                                     <?php echo $laststatus_ctime; ?>
                                 </p>
 
-                                <p style="font-size: 12px;    margin: 0;">
+                                <p style="font-size: 15px;    margin: 0;">
                                     <?php echo $laststatusremark; ?>
                                 </p>
                             </div>
@@ -433,16 +433,16 @@ $this->load->view('layout/layoutTop');
         <!-- /.row -->
 
         <!-- this row will not appear when printing -->
-        <div class="row no-print">
-            <div class="col-xs-12">
-                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-                <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
-                </button>
-                <!--            <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                                <i class="fa fa-download"></i> Generate PDF
-                            </button>-->
-            </div>
-        </div>
+        <!--        <div class="row no-print">
+                    <div class="col-xs-12">
+                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
+                        </button>
+                                    <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                                        <i class="fa fa-download"></i> Generate PDF
+                                    </button>
+                    </div>
+                </div>-->
 
     </div>
 
