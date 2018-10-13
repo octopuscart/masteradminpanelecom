@@ -39,9 +39,7 @@ $this->load->view('layout/layoutTop');
                             <th style="width:50px;">Image</th>
                             <th style="width: 75px;">Category</th>
                             <th style="width: 100px;">Product</th>
-                            <th style="width: 100px;">Price Desc.</th>
-                            <th style="width: 100px;">Seller</th>
-                            <th style="width: 75px;">Date Time</th>
+                            
                             <th style="width: 75px;">Stock Status</th>
                             <th style="width: 75px;">Edit</th>
                         </tr>
@@ -55,7 +53,7 @@ $this->load->view('layout/layoutTop');
                                 <tr>
                                     <td><?php echo $count; ?></td>
                                     <td>
-                                        <img src="<?php echo base_url(); ?>assets_main/productimages/<?php echo $value['file_name']; ?>" style="height:51px;">
+                                        <img src="<?php echo product_image_base.'coman/output/'. $value['folder']; ?>/cutting20001.png" style="height:51px;">
                                     </td>
                                     <td >
                                         <span class="">
@@ -70,19 +68,7 @@ $this->load->view('layout/layoutTop');
                                         <br/>
                                         <span class="product_description product_text"><?php echo $value['short_description']; ?></span>
                                     </td>
-                                    <td>
-                                        <span class="price_tag">R:<b><?php echo $value['regular_price']; ?></b></span>
-                                        <span class="price_tag">S:<b><?php echo $value['sale_price']; ?></b></span><br/>
-                                        <span class="price_tag">P:<b><?php echo $value['price']; ?></b></span>
-                                    </td>
-                                    <td>
-                                        <span class="seller_tag"><b><?php echo $value['first_name']; ?> <?php echo $value['last_name']; ?></b></span>
-                                    </td>
-                                    <td >
-                                        <span class="">
-                                            <?php echo $value['op_date_time']; ?>
-                                        </span>
-                                    </td>
+                                   
                                     <td >
                                         <span class="">
                                             <?php echo $value['stock_status']; ?>

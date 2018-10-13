@@ -60,11 +60,11 @@ function checkPermission($session_data) {
                     </li>   
 
 <?php if (checkPermission($session_data) == 'system') { ?>
-                        <li>
+<!--                        <li>
                             <a href="<?php echo site_url('Order/orderslistvendor'); ?>">
                                 <i class="active fa fa-plus "></i> <span>Vendor Orders Report</span>
                             </a>
-                        </li>  
+                        </li>  -->
 
                         <li>       
                             <a href="<?php echo site_url('Order/orderAnalysis') ?>">
@@ -102,11 +102,11 @@ function checkPermission($session_data) {
                 </a>
                 <ul class="treeview-menu">
 
-                    <li>
+<!--                    <li>
                         <a href="<?php echo base_url(); ?>index.php/ProductManager/add_product">
                             <i class="active fa fa-plus "></i> <span>Add Product</span>
                         </a>
-                    </li>   
+                    </li>   -->
                     <li>
                         <a href="<?php echo base_url(); ?>index.php/ProductManager/productReport">
                             <i class="active fa fa-plus "></i> <span>Product Reports</span>
@@ -116,11 +116,11 @@ function checkPermission($session_data) {
 
 <?php if (checkPermission($session_data) == 'system') { ?>
                         <!--Admin Access-->
-                        <li>
+<!--                        <li>
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/categories">
                                 <i class="active fa fa-plus "></i> <span>Categories</span>
                             </a>
-                        </li>     
+                        </li>     -->
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/createAttribute">
                                 <i class="active fa fa-plus "></i> <span>Attributes</span>
@@ -165,7 +165,7 @@ function checkPermission($session_data) {
 
 
 
-                <li class="treeview">
+<!--                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-money"></i>
                         <span>Credit Management</span>
@@ -174,7 +174,7 @@ function checkPermission($session_data) {
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <!--credit Access-->
+                        credit Access
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/UserManager/usersCreditDebit">
                                 <i class="active fa fa-plus "></i> <span>Allot Credits</span>
@@ -185,9 +185,9 @@ function checkPermission($session_data) {
                                 <i class="active fa fa-plus "></i> <span>Debit</span>
                             </a>
                         </li>    
-                        <!--end of admin access-->
+                        end of admin access
                     </ul>
-                </li>
+                </li>-->
 
 
 

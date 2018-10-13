@@ -95,42 +95,21 @@ $session_data = $this->session->userdata('logged_in');
                                 <div class="row">
 
                                     <div class="col-md-6">
-                                        <div id="carousel-generic" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#carousel-generic" data-slide-to="0" class=""></li>
-                                                <li data-target="#carousel-generic" data-slide-to="1" class="active"></li>
-                                                <li data-target="#carousel-generic" data-slide-to="2" class=""></li>
-                                            </ol>
-                                            <div class="carousel-inner">
-                                                <div class="item active">
-                                                    <div class="product_image product_image_back_slider" style="background: url(<?php echo ($product_obj->file_name ? base_url() . "assets_main/productimages/" . $product_obj->file_name : base_url() . "assets_main/" . default_image); ?>)" style="height:400px!important">
-                                                    </div>  
-                                                </div>
-                                                <div class="item ">
-                                                    <div class="product_image product_image_back_slider" style="background: url(<?php echo ($product_obj->file_name1 ? base_url() . "assets_main/productimages/" . $product_obj->file_name1 : base_url() . "assets_main/" . default_image); ?>)"  style="height:400px!important">
-                                                    </div>  
-                                                </div>
-                                                <div class="item">
-                                                    <div class="product_image product_image_back_slider" style="background: url(<?php echo ($product_obj->file_name2 ? base_url() . "assets_main/productimages/" . $product_obj->file_name2 : base_url() . "assets_main/" . default_image); ?>)"  style="height:400px!important">
-                                                    </div>  
-                                                </div>
-                                            </div>
-                                            <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
-                                                <span class="fa fa-angle-left"></span>
-                                            </a>
-                                            <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-                                                <span class="fa fa-angle-right"></span>
-                                            </a>
-                                        </div>
+
+                                        <div class="product_image product_image_back_slider" style="background: url(<?php echo (product_image_base.'coman/output/'. $product_obj->folder."/cutting20001.png"); ?>)"  style="height:400px!important">
+                                        </div>  
+
+
+
                                     </div>
 
                                     <div class="col-md-6">
                                         <h3><?php echo $product_obj->title; ?></h3>
                                         <p>SKU:<?php echo $product_obj->sku; ?></p>
                                         <p><?php echo $product_obj->short_description; ?></p>
-                                        <h4><small>Price</small> {{<?php echo (($product_obj->price | 0)); ?>|currency:'<?php echo globle_currency;?>'}}</h4>
+                                        <h4><small>Price</small> {{<?php echo (($product_obj->price | 0)); ?>|currency:'<?php echo globle_currency; ?>'}}</h4>
 
-                                        <h4><small>Credit Limit </small> {{<?php echo $product_obj->credit_limit | 0; ?>|currency:'<?php echo globle_currency;?>'}}</h4>
+                                        <h4><small>Credit Limit </small> {{<?php echo $product_obj->credit_limit | 0; ?>|currency:'<?php echo globle_currency; ?>'}}</h4>
 
                                         <?php
                                         if (count($product_detail_attrs)) {
@@ -360,7 +339,7 @@ $session_data = $this->session->userdata('logged_in');
 
 
     <!--veriant products-->
-    <div class="box box-danger">
+<!--    <div class="box box-danger">
         <div class="box-header">
             <h3 class="box-title">
                 Products Variant
@@ -398,7 +377,7 @@ $session_data = $this->session->userdata('logged_in');
                                 <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
 
 
-                                <h4 style="font-size: 15px">{{<?php echo $value->price|0; ?>|currency:" "}}</h4>
+                                <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
                                 <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
                                 <P>
                                     <?php
@@ -423,13 +402,13 @@ $session_data = $this->session->userdata('logged_in');
                 ?>
             </div>
         </div>
-    </div>
+    </div>-->
     <!--end of verient products-->
 
 
     <?php if ($session_data['user_type'] == 'Admin') { ?>
 
-        <!--related products select-->
+<!--        related products select
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">
@@ -453,7 +432,7 @@ $session_data = $this->session->userdata('logged_in');
                                         <div class="media-body">
                                             <h4 class="media-heading"><?php echo $value->title; ?></h4>
                                             <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price|0; ?>|currency:" "}}</p>
+                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
                                             <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
                                         </div>
                                     </div>
@@ -468,10 +447,10 @@ $session_data = $this->session->userdata('logged_in');
                 </form>
             </div>
         </div>
-        <!--end of related products-->
+        end of related products
 
 
-        <!--related products select-->
+        related products select
         <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">
@@ -495,7 +474,7 @@ $session_data = $this->session->userdata('logged_in');
                                         <div class="media-body">
                                             <h4 class="media-heading"><?php echo $value->title; ?></h4>
                                             <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price|0; ?>|currency:" "}}</p>
+                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
                                             <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
                                         </div>
                                     </div>
@@ -510,7 +489,7 @@ $session_data = $this->session->userdata('logged_in');
                 </form>
             </div>
         </div>
-        <!--end of related products-->
+        end of related products-->
         <?php
     }
     ?>

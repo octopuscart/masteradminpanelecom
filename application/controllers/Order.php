@@ -49,10 +49,10 @@ class Order extends CI_Controller {
 
     //order details
     public function orderdetails($order_key) {
-        if ($this->user_type == 'Vendor' || $this->user_type == 'Customer') {
+        if ($this->user_type == 'Customer') {
             redirect('UserManager/not_granted');
         }
-        $order_details = $this->Order_model->getOrderDetails($order_key, 'key');
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
         $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
         $data['vendor_order'] = $vendor_order_details;
         if ($order_details) {
@@ -228,7 +228,6 @@ class Order extends CI_Controller {
             $orderlist = $query->result();
             $orderslistr = [];
             foreach ($orderlist as $key => $value) {
-
                 $this->db->order_by('id', 'desc');
                 $this->db->where('vendor_order_id', $value->id);
                 $query = $this->db->get('vendor_order_status');
@@ -241,8 +240,8 @@ class Order extends CI_Controller {
         }
         $filename = 'orders_report_' . $daterange . ".xls";
         ob_clean();
-        //header("Content-Disposition: attachment; filename='$filename'");
-        //header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename='$filename'");
+        header("Content-Type: application/vnd.ms-excel");
         echo $html;
     }
 

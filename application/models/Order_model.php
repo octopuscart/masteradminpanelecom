@@ -26,11 +26,111 @@ class Order_model extends CI_Model {
             $this->db->where('order_id', $order_details->id);
             $query = $this->db->get('cart');
             $cart_items = $query->result();
+            
+            $this->db->order_by('display_index', 'asc');
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('custom_measurement');
+            $custom_measurement = $query->result_array();
+
+            $order_data['measurements_items'] = $custom_measurement;
+
+            foreach ($cart_items as $key => $value) {
+                $cart_id = $value->id;
+
+                $this->db->where('cart_id', $cart_id);
+                $query = $this->db->get('cart_customization');
+                $cartcustom = $query->result_array();
+
+                $customdata = array();
+                foreach ($cartcustom as $key1 => $value1) {
+                    $customdata[$value1['style_key']] = $value1['style_value'];
+                }
+                $value->custom_dict = $customdata;
+
+//                $this->db->where('order_id', $order_id);
+//                $this->db->where('vendor_id', $vendor_id);
+//                $query = $this->db->get('vendor_order_status');
+//                $orderstatus = $query->result();
+                $value->product_status = array();
+            }
             $order_data['cart_data'] = $cart_items;
         }
         return $order_data;
     }
 
+    
+    public function getOrderDetailsV2($key_id, $is_key = 0) {
+        $order_data = array();
+        if ($is_key === 'key') {
+            $this->db->where('order_key', $key_id);
+        } else {
+            $this->db->where('id', $key_id);
+        }
+        $query = $this->db->get('user_order');
+        $order_details = $query->row();
+        $payment_details = array("payment_mode" => "", "txn_id" => "", "payment_date" => "");
+
+        if ($order_details) {
+
+//            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('user_order_status');
+            $userorderstatus = $query->result();
+            $order_data['order_status'] = $userorderstatus;
+
+            if ($order_details->payment_mode == 'PayPal') {
+                $this->db->where('order_id', $order_details->id);
+                $query = $this->db->get('paypal_status');
+                $paypal_details = $query->result();
+
+                if ($paypal_details) {
+                    $paypal_details = end($paypal_details);
+                    $payment_details['payment_mode'] = "PayPal";
+                    $payment_details['txn_id'] = $paypal_details->txn_no;
+                    $payment_details['payment_date'] = $paypal_details->timestemp;
+                }
+            }
+
+            $order_id = $order_details->id;
+            $order_data['order_data'] = $order_details;
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('cart');
+            $cart_items = $query->result();
+
+            $this->db->order_by('display_index', 'asc');
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('custom_measurement');
+            $custom_measurement = $query->result_array();
+
+            $order_data['measurements_items'] = $custom_measurement;
+
+            foreach ($cart_items as $key => $value) {
+                $cart_id = $value->id;
+
+                $this->db->where('cart_id', $cart_id);
+                $query = $this->db->get('cart_customization');
+                $cartcustom = $query->result_array();
+
+                $customdata = array();
+                foreach ($cartcustom as $key1 => $value1) {
+                    $customdata[$value1['style_key']] = $value1['style_value'];
+                }
+                $value->custom_dict = $customdata;
+
+//                $this->db->where('order_id', $order_id);
+//                $this->db->where('vendor_id', $vendor_id);
+//                $query = $this->db->get('vendor_order_status');
+//                $orderstatus = $query->result();
+                $value->product_status = array();
+            }
+            $order_data['payment_details'] = $payment_details;
+            $order_data['cart_data'] = $cart_items;
+//            $order_data['amount_in_word'] = $this->convert_num_word($order_data['order_data']->total_price);
+        }
+        return $order_data;
+    }
+    
+    
     public function getVendorsOrder($key_id) {
         $order_data = array();
         $this->db->where('order_key', $key_id);

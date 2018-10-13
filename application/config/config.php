@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $baselink = 'http://'.$_SERVER['SERVER_NAME'];
 
-$baselinkmain = strpos($baselink, '192.168') ? $baselink.'/shanielfashionsadmin' : $baselink.'/';
+$baselinkmain = strpos($baselink, '192.168') ? $baselink.'/adminpanel_main' : $baselink.'/';
 
 $config['base_url'] = $baselinkmain; 
 
@@ -34,7 +34,7 @@ $config['base_url'] = $baselinkmain;
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php'; 
+$config['index_page'] = strpos($baselink, '192.168') ?  'index.php/' : '';
 
 
 

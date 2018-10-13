@@ -1,4 +1,24 @@
 <?php
+date_default_timezone_set('Asia/Hong_Kong');
+error_reporting(0);
+$connect = mysql_connect("localhost", "j2k5e6r5_octopus", "India$2017");
+mysql_select_db("j2k5e6r5_bespoktailorhk", $connect);
+
+function resultAssociate($query) {
+    $resultSet = array();
+    $result = mysql_query($query);
+    if ($result === FALSE) {
+        die(mysql_error()); // TODO: better error handling
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        array_push($resultSet, $row);
+    }
+    return $resultSet;
+}
+
+
+$configuration = end(resultAssociate("select * from site_configuration"));
+
 define('panelversion', "V0.9.5.18");
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -9,35 +29,21 @@ define('image_server', '');
 define('autosku', True);
 define('sku_prefix', 'JPF');
 define('default_image', 'image/default_image.jpg');
-define('globle_currency', 'HKD');
-define('sitename', "John's Perfect Fashion");
-define('siteurl', "http://www.johnsperfectfashion.com");
+define('globle_currency', $configuration['currency']);
+define('sitename', $configuration['site_name']);
+define('siteurl', $configuration['site_url']);
+define('product_image_base', $configuration['product_images_url']);
+
 
 
 
 
 //mail inforamtion
-define('mail_host', 'smtp.nitafashions.com');
-define('mail_port', 587);
-define('mail_username', 'donotreply@nitafashions.com');
-define('mail_password', 'India$2017');
-define('mail_reply_to', 'sales@nitafashions.com');
-define('mail_tag', 'Nita Fashions');
-define('mail_from', 'donotreply@nitafashions.com');
+//Email Settings//
+define('email_sender', 'info@shanielfashions.com');
+define('email_sender_name', 'Shaniel Fashions');
+define('email_bcc', 'octopuscartltd@gmail.com');
 
-
-define('pdf_header', '<div style="text-align:center;margin-bottom:0px"> 
-                <span style="font-family: sans-serif;font-size:30px;">
-                    Nita Fashions<br>
-                </span>
-            </div>
-            <div style="margin-top:0px;text-align:center;font-family: sans-serif;font-size:12px">
-                <span style="">
-                    16 Mody Road, G/F, T. S. T, Kowloon, Hong Kong<br>
-                    T: + (852) 27219990, F: + (852) 27234886, E: sales@nitafashions.com, W: www.nitafashions.com  
-
-                </span>
-            </div>');
 
 
 /*

@@ -17,6 +17,35 @@ $this->load->view('layout/layoutTop');
         border-right: 1px solid #c5c5c5;
         margin-right: 12px;
     }
+
+</style>
+<style>
+    .measurement_right_text{
+        float: right;
+    }
+    .measurement_text{
+        float: left;
+    }
+    .fr_value{
+        font-size: 12px;
+        margin-top: -7px;
+        float: left;
+    }
+    .productStatusBlock{
+        padding:10px;
+        border: 1px solid #000;
+        float: left;
+        margin: 5px;
+    }
+
+    .payment_block{
+        padding: 10px;
+        padding-top: 30px;
+        margin: 0px;
+        margin-top: 30px;
+        background: #ddd;
+        border: 6px solid #ff3b3b;
+    }
 </style>
 
 <section class="content" style="min-height: auto;">
@@ -128,191 +157,279 @@ $this->load->view('layout/layoutTop');
 
     <div class="col-md-12">
 
-        <!-- title row -->
-        <div class="row">
-            <div class="col-xs-12">
-                <h2 class="page-header">
-                    Class Apart Store.
-                    <small class="pull-right">Date: <?php echo $ordersdetails['order_data']->order_date; ?></small>
-                </h2>
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- info row -->
-        <div class="row invoice-info">
-            <div class="col-sm-4 invoice-col">
-                To
-                <address>
-                    <strong><?php echo $ordersdetails['order_data']->name; ?></strong><br>
-                    <?php echo $ordersdetails['order_data']->address; ?><br/>
-                    <?php echo $ordersdetails['order_data']->state; ?>  <?php echo $ordersdetails['order_data']->city; ?> <?php echo $ordersdetails['order_data']->pincode; ?><br/>
-                    <i class="fa fa-phone"></i> <?php echo $ordersdetails['order_data']->contact_no; ?><br>
-                    <i class="fa fa-envelope"></i> <?php echo $ordersdetails['order_data']->email; ?>
-                </address>
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-4 invoice-col">
+      
 
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                <b>Invoice #<?php echo $ordersdetails['order_data']->id; ?></b><br><br/>
-                <b>Order No.:</b> <?php echo $ordersdetails['order_data']->order_no; ?><br>
-                <b>Date:</b> <?php echo $ordersdetails['order_data']->order_date; ?><br>
-                <b>Time:</b>  <?php echo $ordersdetails['order_data']->order_time; ?>
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
+
 
         <!-- Table row -->
-        <div class="row">
-            <div class="col-xs-12 table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr style="font-weight: bold">
-                            <td style="width: 20px;text-align: center">S.No.</td>
-                            <td colspan="2"  style="text-align: center">Product</td>
-                            <td style="text-align: right;width: 100px"">Price<br/><span style="font-size: 10px">(In INR)</span></td>
-                            <td style="text-align: right;width: 60px"">Qnty.</td>
-                            <td style="text-align: right;width: 100px">Total<br/><span style="font-size: 10px">(In INR)</span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($vendor_order['vendor'] as $key => $voc) {
-                            $vendor = $voc['vendor'];
-                            ?>
-                            <tr class="vendororder" >
-                                <td colspan="3">
-                                    <span class="vendor-text">Vendor</span>
-                                    <b>
-                                        <?php
-                                        echo $vendor->vendor_name;
-                                        ?>
-                                    </b><br/>
-                                    <?php
-                                    echo $vendor->vendor_email;
-                                    ?><br/>
-                                </td>
-                                <td colspan="2">
-                                    <p>   
-                                        Status : <b>
-                                            <?php
-                                            echo $voc['status'];
-                                            ?>
-                                        </b>
-                                        <br/>
-                                       
-                                            <?php
-                                            echo $voc['remark'];
-                                            ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>   
-                                        Sub Order No. : <b>
-                                            <?php
-                                            echo $vendor->vendor_order_no;
-                                            ?>
-                                        </b>
-                                       
-                                    </p>
-                                    <a class="btn btn-primary btn-xs" href="<?php echo site_url('Order/vendor_order_details/'.$vendor->id);?>">Process As Vendor</a>
-                                </td>
-                                
-                            </tr>
+        <div class="col-md-12" style=" margin-top: 10px;">
+            <article class="" style="padding: 10px;">
 
-                            <?php
-                            $vendor_total_price = 0;
-                            $vendor_total_quntity = 0;
-                            foreach ($voc['cart_items'] as $key => $product) {
-                                ?>
+                <table class="table table-bordered"  align="center" border="0" cellpadding="0" cellspacing="0"  style="background: #fff">
+                    <tr>
+                        <td style="font-size: 12px;width: 50%" >
+                            <b style="color:#c0c0c0">Shipping Address</b><br/>
+                            <span style="text-transform: capitalize;margin-top: 10px;"> 
+                                <?php echo $ordersdetails['order_data']->name; ?>
+                            </span> <br/>
+                            <div style="    padding: 5px 0px;">
+                                <?php echo $ordersdetails['order_data']->address1; ?><br/>
+                                <?php echo $ordersdetails['order_data']->address2; ?><br/>
+                                <?php echo $ordersdetails['order_data']->state; ?>
+                                <?php echo $ordersdetails['order_data']->city; ?>
+
+                                <?php echo $ordersdetails['order_data']->country; ?> <?php echo $ordersdetails['order_data']->zipcode; ?>
+
+                            </div>
+                            <table class="gn_table">
                                 <tr>
-                                    <td>
-                                        <?php echo $key + 1; ?>
-                                    </td>
-
-                                    <td style="width: 60px"> 
-                                        <img src=" <?php echo $product->file_name; ?>" style="height: 50px;"/>
-                                    </td>
-
-                                    <td style="width: 200px;">
-                                        <?php echo $product->title; ?><br/><small><?php echo $product->sku; ?></small>
-                                    </td>
-
-                                    <td style="text-align: right">
-                                        <?php echo $product->price; ?>
-                                    </td>
-
-                                    <td style="text-align: right">
-                                        <?php echo $product->quantity; ?>
-                                    </td>
-
-                                    <td style="text-align: right;">
-                                        <?php echo $product->total_price; ?>
-                                    </td>
+                                    <th>Email</th>
+                                    <td>: <?php echo $ordersdetails['order_data']->email; ?> </td>
                                 </tr>
-                                <?php
-                                $vendor_total_price += $product->total_price;
-                                $vendor_total_quntity += $product->quantity;
-                            }
-                            ?>
-                            <tr style="font-weight: bold;background: #fff;">
-                                <td colspan="4" style="text-align: right;">
-                                    Total
-                                </td>
-                                <td style="text-align: right;">
-                                    {{<?php echo $vendor_total_quntity; ?>}}
-                                </td>
+                                <tr>
+                                    <th>Contact No.</th>
+                                    <td>: <?php echo $ordersdetails['order_data']->contact_no; ?> </td>
+                                </tr>
+                            </table>
 
-                                <td style="text-align: right;">
-                                    {{<?php echo $vendor_total_price; ?>|currency:' '}}
-                                </td>
-                            </tr>
+
+                        </td>
+                        <td style="font-size: 12px;width: 50%" >
+                            <b  style="color:#c0c0c0">Order Information</b><br/>
+                            <table class="gn_table">
+                                <tr>
+                                    <th>Order No.</th>
+                                    <td>: <?php echo $ordersdetails['order_data']->order_no; ?> </td>
+                                </tr>
+                                <tr>
+                                    <th>Date Time</th>
+                                    <td>: <?php echo $ordersdetails['order_data']->order_date; ?> <?php echo $ordersdetails['order_data']->order_time; ?>  </td>
+                                </tr>
+                                <tr>
+                                    <th>Payment Mode</th>
+                                    <td>: <?php echo $ordersdetails['order_data']->payment_mode; ?> </td>
+                                </tr>
+                                <tr>
+                                    <th>Txn No.</th>
+                                    <td>: <?php echo $payment_details['txn_id'] ? $payment_details['txn_id'] : '---'; ?> </td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>: <?php
+                                        if ($order_status) {
+                                            echo end($order_status)->status;
+                                        } else {
+                                            echo "Pending";
+                                        }
+                                        ?> </td>
+                                </tr>
+                            </table>
+
+
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table class="table table-bordered"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" style="background: #fff;">
+                    <tr>
+                        <td colspan="6">
+                            <b  style="color:#c0c0c0">Order Description</b><br/>
+                        </td>
+                    </tr>
+                       <tr style="font-weight: bold">
+                        <td style="width: 20px;text-align: right">S.No.</td>
+                        <td colspan="2"  style="text-align: center">Product</td>
+
+                        <td style="text-align: right;width: 100px"">Price<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+                        <td style="text-align: right;width: 20px"">Qnty.</td>
+                        <td style="text-align: right;width: 100px">Total<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+                    </tr>
+                    <!--cart details-->
+                    <?php
+                    foreach ($ordersdetails['cart_data'] as $key => $product) {
+                        ?>
+                        <tr>
+                            <td style="text-align: right">
+                                <?php echo $key + 1; ?>
+                            </td>
+
+                            <td style="width: 80px">
+                        <center>   
+                            <img src=" <?php echo $product->file_name; ?>" style="height: 70px;"/>
+                        </center>
+                        </td>
+
+                        <td style="width: 200px;">
+
+                            <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
+                            <br/>
+                            <small style="font-size: 12px;">(<?php echo $product->sku; ?>)</small>
+
+                            <h4 class="panel-title">
+                                <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $product->id; ?>" aria-expanded="true" aria-controls="collapseOne">
+                                    View Summary
+                                </a>
+                            </h4>
+                            </div>
+                            <div id="collapse<?php echo $product->id; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body" style="padding:10px 0px;">
+                                    <?php
+                                    echo "<ul class='list-group'>";
+                                    foreach ($product->custom_dict as $key => $value) {
+                                        echo "<li class='list-group-item'>$key <span class='badge'>$value</span></li>";
+                                    }
+                                    echo "</ul>";
+                                    ?>                                            </div>
+                            </div>
+
+
+                        </td>
+
+                        <td style="text-align: right">
+                            <?php echo $product->price; ?>
+                        </td>
+
+                        <td style="text-align: right">
+                            <?php echo $product->quantity; ?>
+                        </td>
+
+                        <td style="text-align: right;">
+                            <?php echo $product->total_price; ?>
+                        </td>
+                        </tr>
+
+                        <?php
+                    }
+                    ?>
+
+
+
+                    <td colspan="7">
+                        Measurement Type :
+                        <?php
+                        echo $ordersdetails['order_data']->measurement_style;
+                        if (count($ordersdetails['measurements_items'])) {
+                            ?>
+                            <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements" aria-expanded="true" aria-controls="collapseOne">
+                                View Measurement
+                            </a>
+                            <div id="collapsemeasurements" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel-body" style="padding:10px 0px;">
+                                            <?php
+                                            echo "<ul class='list-group'>";
+                                            foreach ($ordersdetails['measurements_items'] as $keym => $valuem) {
+                                                $mvalues = explode(" ", $valuem['measurement_value']);
+                                                echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $mvalues[0] . "</span><span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></li>";
+                                            }
+                                            echo "</ul>";
+                                            ?>                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                             <?php
                         }
                         ?>
+                    </td>
+
+
+                    <!--end of cart details-->
+                    <tr>
+                        <td colspan="7">
+                            <?php
+                            $order_status = $ordersdetails['order_status'];
+                            $laststatus = "";
+                            $laststatus_cdate = "";
+                            $laststatus_ctime = "";
+                            $laststatusremark = "";
+                            foreach ($order_status as $key => $value) {
+                                $laststatus = $value->status;
+                                $laststatus_cdate = $value->c_date;
+                                $laststatus_ctime = $value->c_time;
+                                $laststatusremark = $value->remark;
+                            }
+                            ?>
 
 
 
-                    </tbody>
+<!--                                        <button class="btn btn-button pull-right" type="button" data-toggle="collapse" data-target="#collapseProduct<?php echo $product->id; ?>" aria-expanded="false" aria-controls="collapseProduct<?php echo $product->id; ?>">
+                                            Show More  <i class="fa fa-arrow-down"></i>
+                                        </button>-->
+
+                            <div class="statusdiv">
+                                Current Status: <?php echo $laststatus; ?>
+                                <p style="font-size: 10px;    margin: 0;">
+                                    <i class="fa fa-calendar"></i> 
+                                    <?php echo $laststatus_cdate; ?>
+                                    <?php echo $laststatus_ctime; ?>
+                                </p>
+
+                                <p style="font-size: 12px;    margin: 0;">
+                                    <?php echo $laststatusremark; ?>
+                                </p>
+                            </div>
+
+
+
+
+
+
+                            <div class="collapse" id="collapseProduct<?php echo $product->id; ?>">
+                                <div class="">
+                                    <?php
+                                    foreach ($product->product_status as $key => $value) {
+                                        ?>
+                                        <div class="productStatusBlock">
+                                            <p style="font-size: 10px;margin: 0;"><i class="fa fa-calendar"></i> <?php echo $value->c_date ?> <?php echo $value->c_time ?></p>
+                                            <h3><?php echo $value->status; ?></h3>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"  rowspan="4" style="font-size: 12px">
+                            <b>Total Amount in Words:</b><br/>
+                            <span style="text-transform: capitalize">
+                                <span style="text-transform: capitalize"> <?php echo $ordersdetails['order_data']->amount_in_word; ?></span>
+
+                            </span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right">Sub Total</td>
+                        <td style="text-align: right;width: 60px">{{"<?php echo $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
+                    </tr>
+<!--                                <tr>
+                        <td colspan="2" style="text-align: right">Credit Used</td>
+                        <td style="text-align: right;width: 60px"><?php echo $ordersdetails['order_data']->credit_price; ?> </td>
+                    </tr>-->
+                    <tr>
+                        <td colspan="2" style="text-align: right">Total Amount</td>
+                        <td style="text-align: right;width: 60px">{{"<?php echo $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
+                    </tr>
+
+
+
+
                 </table>
-            </div>
-            <!-- /.col -->
+            </article>
         </div>
         <!-- /.row -->
 
-        <div class="row">
-            <div class="col-md-12">
-                <p class="lead" style="text-align: right">Amount Description</p>
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <td colspan="3"  rowspan="4" style="font-size: 12px;text-align: right">
-                                <b>Total Amount in Words:</b><br/>
-                                <span style="text-transform: capitalize"> <?php echo $ordersdetails['order_data']->amount_in_word; ?></span>
-                            </td>
-
-                        </tr>
-                        <tr style="font-weight: bold;">
-                            <td colspan="2" style="text-align: right">Total</td>
-                            <td style="text-align: right;width: 60px">{{<?php echo $ordersdetails['order_data']->sub_total_price; ?>|currency:' '}} </td>
-                        </tr>
-                        <tr  style="font-weight: bold;">
-                            <td colspan="2" style="text-align: right">Credit Used</td>
-                            <td style="text-align: right;width: 60px">{{<?php echo $ordersdetails['order_data']->credit_price; ?>|currency:' '}} </td>
-                        </tr>
-                        <tr  style="font-weight: bold;">
-                            <td colspan="2" style="text-align: right">Total Amount</td>
-                            <td style="text-align: right;width: 60px">{{<?php echo $ordersdetails['order_data']->total_price; ?>|currency:' '}} </td>
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
-        </div>
         <!-- /.row -->
 
         <!-- this row will not appear when printing -->
