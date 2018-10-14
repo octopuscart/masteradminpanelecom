@@ -1,4 +1,4 @@
-<table align="center" border="0" cellpadding="0" cellspacing="0" style=""  width="1024" >
+<table align="center" border="0" cellpadding="0" cellspacing="0" style=""  width="800" >
     <tr >
         <td style="text-align: center;">
            <center> <img src="<?php echo site_mail_logo; ?> " style="margin: 10px auto;
@@ -6,13 +6,13 @@
                  width: auto;"/></center>
             <br/>
             2nd Floor, 45 Haiphong Road,
-            Tsim Sha Tsui, Kowloon, Hong Kong.<br/>
+            Tsim Sha Tsui, Kowloon, Hong Kong<br/>
 
             Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, 
-            Tsim Sha Tsui, Kowloon, Hong Kong. <br/>
-            <b>Tel #</b>: +(852) 27308566  <b>Fax #</b>: +(852) 27308577<br/>
-            <b>Email</b> :info@bespoketailorshk.com  
-            <b>Web</b> :www.bespoketailorshk.com</b>
+            Tsim Sha Tsui, Kowloon, Hong Kong <br/>
+            <b>Tel#</b>: +(852) 2730 8566  <b>Fax#</b>: +(852) 2730 8577<br/>
+            <b>Email</b>:  info@bespoketailorshk.com &nbsp;  
+            <b>Web</b>:  www.bespoketailorshk.com
         </td>
       
 
@@ -20,7 +20,7 @@
 
 </table>
 
-<table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="1024" style="background: #fff;margin-top:20px;">
+<table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="800" style="background: #fff;margin-top:20px;">
     <tr>
         <td style="width: 50%" >
             <b>Shipping Address</b><br/><hr/>
@@ -39,38 +39,39 @@
             <table class="gn_table">
                 <tr>
                     <th style="text-align: left;">Email</th>
-                    <td>: <?php echo $order_data->email; ?> </td>
+                    <td>:  <?php echo $order_data->email; ?> </td>
                 </tr>
                 <tr>
                     <th style="text-align: left;">Contact No.</th>
-                    <td>: <?php echo $order_data->contact_no; ?> </td>
+                    <td>:  <?php echo $order_data->contact_no; ?> </td>
                 </tr>
             </table>
 
 
         </td>
-        <td style="width: 50%" >
+        <td style="width: 20%" >
+            <div style="float:right;width: 200px">
             <b>Order Information</b><br/><hr/>
             <table class="gn_table">
                 <tr>
-                    <th style="text-align: right;">Order No.</th>
-                    <td>: <?php echo $order_data->order_no; ?> </td>
+                    <th style="text-align: left;">Order No.</th>
+                    <td>:  <?php echo $order_data->order_no; ?> </td>
                 </tr>
                 <tr>
-                    <th style="text-align: right;">Date Time</th>
-                    <td>: <?php echo $order_data->order_date; ?> <?php echo $order_data->order_time; ?>  </td>
+                    <th style="text-align: left;">Date Time</th>
+                    <td>:  <?php echo $order_data->order_date; ?> <?php echo $order_data->order_time; ?>  </td>
                 </tr>
                 <tr>
-                    <th style="text-align: right;">Payment Mode</th>
-                    <td>: <?php echo $order_data->payment_mode; ?> </td>
+                    <th style="text-align: left;">Payment Mode</th>
+                    <td>:  <?php echo $order_data->payment_mode; ?> </td>
                 </tr>
                 <tr>
-                    <th style="text-align: right;">Txn No.</th>
-                    <td>: <?php echo $payment_details['txn_id'] ? $payment_details['txn_id'] : '---'; ?> </td>
+                    <th style="text-align: left;">Txn No.</th>
+                    <td>:  <?php echo $payment_details['txn_id'] ? $payment_details['txn_id'] : '---'; ?> </td>
                 </tr>
                 <tr>
-                    <th style="text-align: right;">Status</th>
-                    <td>: <?php
+                    <th style="text-align: left;">Status</th>
+                    <td>:  <?php
                         if ($order_status) {
                             echo end($order_status)->status;
                         } else {
@@ -80,11 +81,11 @@
                 </tr>
             </table>
 
-
+            </div>
         </td>
     </tr>
 </table>
-<table class="carttable"   align="center" border="0" cellpadding="0" cellspacing="0" width="1024" style="background: #fff;padding:20px;border: 1px solid rgb(157, 153, 150);">
+<table class="carttable"   align="center" border="0" cellpadding="0" cellspacing="0" width="800" style="background: #fff;padding:10px;border: 1px solid rgb(157, 153, 150);">
 
 
     <tr style="font-weight: bold">
@@ -95,19 +96,19 @@
 
     </tr>
     <tr style="font-weight: bold">
-        <td style="width: 20px;text-align: center;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">S.No.</td>
-        <td colspan="2"  style="text-align: center;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Product</td>
+        <td style="width: 20px;text-align: right;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">S.No.</td>
+        <td colspan="2"  style="text-align: center;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Product(s)</td>
 
-        <td style="text-align: right;width: 60px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Price<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+        <td style="text-align: right;width: 100px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Price (In <?php echo trim(globle_currency); ?>)</td>
         <td style="text-align: right;width: 60px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Qnty.</td>
-        <td style="text-align: right;width: 60px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Total<br/><span style="font-size: 10px">(In  <?php echo globle_currency; ?>)</span></td>
+        <td style="text-align: right;width: 100px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Total (In  <?php echo trim(globle_currency); ?>)</td>
     </tr>
     <!--cart details-->
     <?php
     foreach ($cart_data as $key => $product) {
         ?>
         <tr style="border: 1px solid #000">
-            <td style="padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
+            <td style="padding: 0px 10px;text-align: right;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
                 <?php echo $key + 1; ?>
             </td>
 
@@ -138,7 +139,7 @@
     </tr>
     <tr>
         <td colspan="6" style="border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 10px 10px;">
-            <b>Style Details : <?php echo $product->title; ?> - <?php echo $product->item_name; ?></b>
+            <b>Style Details: <?php echo $product->title; ?> - <?php echo $product->item_name; ?></b>
             <br/>
             <table><?php
                 foreach ($product->custom_dict as $key => $value) {
@@ -154,27 +155,27 @@
 <!--end of cart details-->
 
 <tr>
-    <td colspan="3"  rowspan="5" style="font-size: 12px">
-        Measurement Type :
+    <td colspan="3"  rowspan="5" style="">
+        Measurement Size(s): 
         <?php
         echo $order_data->measurement_style;
         ?>
     </td>
 
 </tr>
-<tr style="font-size: 25px;">
+<tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Sub Total</td>
     <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo globle_currency ." ".  number_format($order_data->sub_total_price, 2, '.', ''); ?> </td>
 </tr>
-<tr style="font-size: 25px;">
+<tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Shipping Amount</td>
     <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo globle_currency ." ". number_format($order_data->credit_price, 2, '.', ''); ?> </td>
 </tr>
-<tr style="font-size: 25px;">
+<tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Coupon Discount</td>
     <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo globle_currency ." ". number_format($order_data->credit_price, 2, '.', ''); ?> </td>
 </tr>
-<tr style="font-size: 25px;">
+<tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Toal Amount</td>
     <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo globle_currency ." ". number_format($order_data->total_price, 2, '.', ''); ?> </td>
 </tr>

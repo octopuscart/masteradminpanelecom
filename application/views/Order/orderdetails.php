@@ -241,9 +241,9 @@ $this->load->view('layout/layoutTop');
                         <td style="width: 20px;text-align: right">S.No.</td>
                         <td colspan="2"  style="text-align: center">Product</td>
 
-                        <td style="text-align: right;width: 100px"">Price<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+                        <td style="text-align: right;width: 100px"">Price (In <?php echo globle_currency; ?>)</td>
                         <td style="text-align: right;width: 20px"">Qnty.</td>
-                        <td style="text-align: right;width: 100px">Total<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+                        <td style="text-align: right;width: 100px">Total (In <?php echo globle_currency; ?>)</td>
                     </tr>
                     <!--cart details-->
                     <?php
@@ -306,7 +306,7 @@ $this->load->view('layout/layoutTop');
 
 
                     <td colspan="7">
-                        Measurement Type :
+                        Measurement Type:
                         <?php
                         echo $ordersdetails['order_data']->measurement_style;
                         if (count($ordersdetails['measurements_items'])) {
