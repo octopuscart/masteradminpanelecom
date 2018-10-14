@@ -5,11 +5,12 @@
                  height: 50px;background: black;
                  width: auto;"/></center>
             <br/>
-            2nd Floor, 45 Haiphong Road,
-            Tsim Sha Tsui, Kowloon, Hong Kong<br/>
-
             Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, 
             Tsim Sha Tsui, Kowloon, Hong Kong <br/>
+            Showroom: 2nd Floor, 45 Haiphong Road,
+            Tsim Sha Tsui, Kowloon, Hong Kong<br/>
+
+            
             <b>Tel#</b>: +(852) 2730 8566  &nbsp;  <b>Fax#</b>: +(852) 2730 8577<br/>
             <b>Email</b>:  info@bespoketailorshk.com &nbsp;  
             <b>Web</b>:  www.bespoketailorshk.com
