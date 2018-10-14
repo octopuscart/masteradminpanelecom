@@ -168,53 +168,23 @@ $this->load->view('layout/layoutTop');
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <input type="text" class="form-control"  name="contact_no" placeholder="Contact No." value="<?php echo $user_details->gender; ?>">
-                                    </div>
+                                   <div class="form-group">
+                                            <label>Gender</label>
+                                            <select class="form-control" name="gender">
+                                                <option <?php echo $user_details->gender == 'Male' ? "selected" : ''; ?>>Male</option>
+                                                <option <?php echo $user_details->gender == 'Female' ? "selected" : ''; ?>>Female</option>
+
+                                            </select>
+                                        </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Birth Date</label>
-                                        <input type="text" class="form-control"  name="contact_no" placeholder="Contact No." value="<?php echo $user_details->birth_date; ?>">
-                                    </div>
+                                      <div class="form-group">
+                                            <label>Birth Date</label>
+                                            <input type="text" class="form-control" id="datemask"  name="birth_date" placeholder="Birth Date" value="<?php echo $user_details->birth_date; ?>" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                        </div>
                                 </div>
 
 
-                                <?php
-                                if ($user_details->user_type == 'Vendor') {
-                                    ?>
-
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Shop/Office Address</label>
-                                            <textarea class="form-control"  placeholder="Address" name="address"><?php echo $user_details->address; ?></textarea>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label >City</label>
-                                            <input type="text" class="form-control" name="city"  placeholder="City" value="<?php echo $user_details->city; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label >State</label>
-                                            <input type="text" class="form-control"  name="state"  placeholder="State" value="<?php echo $user_details->state; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Pincode</label>
-                                            <input type="text" class="form-control"  name="pincode"  placeholder="Pincode" value="<?php echo $user_details->pincode; ?>">
-                                        </div>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
                                 <div class="col-md-12">
                                     <button type="submit" name="submit" class="btn btn-primary">Update Profile</button>
                                
@@ -236,3 +206,10 @@ $this->load->view('layout/layoutTop');
 $this->load->view('layout/layoutFooter');
 ?> 
 
+<script>
+    $(function () {
+        $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'});
+        $('[name="country"]').val("<?php echo $user_details->country; ?>");
+        $('[name="profession"]').val("<?php echo $user_details->profession; ?>");
+    })
+</script>
