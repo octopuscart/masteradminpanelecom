@@ -59,7 +59,7 @@
                     <td>:  <?php echo $order_data->order_no; ?> </td>
                 </tr>
                 <tr>
-                    <th style="text-align: left;">Date Time</th>
+                    <th style="text-align: left;">Date/Time</th>
                     <td>:  <?php echo $order_data->order_date; ?> <?php echo $order_data->order_time; ?>  </td>
                 </tr>
                 <tr>
