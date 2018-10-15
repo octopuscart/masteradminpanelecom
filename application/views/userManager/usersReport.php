@@ -42,7 +42,7 @@ function userReportFunction($users) {
                 <th style="width: 75px;">Name</th>
                 <th style="width: 100px;">Email </th>
                 <th style="width: 100px;">Contact No.</th>
-                <th style="width: 75px;">Registration Date Time</th>
+                <th style="width: 100px;">Reg. Date/Time</th>
                 <th style="width: 75px;">Edit</th>
             </tr>
         </thead>
@@ -62,8 +62,11 @@ function userReportFunction($users) {
                                 ?>
                                 <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
                             <?php } else {
+                                
+                                $avatar = $value->gender=='Female'?"avatar3":"avatar5";
+                                
                                 ?>
-                                <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" style="height:51px;">
+                                <img src="<?php echo base_url(); ?>assets_main/dist/img/<?php echo $avatar;?>.png" style="height:51px;">
 
                             <?php }
                             ?>
@@ -72,9 +75,10 @@ function userReportFunction($users) {
 
                         <td>
                             <span class="">
-                                <span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span>
+                                <b><span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span></b>
                                 <br/>
-                                <b><?php echo $value->user_type; ?></b>
+                                <i class="fa fa-<?php echo strtolower($value->gender); ?>"></i>  <?php echo $value->gender; ?>
+                                <br/>(<?php echo $value->profession?$value->profession:'----'; ?>)
                             </span>
                         </td>
 
@@ -125,7 +129,7 @@ function userReportFunction($users) {
                 <h3 class="box-title">Users Reports</h3>
                 <div class="box-tools pull-right">
                     <a class="btn btn-success " href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
-                        Export Data
+                        <i class="fa fa-file-excel-o"></i>  Export Data
                     </a>
                 </div>
 

@@ -36,15 +36,15 @@ define('site_logo', $configuration['site_logo']);
 define('siteurl', $configuration['site_url']);
 define('product_image_base', $configuration['product_images_url']);
 
-define('site_mail_logo', 'http://www.bespoketailorshk.com/assets/images/logo73.png');
+define('site_mail_logo', 'https://www.bespoketailorshk.com/assets/images/logo73.png');
 
 
 
 //mail inforamtion
 //Email Settings//
-define('email_sender', 'info@shanielfashions.com');
-define('email_sender_name', 'Shaniel Fashions');
-define('email_bcc', 'octopuscartltd@gmail.com');
+define('email_sender', $configuration['email_sender']);
+define('email_sender_name', $configuration['email_sender_name']);
+define('email_bcc', $configuration['email_bcc']);
 
 
 

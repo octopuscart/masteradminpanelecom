@@ -139,9 +139,7 @@ $this->load->view('layout/layoutTop');
                         </li>
                         <li class="list-group-item">
 
-
-
-                            <b><i class="fa fa-male"></i>  Gender</b> <br/><a class="subtext"><?php echo $user_details->gender; ?></a>
+                           <b> <i class="fa fa-<?php echo strtolower($user_details->gender); ?>"></i>   Gender</b> <br/><a class="subtext"><?php echo $user_details->gender; ?></a>
                         </li>
                         <li class="list-group-item">
                             <b><i class="fa fa-birthday-cake"></i>  Date Of Birth</b> <br/><a class="subtext"><?php echo $user_details->birth_date; ?></a>
