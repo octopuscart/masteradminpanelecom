@@ -289,7 +289,7 @@ $this->load->view('layout/layoutFooter');
         });
         $('#tableDataOrder').DataTable({
             "language": {
-                "search": "Search Order By Email, Order No., Order Date Etc."
+                "search": "Search Order By Email, First Name, Last Name Etc."
             }
         })
     })
