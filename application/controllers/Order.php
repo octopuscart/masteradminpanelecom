@@ -359,7 +359,7 @@ class Order extends CI_Controller {
 //order analisys
     public function orderAnalysis() {
         $data['exportdata'] = 'no';
-        if ($this->user_type == 'Vendor' || $this->user_type == 'Customer') {
+        if ($this->user_type != 'Admin') {
             redirect('UserManager/not_granted');
         }
         $date1 = date('Y-m-') . "01";
@@ -392,13 +392,16 @@ class Order extends CI_Controller {
 
 
         $this->db->order_by('id', 'desc');
-        $this->db->where('op_date_time between "' . $date1 . '" and "' . $date2 . '"');
+  
         $query = $this->db->get('admin_users');
         $userlist = $query->result_array();
 
-        $this->db->order_by('id', 'desc');
-        $this->db->where('c_date between "' . $date1 . '" and "' . $date2 . '"');
-        $query = $this->db->get('vendor_order');
+        $this->db->order_by('c.id', 'desc');
+         $query = $this->db->from('cart as c');
+        $this->db->join('user_order as uo', 'uo.id = c.order_id');
+        $this->db->where('c.order_id > 0');
+        $this->db->where('uo.order_date between "' . $date1 . '" and "' . $date2 . '"');
+        $query = $this->db->get();
         $vendororderlist = $query->result_array();
 
 

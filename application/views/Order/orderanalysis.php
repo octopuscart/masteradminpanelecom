@@ -39,7 +39,7 @@ $this->load->view('layout/layoutTop');
                         <div class="inner">
                             <h3><?php echo $vendor_orders; ?></h3>
 
-                            <p>Vendor Orders</p>
+                            <p>Items In Orders</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>

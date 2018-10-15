@@ -20,11 +20,9 @@ class Services extends CI_Controller {
         $this->user_type = $this->session->logged_in['user_type'];
     }
 
-
     public function index() {
         redirect('/');
     }
-
 
     function order_mail_send($order_id) {
         $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
@@ -54,11 +52,9 @@ class Services extends CI_Controller {
         }
         $daterange = $date1 . " to " . $date2;
         $data['daterange'] = $daterange;
-  
+        $data['users_all'] = $this->User_model->user_reports("User");
         $this->load->view('Email/newslatter', $data);
     }
-
-
 
 }
 

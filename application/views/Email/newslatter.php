@@ -1,12 +1,146 @@
 <?php
 $this->load->view('layout/layoutTop');
+
+function userReportFunction($users) {
+    ?>
+    <table id="tableDataOrder" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th style="width: 20px;">Select</th>
+                <th style="width: 20px;">S.N.</th>
+                <th style="width:50px;">Image</th>
+                <th style="width: 75px;">Name</th>
+                <th style="width: 100px;">Email </th>
+                <th style="width: 100px;">Contact No.</th>
+                <th style="width: 100px;">Reg. Date/Time</th>
+                <th style="width: 75px;">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (count($users)) {
+
+                $count = 1;
+                foreach ($users as $key => $value) {
+                    ?>
+                    <tr>
+                        <td><input type="checkbox" name="receivers[]"></td>
+                        <td><?php echo $count; ?></td>
+
+                        <td>
+                            <?php
+                            if ($value->image) {
+                                ?>
+                                <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
+                                <?php
+                            } else {
+
+                                $avatar = $value->gender == 'Female' ? "avatar3" : "avatar5";
+                                ?>
+                                <img src="<?php echo base_url(); ?>assets_main/dist/img/<?php echo $avatar; ?>.png" style="height:51px;">
+
+                            <?php }
+                            ?>
+
+                        </td>
+
+                        <td>
+                            <span class="">
+                                <b><span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span></b>
+                                <br/>
+                                <i class="fa fa-<?php echo strtolower($value->gender); ?>"></i>  <?php echo $value->gender; ?>
+                                <br/>(<?php echo $value->profession ? $value->profession : '----'; ?>)
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="">
+                                <span class="seller_tag">
+                                    <?php echo $value->email; ?>
+                                </span>
+
+                            </span>
+                        </td>
+                        <td>
+                            <span class="">
+
+                                <?php echo $value->contact_no; ?>
+                            </span>
+                        </td>
+
+
+
+                        <td>
+                            <span class="">
+                                <?php echo $value->registration_datetime; ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <a href="<?php echo '../userManager/user_details/' . $value->id; ?>" class="btn btn-danger"><i class="fa fa-eye "></i> View</a>
+                        </td>
+                    </tr>
+                    <?php
+                    $count++;
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
+}
 ?>
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-3">
-          
-                <!-- /. box -->
+        <!--        <div class="col-md-3">
+        
+                     /. box 
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Choose Template</h3>
+        
+                            <div class="box-tools">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                         /.box-header 
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="<?php echo site_url("Services/newslatter/1"); ?>"><i class="fa fa-circle-o text-red"></i> News Letter</a></li>
+                                <li><a href="<?php echo site_url("Services/newslatter/2"); ?>"><i class="fa fa-circle-o text-yellow"></i> Offer Template</a></li>
+                                <li><a href="<?php echo site_url("Services/newslatter/3"); ?>"><i class="fa fa-circle-o text-light-blue"></i> Event Template</a></li>
+                            </ul>
+                        </div>
+                         /.box-body 
+                    </div>
+                     /.box 
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Folders</h3>
+        
+                            <div class="box-tools">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#"><i class="fa fa-inbox"></i> Inbox
+                                        <span class="label label-primary pull-right">12</span></a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                                </li>
+                                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                            </ul>
+                        </div>
+                         /.box-body 
+                    </div>
+        
+                </div>-->
+        <!-- /.col -->
+        <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">Choose Template</h3>
@@ -16,98 +150,90 @@ $this->load->view('layout/layoutTop');
                         </button>
                     </div>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <ul class="nav nav-pills nav-stacked">
+                    <ul class="nav nav-pills">
                         <li><a href="<?php echo site_url("Services/newslatter/1"); ?>"><i class="fa fa-circle-o text-red"></i> News Letter</a></li>
                         <li><a href="<?php echo site_url("Services/newslatter/2"); ?>"><i class="fa fa-circle-o text-yellow"></i> Offer Template</a></li>
                         <li><a href="<?php echo site_url("Services/newslatter/3"); ?>"><i class="fa fa-circle-o text-light-blue"></i> Event Template</a></li>
                     </ul>
                 </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Folders</h3>
 
-                    <div class="box-tools">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="box-body no-padding">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#"><i class="fa fa-inbox"></i> Inbox
-                                <span class="label label-primary pull-right">12</span></a></li>
-                        <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                        <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                        </li>
-                        <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-                    </ul>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Compose New Message</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="form-group">
-                        <input class="form-control" placeholder="To:">
+                <form action="" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Compose New Message</h3>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Subject:">
-                    </div>
-                    <div class="form-group">
-                        <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                            <?php
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Subject:" required="" value="<?php
                             switch ($lattertype) {
                                 case "1":
-                                    echo $html = $this->load->view('Email/order_pdf_1', $order_details, true);
-
+                                    echo "Bespoke Tailors Newsletter";
                                     break;
                                 case "2":
-                                    echo $html = $this->load->view('Email/order_pdf_2', $order_details, true);
-
+                                    echo "Bespoke Tailors Offers";
                                     break;
                                 case "3":
-                                    echo $html = $this->load->view('Email/order_pdf_3', $order_details, true);
-
+                                    echo "Bespoke Tailors Events";
                                     break;
                                 default:
-                                    echo $html = $this->load->view('Email/order_pdf_1', $order_details, true);
+                                    echo "Bespoke Tailors Newsletter";
                             }
-                            ?>
-                        </textarea>
-                    </div>
-<!--                    <div class="form-group">
-                        <div class="btn btn-default btn-file">
-                            <i class="fa fa-paperclip"></i> Attachment
-                            <input type="file" name="attachment">
+                            ?>">
                         </div>
-                        <p class="help-block">Max. 32MB</p>
-                    </div>-->
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                        <div class="form-group">
+                            <textarea id="compose-textarea" class="form-control" style="height: 200px">
+                                <?php
+                                switch ($lattertype) {
+                                    case "1":
+                                        echo $html = $this->load->view('Email/order_pdf_1', $order_details, true);
+
+                                        break;
+                                    case "2":
+                                        echo $html = $this->load->view('Email/order_pdf_2', $order_details, true);
+
+                                        break;
+                                    case "3":
+                                        echo $html = $this->load->view('Email/order_pdf_3', $order_details, true);
+
+                                        break;
+                                    default:
+                                        echo $html = $this->load->view('Email/order_pdf_1', $order_details, true);
+                                }
+                                ?>
+                            </textarea>
+                        </div>
+                        <!--                    <div class="form-group">
+                                                <div class="btn btn-default btn-file">
+                                                    <i class="fa fa-paperclip"></i> Attachment
+                                                    <input type="file" name="attachment">
+                                                </div>
+                                                <p class="help-block">Max. 32MB</p>
+                                            </div>-->
+<?php userReportFunction($users_all); ?>
                     </div>
-                    <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
-                </div>
+                    <!-- /.box-body -->
+
+
+
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                        </div>
+                        <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+                    </div>
+                </form>
                 <!-- /.box-footer -->
             </div>
             <!-- /. box -->
         </div>
         <!-- /.col -->
     </div>
+
     <!-- /.row -->
 </section>
 <!-- /.content -->
