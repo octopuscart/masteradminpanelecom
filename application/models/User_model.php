@@ -18,9 +18,7 @@ class User_model extends CI_Model {
             return $data; //format the array into json data
         }
     }
-    
-    
-    
+
     //get user creadit detail by id
     function user_credits($id) {
         $this->db->select('sum(credit) as credits');
@@ -71,11 +69,11 @@ class User_model extends CI_Model {
     //get user detail by id
     function user_reports($user_type) {
 
-      
-          
-                $this->db->where(array('user_type' => "", 'status!=' => 'Blocked'));
-           
-        
+
+
+        $this->db->where(array('user_type' => $user_type, 'status!=' => 'Blocked'));
+
+
         $query = $this->db->get('admin_users');
         return $query->result();
     }

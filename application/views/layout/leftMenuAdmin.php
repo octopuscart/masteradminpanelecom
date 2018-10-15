@@ -20,21 +20,28 @@ function checkPermission($session_data) {
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                
-                    
-                    
-                     <?php if ($session_data['image']) { ?>
-                                            <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $session_data['image']; ?>" class="img-circle" alt="User Image">
 
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                        <?php } ?> 
+
+
+                <?php if ($session_data['image']) { ?>
+                    <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $session_data['image']; ?>" class="img-circle" alt="User Image">
+
+                    <?php
+                } else {
+                    ?>
+                    <img src="<?php echo base_url(); ?>assets_main/dist/img/avatar5.png" class="img-circle" alt="User Image">
+                <?php } ?> 
 
             </div>
             <div class="pull-left info">
-                <p style="line-height: 35px;"><?php echo $session_data['first_name'] . " " . $session_data['last_name']; ?></p>
+                <p style="line-height: 20px;">
+                    <?php echo $session_data['first_name'] . " " . $session_data['last_name']; ?>
+                    <br/>
+                    <span style="color:green;"><?php echo $session_data['user_type'];  ?></span>
+                </p>
+
+               
+
             </div>
         </div>
 
@@ -144,7 +151,7 @@ function checkPermission($session_data) {
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-user-circle-o"></i>
                         <span>Client Management</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
@@ -181,8 +188,8 @@ function checkPermission($session_data) {
                         <!--end of admin access-->
                     </ul>
                 </li>
-                
-                
+
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-calendar"></i>
@@ -208,6 +215,31 @@ function checkPermission($session_data) {
                     </ul>
                 </li>
 
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>User Management</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!--Admin Access-->
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/UserManager/addManager">
+                                <i class="active fa fa-plus "></i> <span>Add User</span>
+                            </a>
+                        </li>   
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/UserManager/usersReportManager">
+                                <i class="active fa fa-plus "></i> <span>Users Reports</span>
+                            </a>
+                        </li>   
+                        <!--end of admin access-->
+                    </ul>
+                </li>
 
 
                 <!--                <li class="treeview">
@@ -252,11 +284,11 @@ function checkPermission($session_data) {
                                 <i class="active fa fa-plus "></i> <span>Add Sliders</span>
                             </a>
                         </li> 
-                        <li>
-                            <a href="<?php echo base_url(); ?>index.php/Configuration/add_barcode">
-                                <i class="active fa fa-plus "></i> <span>Add Barcodes</span>
-                            </a>
-                        </li> 
+                        <!--                        <li>
+                                                    <a href="<?php echo base_url(); ?>index.php/Configuration/add_barcode">
+                                                        <i class="active fa fa-plus "></i> <span>Add Barcodes</span>
+                                                    </a>
+                                                </li> -->
                         <!--                        <li>
                                                     <a href="<?php echo base_url(); ?>index.php/UserManager/usersReport">
                                                         <i class="active fa fa-plus "></i> <span>Users Reports</span>

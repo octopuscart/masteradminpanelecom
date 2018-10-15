@@ -59,7 +59,6 @@ $this->load->view('layout/layoutTop');
                                     <div class="form-group">
                                         <label >User Type</label>
                                         <select name="user_type" class="form-control">
-                                            <option>Vendor</option>
                                              <?php if($user_type=='Admin'){;?><
                                             <option>Manager</option>
                                              <?php }?>
@@ -99,31 +98,7 @@ $this->load->view('layout/layoutTop');
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea class="form-control"  placeholder="Address" name="address"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label >City</label>
-                                        <input type="text" class="form-control" name="city"  placeholder="City" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label >State</label>
-                                        <input type="text" class="form-control"  name="state"  placeholder="State" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Pincode</label>
-                                        <input type="text" class="form-control"  name="pincode"  placeholder="Pincode" value="">
-                                    </div>
-                                </div>
+                               
 
                                 <div class="col-md-12">
                                     <button type="submit" name="submit" class="btn btn-primary">Add User</button>

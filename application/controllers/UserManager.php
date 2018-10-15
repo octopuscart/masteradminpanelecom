@@ -39,7 +39,7 @@ class UserManager extends CI_Controller {
     public function usersReport() {
         $data['users_vendor'] = $this->User_model->user_reports("Vendor");
         $data['users_customer'] = $this->User_model->user_reports("Customer");
-        $data['users_all'] = $this->User_model->user_reports("All");
+        $data['users_all'] = $this->User_model->user_reports("");
         $data['users_blocked'] = $this->User_model->user_reports("Blocked");
         $data['users_manager'] = $this->User_model->user_reports("Manager");
         if ($this->user_type == 'Vendor' || $this->user_type == 'Customer') {
@@ -47,6 +47,20 @@ class UserManager extends CI_Controller {
         }
 
         $this->load->view('userManager/usersReport', $data);
+    }
+    
+    
+    public function usersReportManager() {
+        $data['users_vendor'] = $this->User_model->user_reports("Vendor");
+        $data['users_customer'] = $this->User_model->user_reports("Customer");
+        $data['users_all'] = $this->User_model->user_reports("All");
+        $data['users_blocked'] = $this->User_model->user_reports("Blocked");
+        $data['users_manager'] = $this->User_model->user_reports("Manager");
+        if ($this->user_type == 'Vendor' || $this->user_type == 'Customer') {
+            redirect('UserManager/not_granted');
+        }
+
+        $this->load->view('userManager/usersReportManager', $data);
     }
 
     public function user_profile_record_xls($user_type) {
@@ -62,7 +76,7 @@ class UserManager extends CI_Controller {
         echo $html;
     }
 
-    public function addVendor() {
+    public function addManager() {
         $config['upload_path'] = 'assets_main/userimages';
         $config['allowed_types'] = '*';
         $data["message"] = "";
@@ -105,7 +119,7 @@ class UserManager extends CI_Controller {
                 $last_name = $this->input->post('last_name');
 
                 $contact_no = $this->input->post('contact_no');
-                $address = $this->input->post('address');
+       
                 $post_data = array(
                     'first_name' => $first_name,
                     'last_name' => $last_name,
@@ -114,12 +128,12 @@ class UserManager extends CI_Controller {
                     'password2' => $password,
                     'image' => $picture,
                     'password' => $pwd,
-                    'address' => $address,
+
                     'contact_no' => $contact_no,
                     'op_date_time' => $op_date_time
                 );
                 $this->db->insert('admin_users', $post_data);
-                redirect('UserManager/addVendor');
+                redirect('UserManager/addManager');
             }
         }
         $this->load->view('userManager/addVendor', $data);
