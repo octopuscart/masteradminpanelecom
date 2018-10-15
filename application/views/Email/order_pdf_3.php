@@ -35,11 +35,9 @@ On the day of your appointment, <br/>please call us on his contact no. (UK: +44 
             <b>Address 2</b><br/>
             Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, <br/>
             Tsim Sha Tsui, Kowloon, Hong Kong.                                        <br/>
-            <b>Tel #</b>: +(852) 27308566  <b>Fax #</b>: +(852) 27308577<br/>
-            <b>Email</b> :info@bespoketailorshk.com  
-            <b>Web</b> :www.bespoketailorshk.com</b>
-
-
+             <b>Tel#</b>: +(852) 2730 8566  <b>Fax#</b>: +(852) 2730 8577<br/>
+            <b>Email</b>: info@bespoketailorshk.com  &nbsp;
+            <b>Web</b>: www.bespoketailorshk.com
         </address>
     </span>
 </div>

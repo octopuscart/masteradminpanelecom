@@ -39,10 +39,8 @@ As one of Hong Kong's leading custom tailors, we are proud of our international 
             Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, <br/>
             Tsim Sha Tsui, Kowloon, Hong Kong.                                        <br/>
              <b>Tel#</b>: +(852) 2730 8566  <b>Fax#</b>: +(852) 2730 8577<br/>
-            <b>Email</b>: info@bespoketailorshk.com  
-            <b>Web</b>: www.bespoketailorshk.com</b>
-
-
+            <b>Email</b>: info@bespoketailorshk.com  &nbsp;
+            <b>Web</b>: www.bespoketailorshk.com
         </address>
     </span>
 </div>
