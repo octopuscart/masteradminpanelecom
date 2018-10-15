@@ -55,6 +55,17 @@ class Services extends CI_Controller {
         $data['users_all'] = $this->User_model->user_reports("User");
         $this->load->view('Email/newslatter', $data);
     }
+    
+    
+    function appointment(){
+        $data = array();
+        $this->load->view("Appointment/setnew", $data);
+    }
+    
+     function appointment_report(){
+        $data = array();
+        $this->load->view("Appointment/report", $data);
+    }
 
 }
 
