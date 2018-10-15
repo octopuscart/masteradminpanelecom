@@ -37,10 +37,10 @@ function checkPermission($session_data) {
                 <p style="line-height: 20px;">
                     <?php echo $session_data['first_name'] . " " . $session_data['last_name']; ?>
                     <br/>
-                    <span style="color:green;"><?php echo $session_data['user_type'];  ?></span>
+                    <span style="color:green;"><?php echo $session_data['user_type']; ?></span>
                 </p>
 
-               
+
 
             </div>
         </div>
@@ -126,11 +126,11 @@ function checkPermission($session_data) {
 
                     <?php if (checkPermission($session_data) == 'system') { ?>
                         <!--Admin Access-->
-                        <!--                        <li>
-                                                    <a href="<?php echo base_url(); ?>index.php/ProductManager/categories">
-                                                        <i class="active fa fa-plus "></i> <span>Categories</span>
-                                                    </a>
-                                                </li>     -->
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/ProductManager/categories">
+                                <i class="active fa fa-plus "></i> <span>Categories</span>
+                            </a>
+                        </li>     
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/createAttribute">
                                 <i class="active fa fa-plus "></i> <span>Attributes</span>
