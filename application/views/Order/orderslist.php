@@ -46,63 +46,98 @@ $this->load->view('layout/layoutTop');
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <table id="tableDataOrder" class="table table-bordered table-striped">
+                    <table id="tableDataOrder" class="table table-bordered  tableDataOrder">
                         <thead>
                             <tr>
+                                <th style="width: 20px">S. NO.</th>
+                                <th style="width:200px">Order Information</th>
+                                <th style="width:200px">Customer Information</th>
+                                <th style="width:80px">Items/Qnty.</th>
+                                <th style="width:100px">Sizes</th>
+                                <th>Status</th>
                                 <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             if (count($orderslist)) {
+                                $count = 1;
                                 foreach ($orderslist as $key => $value) {
                                     ?>
-                                    <tr>
+                                    <tr style="border-bottom: 1px solid #000;">
                                         <td>
-                                            <div class="col-md-12  "> 
-                                                <div class="pricing">
-                                                    <article class="order_box" style="padding: 10px">
-                                                        <div class="col-md-3">
-                                                            <h6 style="font-weight: bold;">
-                                                                Order No. #<?php echo $value->order_no; ?>
-                                                            </h6>
-                                                            Total Amount: {{<?php echo $value->total_price; ?>|currency:" "}}
-                                                            <br/>
-                                                            Total Products: {{<?php echo $value->total_quantity; ?>}}
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h6 style="font-weight: bold;">
-                                                                <?php echo $value->name; ?>
-                                                            </h6>
-                                                            <span style="border-bottom: 1px solid #c5c5c5;">E: <?php echo $value->email; ?></span>
-                                                            <br/>
-                                                            <p style="font-size:12px"><?php echo $value->address; ?> <?php echo $value->city; ?> <?php echo $value->state; ?><p>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <span >
-                                                                <i class="fa fa-calendar"></i> <?php echo $value->order_date; ?>  <?php echo $value->order_time; ?>
-                                                            </span><br/>
-                                                            Status: <?php echo $value->status; ?>
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td>
+                                      
+                                                <table class="small_table">
+                                                    <tr>
+                                                        <th>Order No.</th>
+                                                        <td>: <?php echo $value->order_no; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total Amount</th>
+                                                        <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total Products</th>
+                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
+                                                    </tr>
+                                                </table>
+                                        
+                                        </td>
 
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <a href="<?php echo site_url('order/orderdetails/' . $value->order_key); ?>" class="btn btn-default btn-lg" style="margin: 0px;    float: right;">
-                                                                View Order <i class="fa fa-arrow-right"></i>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-6 orderlist_stylemes">
-                                                            <b>Items:</b>  <span style="font-weight: 500"><?php echo $value->items; ?></span>
-                                                        </div>
-                                                        <div class="col-md-6 orderlist_stylemes">
-                                                            <b>Sizes:</b>  <span style="font-weight: 500"><?php echo $value->measurement_style; ?></span>
-                                                        </div>
-                                                        <div style="clear: both"></div>
-                                                    </article>
-                                                </div>
-                                            </div>
+                                        <td>
+                                           
+                                                <b> <?php echo $value->name; ?></b>
+                                                <table class="small_table">
+                                                    <tr>
+                                                        <th><i class="fa fa-envelope"></i> &nbsp; </th>
+                                                        <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><i class="fa fa-phone"></i>  &nbsp;</th>
+                                                        <td> <?php echo $value->contact_no; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
+                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
+                                                    </tr>
+                                                </table>
+                                          
+                                        </td>
+                                        
+
+                                        <td>
+                                            <table class="small_table">
+                                                <?php
+                                                $items = $value->itemsarray;
+                                                foreach ($items as $k => $v) {
+                                                    echo "<tr><th>$k</th><td>: $v</td></tr>";
+                                                }
+                                                ?>
+                                            </table>
+                                        </td>
+<td>
+                                         
+                                                <?php
+                                                echo $value->measurement_style;
+                                                ?>
+                                          
+                                        </td>
+                                        <td>
+                                            <?php
+                                            echo "" . $value->status . "<br/>";
+                                            echo $value->status_datetime;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo site_url("order/orderdetails/".$value->order_key);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
                                         </td>
                                     </tr>
                                     <?php
+                                    $count++;
                                 }
                             } else {
                                 ?>

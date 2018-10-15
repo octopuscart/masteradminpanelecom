@@ -16,14 +16,14 @@
 
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/AdminLTE.css">
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/customstyle.css">
+
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/skins/_all-skins.min.css">
         <script src="<?php echo base_url(); ?>assets_main/dist/js/angular.min.js"></script>
 
-
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets_main/dist/css/customstyle.css">
 
         <!-- Google Font -->
         <link rel="stylesheet"
