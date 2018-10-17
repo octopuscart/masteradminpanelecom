@@ -166,19 +166,24 @@ class Order_model extends CI_Model {
         $emailsender = email_sender;
         $sendername = email_sender_name;
         $email_bcc = email_bcc;
-       
+
         if ($order_details) {
             $currentstatus = $order_details['order_status'][0];
             $order_no = $order_details['order_data']->order_no;
             $this->email->from($emailsender, $sendername);
             $this->email->to($order_details['order_data']->email);
             $this->email->bcc(email_bcc);
-            $subject = "Bespoke Tailors - ".$currentstatus->remark;
+            $subject = "Bespoke Tailors - " . $currentstatus->remark;
             $this->email->subject($subject);
-            $this->load->view('Email/order_mail', $order_details, true);
-            $this->email->message($this->load->view('Email/order_mail', $order_details, true));
-            $this->email->print_debugger();
-            $result = $this->email->send();
+            
+            $checkcode = 0;
+            if ($checkcode == 0) {
+                echo $this->load->view('Email/order_mail', $order_details, true);
+            } else {
+                $this->email->message($this->load->view('Email/order_mail', $order_details, true));
+                $this->email->print_debugger();
+                $result = $this->email->send();
+            }
         }
     }
 
@@ -204,8 +209,7 @@ class Order_model extends CI_Model {
             }
         }
     }
-    
-    
+
     function order_pdf_worker($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
         $order_details = $this->getOrderDetails($order_id, 0);
