@@ -193,21 +193,37 @@ class Order_model extends CI_Model {
             $pdfFilePath = $order_no . ".pdf";
             $checkcode = 1;
             if ($checkcode == 0) {
-
                 echo $html;
             } else {
-
-//load mPDF library
                 $this->load->library('m_pdf');
-
-//generate the PDF from the given html
-
                 $this->m_pdf->pdf->SetHTMLHeader($html_header);
                 $this->m_pdf->pdf->SetHTMLFooter($html_footer);
 
                 $this->m_pdf->pdf->WriteHTML($html);
+                $this->m_pdf->pdf->Output($pdfFilePath, "D");
+            }
+        }
+    }
+    
+    
+    function order_pdf_worker($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->getOrderDetails($order_id, 0);
+        if ($order_details) {
+            $order_no = $order_details['order_data']->order_no;
+            $html = $this->load->view('Email/order_pdf_worker', $order_details, true);
+            $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
+            $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
+            $pdfFilePath = $order_no . "_worker_report.pdf";
+            $checkcode = 1;
+            if ($checkcode == 0) {
+                echo $html;
+            } else {
+                $this->load->library('m_pdf');
+                $this->m_pdf->pdf->SetHTMLHeader($html_header);
+                $this->m_pdf->pdf->SetHTMLFooter($html_footer);
 
-//download it.
+                $this->m_pdf->pdf->WriteHTML($html);
                 $this->m_pdf->pdf->Output($pdfFilePath, "D");
             }
         }

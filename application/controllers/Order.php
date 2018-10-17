@@ -290,6 +290,10 @@ class Order extends CI_Controller {
     function order_pdf($order_id) {
         $this->Order_model->order_pdf($order_id);
     }
+    
+    function order_pdf_worker($order_id) {
+        $this->Order_model->order_pdf_worker($order_id);
+    }
 
     public function remove_order_status($status_id, $orderkey) {
         $this->db->delete('user_order_status', array('id' => $status_id));
