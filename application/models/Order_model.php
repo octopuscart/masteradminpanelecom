@@ -176,7 +176,7 @@ class Order_model extends CI_Model {
             $subject = "Bespoke Tailors - " . $currentstatus->remark;
             $this->email->subject($subject);
             
-            $checkcode = 0;
+            $checkcode = 1;
             if ($checkcode == 0) {
                 echo $this->load->view('Email/order_mail', $order_details, true);
             } else {
