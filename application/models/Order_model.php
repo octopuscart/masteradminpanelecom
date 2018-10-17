@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Order_model extends CI_Model {
 
     function __construct() {
-        // Call the Model constructor
+// Call the Model constructor
         parent::__construct();
         $this->load->database();
     }
 
-    //get order details  
+//get order details  
     public function getOrderDetails($key_id, $is_key = 0) {
         $order_data = array();
         if ($is_key === 'key') {
@@ -66,7 +66,7 @@ class Order_model extends CI_Model {
 
         if ($order_details) {
 
-//            $this->db->order_by('id', 'desc');
+            $this->db->order_by('id', 'desc');
             $this->db->where('order_id', $order_details->id);
             $query = $this->db->get('user_order_status');
             $userorderstatus = $query->result();
@@ -162,24 +162,23 @@ class Order_model extends CI_Model {
 
     function order_mail($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
-        $order_details = $this->getOrderDetails($order_id, 0);
+        $order_details = $this->getOrderDetailsV2($order_id, 'key');
         $emailsender = email_sender;
         $sendername = email_sender_name;
         $email_bcc = email_bcc;
-
+       
         if ($order_details) {
-
+            $currentstatus = $order_details['order_status'][0];
             $order_no = $order_details['order_data']->order_no;
-//            $this->email->from($emailsender, $sendername);
-//            $this->email->to($order_details['order_data']->email);
-//            $this->email->bcc(email_bcc);
-            //$subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [" . $order_no . "] has been successfully placed!";
-            //  $this->email->subject($subject);
-//
-            echo $this->load->view('Email/order_mail', $order_details, true);
-//            $this->email->message($this->load->view('Email/order_mail', $order_details, true));
-//            $this->email->print_debugger();
-//            // echo $result = $this->email->send();
+            $this->email->from($emailsender, $sendername);
+            $this->email->to($order_details['order_data']->email);
+            $this->email->bcc(email_bcc);
+            $subject = "Bespoke Tailors - ".$currentstatus->remark;
+            $this->email->subject($subject);
+            $this->load->view('Email/order_mail', $order_details, true);
+            $this->email->message($this->load->view('Email/order_mail', $order_details, true));
+            $this->email->print_debugger();
+            $result = $this->email->send();
         }
     }
 
@@ -189,23 +188,28 @@ class Order_model extends CI_Model {
         if ($order_details) {
             $order_no = $order_details['order_data']->order_no;
             $html = $this->load->view('Email/order_pdf', $order_details, true);
-             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
+            $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . ".pdf";
+            $checkcode = 1;
+            if ($checkcode == 0) {
 
-//            echo $html;
-            //load mPDF library
-            $this->load->library('m_pdf');
+                echo $html;
+            } else {
 
-            //generate the PDF from the given html
+//load mPDF library
+                $this->load->library('m_pdf');
 
-            $this->m_pdf->pdf->SetHTMLHeader($html_header);
-            $this->m_pdf->pdf->SetHTMLFooter($html_footer);
+//generate the PDF from the given html
 
-            $this->m_pdf->pdf->WriteHTML($html);
+                $this->m_pdf->pdf->SetHTMLHeader($html_header);
+                $this->m_pdf->pdf->SetHTMLFooter($html_footer);
 
-            //download it.
-             $this->m_pdf->pdf->Output($pdfFilePath, "D");
+                $this->m_pdf->pdf->WriteHTML($html);
+
+//download it.
+                $this->m_pdf->pdf->Output($pdfFilePath, "D");
+            }
         }
     }
 

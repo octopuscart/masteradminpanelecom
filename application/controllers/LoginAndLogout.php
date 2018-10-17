@@ -59,7 +59,7 @@ class LoginAndLogout extends CI_Controller {
                 );
                 $this->session->set_userdata('logged_in', $sess_data);
 
-                redirect('Order/orderAnalysisVendor');
+                redirect('Order/orderAnalysis');
             }
         }
         $this->load->view('login',$data1);

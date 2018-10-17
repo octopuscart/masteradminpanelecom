@@ -56,7 +56,7 @@ date_default_timezone_set('Asia/Hong_Kong');
  */
 $baselink = 'http://' . $_SERVER['SERVER_NAME'];
 $checkdebug = strpos($baselink, '192.168') ? TRUE : FALSE;
-$checkdebug = TRUE;
+//$checkdebug = TRUE;
 if ($checkdebug) {
     define('ENVIRONMENT', 'development');
 } else{
@@ -74,7 +74,7 @@ if ($checkdebug) {
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		error_reporting(1);
 		ini_set('display_errors', 1);
 	break;
 

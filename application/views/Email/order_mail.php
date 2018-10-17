@@ -32,29 +32,45 @@
 
             }
             .style_block{
-       float: left;
-    padding: 1px 1px;
-    margin: 2.5px;
-    /* background: #000; */
-    color: white;
-    border: 1px solid #e4e4e4;
-    width: 47%;
-    font-size: 10px;
+                float: left;
+                padding: 1px 1px;
+                margin: 2.5px;
+                /* background: #000; */
+                color: white;
+                border: 1px solid #e4e4e4;
+                width: 47%;
+                font-size: 12px;
             }
 
-  .style_block span {
-    background: #fff;
-    margin-left: 5px;
-    color: #000;
-    padding: 0px 5px;
-    width: 50%;
-}
-.style_block b {
-    width: 46%;
-    float: left;
-        background: #dedede;
-    color: black;
-}
+
+            .style_block span {
+                background: #fff;
+                margin-left: 5px;
+                color: #000;
+                padding: 0px 5px;
+                width: 50%;
+            }
+            .style_block b {
+                width: 46%;
+                float: left;
+                background: #dedede;
+                color: black;
+            }
+            span.fr_value {
+                margin-left: 1px;
+                padding: 0;
+                font-size: 9px;
+                text-align: -webkit-left;
+                position: absolute;
+                margin-top: 0px;
+                width: 20px;
+            }
+
+            .icon-circle{
+                font-size: 19px; height: 31px;width: 31px;
+                background-color: #000;
+                float: left; border-radius: 50%; color: #fff;line-height: 28px;text-align: center;
+            }
         </style>
     </head>
 
@@ -63,20 +79,20 @@
           background: rgb(225, 225, 225);
           font-family: sans-serif;">
         <div class="" style="padding:50px 0px">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="background: #000;padding: 0 20px">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #000;padding: 0 20px">
                 <tr>
                     <td >
                         <center><img src="<?php echo site_mail_logo; ?> " style="margin: 10px;
                                      height: 50px;
                                      width: auto;"/><br/>
-                            <h4 style="color: white;"> Order No.:<?php echo $order_data->order_no; ?></h4>
+                            <h4 style="color: white;"> Order No.: <?php echo $order_data->order_no; ?></h4>
                         </center>
                     </td>
 
                 </tr>
 
             </table>
-            <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="background: #fff">
+            <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff">
                 <tr>
                     <td style="font-size: 12px;width: 50%" >
                         <b>Shipping Address</b><br/><hr/>
@@ -105,15 +121,20 @@
 
 
                     </td>
-                    <td style="font-size: 12px;width: 50%" >
+                    <td style="font-size: 12px;width: 35%" >
 
                         <table class="gn_table">
+                            <tr>
+                                <td colspan="2">
+                                    <b>Order Information</b><br/><hr/>
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Order No.</th>
                                 <td>: <?php echo $order_data->order_no; ?> </td>
                             </tr>
                             <tr>
-                                <th>Date Time</th>
+                                <th>Date/Time</th>
                                 <td>: <?php echo $order_data->order_date; ?> <?php echo $order_data->order_time; ?>  </td>
                             </tr>
                             <tr>
@@ -122,7 +143,7 @@
                             </tr>
                             <tr>
                                 <th>Txn No.</th>
-                                <td>: <?php echo $payment_details['txn_id']?$payment_details['txn_id']:'---'; ?> </td>
+                                <td>: <?php echo $payment_details['txn_id'] ? $payment_details['txn_id'] : '---'; ?> </td>
                             </tr>
                             <tr>
                                 <th>Status</th>
@@ -140,21 +161,93 @@
                     </td>
                 </tr>
             </table>
-            <table class="carttable"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" width="600" style="background: #fff;padding:20px">
+
+
+            <table class="carttable"  border-color= "#9E9E9E" align="center"  cellpadding="0" cellspacing="0" width="700" style="background: #fff;">
+
+
+                <tr>
+                    <td>
+                        <div class = "" style = "    padding: 5px 5px;
+                             border: 1px solid #000;
+                             margin-bottom: 18px;
+                             border-radius: 5px;">
+                            <center>
+                                <h3 style="padding: 2px;  margin: -2px;  background-color: #ECECEC; margin-bottom: 10px;  color: #000; font-weight: 300;">Order Status</h3>
+
+                                <table class="orderstatustable" align="center"  cellpadding="0" cellspacing="0" width="600" >
+
+                                    <?php
+                                    $count = 0;
+                                    $countord = count($order_status);
+                                    foreach ($order_status as $oskey => $osvalue) {
+                                        ?>
+                                        <tr style="border-bottom: 1px solid #000;">
+                                            <td style='text-align: right; border-left: 0px solid;padding: 0;'>
+
+                                                <i class='icon-circle'><?php
+                                                    echo $countord - $count;
+                                                    ?></i>
+                                            </td>
+                                            <td style=' padding: 10px;'>
+                                                <b>
+                                                    <?php
+                                                    echo $osvalue->status;
+                                                    ?>
+                                                </b>
+                                                <br/>
+                                                <small style="font-weight:300;font-size:13px">
+                                                        <?php
+                                                        echo $osvalue->remark;
+                                                        ?></small>
+                                                
+
+                                            </td>
+
+                                            <th style="
+                                                text-align: left;">
+                                                    <span style="font-size: 10px;">
+                                                <?php
+                                                echo $osvalue->c_date . " " . $osvalue->c_time;
+                                                ?>
+                                                </span>
+                                            </th>
+
+                                        </tr>
+                                        <?php
+                                     
+                                            echo "<tr><td colspan=3><hr /></td></tr>";
+                                        
+                                        ?>
+                                        <?php
+                                        $count++;
+                                    }
+                                    ?>
+
+                                </table>
+                            </center>
+                        </div>
+                    </td>
+                </tr>          
+
+            </table>
+
+
+            <table class="carttable"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" width="700" style="background: #fff;padding:20px">
                 <tr style="font-weight: bold">
                     <td style="width: 20px;text-align: center">S.No.</td>
                     <td colspan="2"  style="text-align: center">Product</td>
 
-                    <td style="text-align: right;width: 60px">Price<br/><span style="font-size: 10px">(In <?php echo globle_currency; ?>)</span></td>
+                    <td style="text-align: right;width: 100px">Price (In <?php echo trim(globle_currency); ?>)</td>
                     <td style="text-align: right">Qnty.</td>
-                    <td style="text-align: right;width: 60px">Total<br/><span style="font-size: 10px">(In  <?php echo globle_currency; ?>)</span></td>
+                    <td style="text-align: right;width: 100px">Total (In  <?php echo trim(globle_currency); ?>)</td>
                 </tr>
                 <!--cart details-->
                 <?php
                 foreach ($cart_data as $key => $product) {
                     ?>
                     <tr>
-                        <td>
+                        <td style="text-align: right">
                             <?php echo $key + 1; ?>
                         </td>
 
@@ -185,11 +278,9 @@
                         <td colspan="6">
                             <b>Style Details : <?php echo $product->title; ?> - <?php echo $product->item_name; ?></b>
                             <br/><?php
-                            
                             foreach ($product->custom_dict as $key => $value) {
                                 echo "<p class='style_block'><b>$key</b><span> $value</span></p>";
                             }
-                         
                             ?>  
                         </td>
                     </tr>
@@ -199,27 +290,42 @@
                 <!--end of cart details-->
 
                 <tr>
+                    <td colspan="6">
+                        <b>Sizes: <?php echo $order_data->measurement_style; ?></b>
+                        <br/><?php
+                if (count($measurements_items)) {
+                    foreach ($measurements_items as $keym => $valuem) {
+                        $mvalues = explode(" ", $valuem['measurement_value']);
+                        echo "<p class='style_block'><b>" . $valuem['measurement_key'] . " </b><span> " . $mvalues[0] . " <span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></p>";
+                    }
+                }
+                ?>  
+                    </td>
+                </tr>
+
+
+                <tr>
                     <td colspan="3"  rowspan="5" style="font-size: 12px">
-                        <b>Total Amount in Words:</b><br/>
-                        <span style="text-transform: capitalize"> <?php echo $amount_in_word; ?></span>
+                        <b>Total Amount in Words: </b><br/>
+                        <span style="text-transform: capitalize"> Only <?php echo $order_data->amount_in_word; ?></span>
                     </td>
 
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Sub Total</td>
-                    <td style="text-align: right;width: 60px"><?php echo $order_data->sub_total_price; ?> </td>
+                    <td style="text-align: right;width: 60px"><?php echo globle_currency . " " . number_format($order_data->sub_total_price, 2, '.', ''); ?> </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Shipping Amount</td>
-                    <td style="text-align: right;width: 60px"><?php echo $order_data->credit_price; ?> </td>
+                    <td style="text-align: right;width: 60px"><?php echo globle_currency . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Coupon Discount</td>
-                    <td style="text-align: right;width: 60px"><?php echo $order_data->credit_price; ?> </td>
+                    <td style="text-align: right;width: 60px"><?php echo globle_currency . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Toal Amount</td>
-                    <td style="text-align: right;width: 60px"><?php echo $order_data->total_price; ?> </td>
+                    <td style="text-align: right;width: 60px"><?php echo globle_currency . " " . number_format($order_data->total_price, 2, '.', ''); ?> </td>
                 </tr>
 
 
@@ -243,11 +349,11 @@
                                     <address>
                                         <b>Address 1</b><br/>
                                         2nd Floor, 45 Haiphong Road,<br/> 
-                                        Tsim Sha Tsui, Kowloon, Hong Kong.
+                                        Tsim Sha Tsui, Kowloon, Hong Kong
                                         <br/><br/>
                                         <b>Address 2</b><br/>
                                         Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, <br/>
-                                        Tsim Sha Tsui, Kowloon, Hong Kong.                                        <br/>
+                                        Tsim Sha Tsui, Kowloon, Hong Kong                                        <br/>
                                         <b>Tel#</b>: +(852) 2730 8566  <b>Fax#</b>: +(852) 2730 8577<br/>
                                         <b>Email</b>: info@bespoketailorshk.com  
                                         <b>Web</b>: www.bespoketailorshk.com</b>

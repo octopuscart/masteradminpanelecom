@@ -95,6 +95,7 @@ $this->load->view('layout/layoutTop');
 
                     <div class="box-footer">
                         <div class="col-md-12">
+                            <>
                             <button type="submit" class="btn btn-primary btn-lg" name="submit" value="submit">Submit</button>
                         </div>
                     </div>
