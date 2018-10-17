@@ -212,7 +212,7 @@ $lng_array = array(
                         <?php
                         foreach ($measurements_items as $keym => $valuem) {
                             $mvalues = explode(" ", $valuem['measurement_value']);
-                            echo "<tr><td style='border-bottom:1px solid #c0c0c0;padding-left:20px;'>" . $valuem['measurement_key'] . " </td><td style='border-bottom:1px solid #c0c0c0;padding-left:20px;'>" . (isset($lng_array[$valuem['measurement_key']]) ? $lng_array[$valuem['measurement_key']] : '') . "</td><td style='border-bottom:1px solid #c0c0c0'>" . $mvalues[0] . " <span style='margin-left: 1px;
+                            echo "<tr><td style='border-bottom:1px solid #c0c0c0;padding-left:20px;'>" . $valuem['measurement_key'] . " </td><td style='border-bottom:1px solid #c0c0c0;padding-left:20px;font-family: Sun-ExtA ;'>" . (isset($lng_array[$valuem['measurement_key']]) ? $lng_array[$valuem['measurement_key']] : '') . "</td><td style='border-bottom:1px solid #c0c0c0'>" . $mvalues[0] . " <span style='margin-left: 1px;
     padding: 0;
     font-size: 10px;
 
