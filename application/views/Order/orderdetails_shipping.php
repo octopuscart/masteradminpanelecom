@@ -61,36 +61,118 @@ $this->load->view('layout/layoutTop');
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Order No.:<?php echo $ordersdetails['order_data']->order_no; ?></h3>
+                        <h3 class="box-title">Order No.: <?php echo $ordersdetails['order_data']->order_no; ?></h3>
                     </div>
 
 
                     <form role="form" action="#" method="post">
                         <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b style="color:#c0c0c0">Shipping Address</b><br/>
+                                    <span style="text-transform: capitalize;margin-top: 10px;"> 
+                                        <?php echo $ordersdetails['order_data']->name; ?>
+                                    </span> <br/>
+                                    <div style="    padding: 5px 0px;">
+                                        <?php echo $ordersdetails['order_data']->address1; ?><br/>
+                                        <?php echo $ordersdetails['order_data']->address2; ?><br/>
+                                        <?php echo $ordersdetails['order_data']->state; ?>
+                                        <?php echo $ordersdetails['order_data']->city; ?>
+
+                                        <?php echo $ordersdetails['order_data']->country; ?> <?php echo $ordersdetails['order_data']->zipcode; ?>
+
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <b style="color:#c0c0c0">Customer ID:</b><br/>
+
+                                    <?php echo ucwords($ordersdetails['order_data']->user_id); ?>
+                                    <br/>
+                                    <hr/>
+                                    <b style="color:#c0c0c0">Destination Country</b><br/>
+
+                                    <?php echo $ordersdetails['order_data']->country; ?>
+                                    <br/>
+
+
+                                </div>
+                            </div>
+
+                            <input class="form-control" type="hidden" name="shipping_country" value="<?php echo $ordersdetails['order_data']->country ?>">
+
+
+                            <input class="form-control" type="hidden" name="customer_id" value="<?php echo ucwords($ordersdetails['order_data']->user_id); ?>">
+
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Order Status</label>
-                                    <?php if ($status) { ?>
-                                        <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
-                                    <?php } else { ?>
-                                        <input class="form-control"  name="status" value="<?php echo $status; ?>">
-                                    <?php } ?>
-
+                                    <label>Total Weight</label>
+                                    <input class="form-control" type="number" name="total_weight" value="" >
                                 </div>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Remark <small>(It will be subject of email.)</small></label>
-                                    <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="">
+                                    <label>Weight Unit</label>
+                                    <select class="form-control" name="weight_unit">
+                                        <option>KG</option>
+                                        <option>LBS</option>
+                                    </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Shipping Date</label>
+                                    <input class="form-control" type="date" name="shipping_date" value="<?php echo date('Y-m-d'); ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Shipping Time</label>
+                                    <input class="form-control" type="time" name="shipping_time" value="<?php echo date('H:m:s'); ?>" required="">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Shipping Company</label>
+                                    <input class="form-control" type="datetime" name="shipping_company" value="" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Shipping Contact No.</label>
+                                    <input class="form-control" type="datetime" name="shippping_contact_no" value="" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Traking No.</label>
+                                    <input class="form-control" type="datetime" name="shipping_tracking_no" value="" required="">
+                                </div>
+                            </div>
+
+
+
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description <small>(It will be message body of email.)</small></label>
-                                    <textarea class="form-control" placeholder="Enter Message"  name="description"></textarea>
+                                    <label>Tracking Link</label>
+                                    <input type="text" class="form-control" placeholder="" name="shipping_tracking_link" required="">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" placeholder="Remark for order status" name="description"></textarea>
                                 </div>
                             </div>
 
@@ -181,8 +263,6 @@ $this->load->view('layout/layoutTop');
             <article class="" style="padding: 10px;">
                 <div class="row">
                     <div class="col-md-12" style="padding:5px 20px;">
-                        <a class="btn btn-success pull-right" href="<?php echo site_url("order/order_mail_send_direct/" . $ordersdetails['order_data']->order_key) ?>"><i class="fa fa-envelope"></i> Send Current Status Mail</a>
-
                         <a class="btn btn-success pull-right" href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-download"></i> Download</a>
                     </div>
                 </div>

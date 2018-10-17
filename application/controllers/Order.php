@@ -58,6 +58,84 @@ class Order extends CI_Controller {
 
 //order details
     public function orderdetails($order_key) {
+        $order_status = $this->input->get('status');
+        $data['status'] = $order_status;
+        if ($this->user_type == 'Customer') {
+            redirect('UserManager/not_granted');
+        }
+
+
+
+
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+        $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
+        $data['vendor_order'] = $vendor_order_details;
+        if ($order_details) {
+            $order_id = $order_details['order_data']->id;
+            $data['ordersdetails'] = $order_details;
+            $data['order_key'] = $order_key;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_id);
+            $query = $this->db->get('user_order_status');
+            $orderstatuslist = $query->result();
+
+            $currentstatus = $orderstatuslist[0]->status;
+
+            if ($order_status) {
+                
+            } else {
+                //redirecttion
+                switch ($currentstatus) {
+                    case "Order Confirmed":
+                        redirect("Order/orderdetails_payments/$order_key");
+                        break;
+                    case "Payment Confirmed":
+                        redirect("Order/orderdetails_shipping/$order_key");
+                        break;
+                    case "Shipped":
+                        if ($order_status == 'Delivered') {
+                            
+                        } else {
+                            redirect("Order/orderdetails/$order_key/?status=Delivered");
+                        }
+                        break;
+                    default:
+                        echo "";
+                }
+            }
+            //end of redirection
+
+
+
+            $data['user_order_status'] = $orderstatuslist;
+            if (isset($_POST['submit'])) {
+                $productattr = array(
+                    'c_date' => date('Y-m-d'),
+                    'c_time' => date('H:i:s'),
+                    'status' => $this->input->post('status'),
+                    'remark' => $this->input->post('remark'),
+                    'description' => $this->input->post('description'),
+                    'order_id' => $order_id
+                );
+                $this->db->insert('user_order_status', $productattr);
+                if ($this->input->post('sendmail') == TRUE) {
+                    try {
+                        $this->Order_model->order_mail($order_key, "");
+                    } catch (Exception $e) {
+                        echo 'Message: ' . $e->getMessage();
+                    }
+                }
+                redirect("Order/orderdetails/$order_key");
+            }
+        } else {
+            redirect('/');
+        }
+        $this->load->view('Order/orderdetails', $data);
+    }
+
+    public function orderdetails_payments($order_key) {
+        $order_status = $this->input->get('status');
+        $data['status'] = $order_status;
         if ($this->user_type == 'Customer') {
             redirect('UserManager/not_granted');
         }
@@ -77,29 +155,136 @@ class Order extends CI_Controller {
                 $productattr = array(
                     'c_date' => date('Y-m-d'),
                     'c_time' => date('H:i:s'),
-                    'status' => $this->input->post('status'),
+                    'status' => "Payment Confirmed",
                     'remark' => $this->input->post('remark'),
                     'description' => $this->input->post('description'),
                     'order_id' => $order_id
                 );
                 $this->db->insert('user_order_status', $productattr);
-                
-                try {
-                   $this->Order_model->order_mail($order_key, "");
-                } catch (Exception $e) {
-                    echo 'Message: ' . $e->getMessage();
+
+
+                $productattr = array(
+                    'status' => "Payment Confirmed",
+                    'remark' => $this->input->post('remark'),
+                    'txn_no' => $this->input->post('txn_no'),
+                    'c_date' => $this->input->post('c_date'),
+                    'c_time ' => $this->input->post('c_time'),
+                    'description' => "Payment Comfirmed Using " . $this->input->post('payment_mode') . " " . $this->input->post('description'),
+                    'order_id' => $order_id
+                );
+                $this->db->insert('paypal_status', $productattr);
+
+
+
+                if ($this->input->post('sendmail') == TRUE) {
+                    try {
+                        $this->Order_model->order_mail($order_key, "");
+                    } catch (Exception $e) {
+                        echo 'Message: ' . $e->getMessage();
+                    }
                 }
                 redirect("Order/orderdetails/$order_key");
             }
         } else {
             redirect('/');
         }
-        $this->load->view('Order/orderdetails', $data);
+        $this->load->view('Order/orderdetails_payment', $data);
+    }
+
+    public function orderdetails_shipping($order_key) {
+        if ($this->user_type == 'Customer') {
+            redirect('UserManager/not_granted');
+        }
+        $order_status = $this->input->get('status');
+        $data['status'] = $order_status;
+
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+        $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
+        $data['vendor_order'] = $vendor_order_details;
+
+
+        if ($order_details) {
+            $order_id = $order_details['order_data']->id;
+            $data['ordersdetails'] = $order_details;
+            $data['order_key'] = $order_key;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_id);
+            $query = $this->db->get('user_order_status');
+            $orderstatuslist = $query->result();
+            $data['user_order_status'] = $orderstatuslist;
+
+
+
+
+            if (isset($_POST['submit'])) {
+
+                $tracking_no = $this->input->post('shipping_tracking_no');
+                $tracking_link = $this->input->post('shipping_tracking_link');
+                $shipping_company = $this->input->post('shipping_company');
+                $shippping_contact_no = $this->input->post('shippping_contact_no');
+                $shipping_time = $this->input->post('shipping_time');
+                $shipping_time = $this->input->post('shipping_date');
+                $total_weight = $this->input->post('total_weight');
+                $weight_unit = $this->input->post('weight_unit');
+                $description = $this->input->post('description');
+                $customer_id = $this->input->post('customer_id');
+                $shipping_country = $this->input->post('shipping_country');
+                $description = $this->input->post('description');
+
+
+                $shippingarray = array(
+                    'shipping_tracking_no' => $this->input->post('shipping_tracking_no'),
+                    'shipping_tracking_link' => $this->input->post('shipping_tracking_link'),
+                    'shipping_company' => $this->input->post('shipping_company'),
+                    'shippping_contact_no' => $this->input->post('shippping_contact_no'),
+                    'shipping_time' => $this->input->post('shipping_time'),
+                    'shipping_date' => $this->input->post('shipping_date'),
+                    'total_weight' => $this->input->post('total_weight'),
+                    'weight_unit' => $this->input->post('weight_unit'),
+                    'description' => $this->input->post('description'),
+                    'customer_id' => $this->input->post('customer_id'),
+                    'shipping_country' => $this->input->post('shipping_country'),
+                    'description' => $this->input->post('description'),
+                    'order_id' => $order_id
+                );
+                $this->db->insert('shipping_order', $shippingarray);
+
+                $remark = "Your order has been shipped";
+                $description1 = "Order Shipped By $shipping_company, Tracking No.: $tracking_no,<br/> Traking Link: <a href='$tracking_link' target='_blank'>$tracking_link</a>";
+
+                $productattr = array(
+                    'c_date' => date('Y-m-d'),
+                    'c_time' => date('H:i:s'),
+                    'status' => "Shipped",
+                    'remark' => $remark,
+                    'description' => $description1,
+                    'order_id' => $order_id
+                );
+                $this->db->insert('user_order_status', $productattr);
+                if ($this->input->post('sendmail') == TRUE) {
+                    try {
+                          $this->Order_model->order_mail($order_key, "");
+                    } catch (Exception $e) {
+                        echo 'Message: ' . $e->getMessage();
+                    }
+                }
+                redirect("Order/orderdetails/$order_key");
+            }
+        } else {
+            redirect('/');
+        }
+        $this->load->view('Order/orderdetails_shipping', $data);
     }
 
     function order_mail_send($order_id) {
         $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
         $this->Order_model->order_mail($order_id, $subject);
+    }
+    
+    function order_mail_send_direct($order_key) {
+        $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
+        $this->Order_model->order_mail($order_key, $subject);
+        redirect("Order/orderdetails/$order_key");
     }
 
     function order_pdf($order_id) {

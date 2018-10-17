@@ -192,32 +192,37 @@
                                             <td style=' padding: 10px;'>
                                                 <b>
                                                     <?php
-                                                    echo $osvalue->status;
-                                                    ?>
+                                                  
+                                                        echo $osvalue->status;
+                                                   ?>
                                                 </b>
                                                 <br/>
                                                 <small style="font-weight:300;font-size:13px">
-                                                        <?php
+                                                    <?php
+                                                    if($osvalue->status=="Shipped") {
+                                                        echo $osvalue->description;
+                                                    } else {
                                                         echo $osvalue->remark;
-                                                        ?></small>
-                                                
+                                                    }
+                                                    ?>
+              
+                                                </small>
+
 
                                             </td>
 
                                             <th style="
                                                 text-align: left;">
-                                                    <span style="font-size: 10px;">
-                                                <?php
-                                                echo $osvalue->c_date . " " . $osvalue->c_time;
-                                                ?>
+                                                <span style="font-size: 10px;">
+                                                    <?php
+                                                    echo $osvalue->c_date . " " . $osvalue->c_time;
+                                                    ?>
                                                 </span>
                                             </th>
 
                                         </tr>
                                         <?php
-                                     
-                                            echo "<tr><td colspan=3><hr /></td></tr>";
-                                        
+                                        echo "<tr><td colspan=3><hr /></td></tr>";
                                         ?>
                                         <?php
                                         $count++;

@@ -61,7 +61,9 @@ $this->load->view('layout/layoutTop');
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Order No.:<?php echo $ordersdetails['order_data']->order_no; ?></h3>
+                        <h3 class="box-title" style="width: 100%"><i class=" fa fa-money"></i> Payment Confirmation
+                            <span style="float: right"> Order No.: <?php echo $ordersdetails['order_data']->order_no; ?></span>
+                        </h3>
                     </div>
 
 
@@ -70,20 +72,33 @@ $this->load->view('layout/layoutTop');
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Order Status</label>
-                                    <?php if ($status) { ?>
-                                        <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
-                                    <?php } else { ?>
-                                        <input class="form-control"  name="status" value="<?php echo $status; ?>">
-                                    <?php } ?>
-
+                                    <label>Payment Date</label>
+                                    <input class="form-control" type="date" name="c_date" value="<?php echo date('Y-m-d'); ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Payment Time</label>
+                                    <input class="form-control" type="time" name="c_time" value="<?php echo date('H:m:s'); ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Payment Mode</label>
+                                    <input class="form-control"  name="payment_mode" value="<?php echo $ordersdetails['order_data']->payment_mode; ?>" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Transection ID</label>
+                                    <input type="text" class="form-control" placeholder="" name="txn_no" required="">
                                 </div>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Remark <small>(It will be subject of email.)</small></label>
-                                    <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="">
+                                    <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="" value="Your payment has been received. Thanks.">
                                 </div>
                             </div>
 
@@ -181,8 +196,6 @@ $this->load->view('layout/layoutTop');
             <article class="" style="padding: 10px;">
                 <div class="row">
                     <div class="col-md-12" style="padding:5px 20px;">
-                        <a class="btn btn-success pull-right" href="<?php echo site_url("order/order_mail_send_direct/" . $ordersdetails['order_data']->order_key) ?>"><i class="fa fa-envelope"></i> Send Current Status Mail</a>
-
                         <a class="btn btn-success pull-right" href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-download"></i> Download</a>
                     </div>
                 </div>
