@@ -9,6 +9,11 @@ function checkPermission($session_data) {
     if ($session_data['user_type'] == 'Manager') {
         return "system";
     }
+    
+    if ($session_data['user_type'] == 'Developer') {
+        return "system";
+    }
+    
     if ($session_data['user_type'] == 'Vendor') {
         return "vendor";
     }
@@ -130,12 +135,26 @@ function checkPermission($session_data) {
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/categories">
                                 <i class="active fa fa-plus "></i> <span>Categories</span>
                             </a>
-                        </li>     
+                        </li>    
+                        
+                        
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/ProductManager/categoryItems">
+                                <i class="active fa fa-plus "></i> <span>Items Prices</span>
+                            </a>
+                        </li>  
+                        
+                        <?php
+                        if($session_data['user_type']=='Developer'){
+                        ?>
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/createAttribute">
                                 <i class="active fa fa-plus "></i> <span>Attributes</span>
                             </a>
-                        </li>     
+                        </li>   
+                        <?php
+                        }
+                        ?>
                         <!--end of admin access-->
 
                         <?php

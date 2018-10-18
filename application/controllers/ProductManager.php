@@ -81,6 +81,88 @@ class ProductManager extends CI_Controller {
         $this->load->view('productManager/categories', $data);
     }
 
+    //Add Categories
+    function categoryItems() {
+
+
+        $data['category_items'] = $this->Product_model->category_items_prices();
+
+
+        $query = $this->db->get('custome_items');
+        $data['custome_items'] = $query->result();
+
+        $query = $this->db->get('custome_items_price');
+        $data['custome_items_price'] = $query->result();
+
+
+        if(isset($_POST['delete_category'])){
+            $this->db->where('id', $this->input->post('category_id'));
+            $this->db->delete('category_items');
+             redirect('ProductManager/categoryItems');
+        }
+        
+        if(isset($_POST['update_category'])){
+            $this->db->set('category_name', $this->input->post('category_name'));
+            $this->db->where('id', $this->input->post('category_id'));
+            $this->db->update('category_items');
+             redirect('ProductManager/categoryItems');
+        }
+
+        if (isset($_POST['update_price'])) {
+            $p_item_id = $this->input->post('item_id');
+            $p_item_price = $this->input->post('item_price');
+            $this->db->set('price', $p_item_price);
+            $this->db->where('id', $p_item_id);
+            $this->db->update('custome_items_price');
+             redirect('ProductManager/categoryItems');
+        }
+
+
+        if (isset($_POST['submit'])) {
+            if ($_POST['submit'] == 'Add Category') {
+                $category_array = array(
+                    'category_name' => $this->input->post('category_name'),
+                );
+                $this->db->insert('category_items', $category_array);
+                $category_item_id = $this->db->insert_id();
+
+                $item_ids = $this->input->post("item_id");
+                $item_prices = $this->input->post("item_price");
+
+                foreach ($item_prices as $key => $value) {
+                    $item_id = $item_ids[$key];
+                    $price = $item_prices[$key];
+                    $category_item_price = array(
+                        'item_id' => $item_id,
+                        'category_items_id' => $category_item_id,
+                        'price' => $price,
+                    );
+                    $this->db->insert('custome_items_price', $category_item_price);
+                }
+                    redirect('ProductManager/categoryItems');
+
+
+
+
+//                $category_array = array(
+//                    'category_name' => $this->input->post('category_name'),
+//                    'description' => $this->input->post('description'),
+//                    'parent_id' => $this->input->post('parent_id'),
+//                );
+//                $this->db->insert('category', $category_array);
+            }
+//            if ($_POST['submit'] == 'Edit') {
+//                echo $id = $this->input->post('parent_id');
+//                $this->db->set('category_name', $this->input->post('category_name'));
+//                $this->db->set('description', $this->input->post('description'));
+//                $this->db->where('id', $id);
+//                $this->db->update('category');
+//            }
+//            redirect('ProductManager/categories');
+        }
+        $this->load->view('productManager/categoryItems', $data);
+    }
+
     //
     //end of categories
     //----------------------------
@@ -225,7 +307,6 @@ class ProductManager extends CI_Controller {
                 'regular_price' => $this->input->post('regular_price'),
                 'sale_price' => $this->input->post('sale_price'),
                 'price' => $this->input->post('price'),
-                
                 'file_name' => $file_newname,
                 'file_name1' => $file_newname1,
                 'file_name2' => $file_newname2,

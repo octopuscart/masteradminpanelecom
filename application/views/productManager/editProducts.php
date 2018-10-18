@@ -60,6 +60,10 @@ $session_data = $this->session->userdata('logged_in');
         top: 0px;
         right: 20px;
     }
+    
+    .custom_images{
+        height: 100px;
+    }
 
 
 
@@ -84,7 +88,7 @@ $session_data = $this->session->userdata('logged_in');
                                 <a href="#tab_1" data-toggle="tab" class="tab_title_d">General Information</a>
                             </li>
                             <li><a href="#tab_2" data-toggle="tab" class="tab_title_d">Description</a></li>
-                            <li><a href="#tab_3" data-toggle="tab" class="tab_title_d">Images</a></li>
+                            <!--<li><a href="#tab_3" data-toggle="tab" class="tab_title_d">Images</a></li>-->
                             <li><a href="#tab_4" data-toggle="tab" class="tab_title_d">Price & Stock Status</a></li>
                             <li><a href="#tab_5" data-toggle="tab" class="tab_title_d">Attributes</a></li>
                             <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
@@ -96,9 +100,17 @@ $session_data = $this->session->userdata('logged_in');
 
                                     <div class="col-md-6">
 
-                                        <div class="product_image product_image_back_slider" style="background: url(<?php echo (product_image_base.'coman/output/'. $product_obj->folder."/cutting20001.png"); ?>)"  style="height:400px!important">
+                                        <div class="product_image product_image_back_slider" style="background: url(<?php echo (product_image_base . 'coman/output/' . $product_obj->folder . "/cutting20001.png"); ?>)"  style="height:400px!important">
                                         </div>  
-
+                                        <div class="tab-content">
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/shirt/output/<?php echo $product_obj->folder;?>/shirt_model10001.png">
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/s1_master_style60001.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/pant_style10001.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/style_buttons.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/fabric20001.png"/>
+                                            <div style="clear: both"></div>
+                                        </div>
+                             
 
 
                                     </div>
@@ -339,157 +351,157 @@ $session_data = $this->session->userdata('logged_in');
 
 
     <!--veriant products-->
-<!--    <div class="box box-danger">
-        <div class="box-header">
-            <h3 class="box-title">
-                Products Variant
-                <?php
-                if (!$product_obj->variant_product_of) {
-                    ?>
-                    <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
-                    <?php
-                }
-                ?>
-                <?php
-                if ($product_obj->variant_product_of) {
-                    ?>
-                    <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
-                    <?php
-                }
-                ?>
-            </h3>
-
-        </div>
-        <div class="box-body">
-            <div class="row">
-                <?php
-                foreach ($variant_products as $key => $value) {
-                    ?>
-                    <div class="col-md-3">                           
-                        <div class="thumbnail" >
-                            <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
-                            </div>               
-                            <div class="caption">
-
-                                <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
-
-
-                                <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
-                                <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
-                                <P>
-                                    <?php
-                                    $attr = $attributefunction->variant_product_attr($value->product_id);
-                                    foreach ($attr as $key => $value) {
-                                        ?>
-                                    <li style="margin: 5px"><span class="attrkey">
-                                            <?php echo $value['attribute']; ?>
-                                        </span>
-                                        <span class="attrval">
-                                            <?php echo $value['attribute_value']; ?>
-                                        </span>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
-                                </P>
-                            </div>
-                        </div>
-                    </div>
-                <?php }
-                ?>
+    <!--    <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Products Variant
+    <?php
+    if (!$product_obj->variant_product_of) {
+        ?>
+                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+        <?php
+    }
+    ?>
+    <?php
+    if ($product_obj->variant_product_of) {
+        ?>
+                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+        <?php
+    }
+    ?>
+                </h3>
+    
             </div>
-        </div>
-    </div>-->
+            <div class="box-body">
+                <div class="row">
+    <?php
+    foreach ($variant_products as $key => $value) {
+        ?>
+                            <div class="col-md-3">                           
+                                <div class="thumbnail" >
+                                    <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
+                                    </div>               
+                                    <div class="caption">
+        
+                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
+        
+        
+                                        <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
+                                        <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
+                                        <P>
+        <?php
+        $attr = $attributefunction->variant_product_attr($value->product_id);
+        foreach ($attr as $key => $value) {
+            ?>
+                                                <li style="margin: 5px"><span class="attrkey">
+            <?php echo $value['attribute']; ?>
+                                                    </span>
+                                                    <span class="attrval">
+            <?php echo $value['attribute_value']; ?>
+                                                    </span>
+                                                </li>
+            <?php
+        }
+        ?>
+                                        </P>
+                                    </div>
+                                </div>
+                            </div>
+    <?php }
+    ?>
+                </div>
+            </div>
+        </div>-->
     <!--end of verient products-->
 
 
     <?php if ($session_data['user_type'] == 'Admin') { ?>
 
-<!--        related products select
-        <div class="box box-danger">
-            <div class="box-header">
-                <h3 class="box-title">
-                    Select Related Products
-                </h3>
-            </div>
-            <div class="box-body">
-                <form action="#" method="post">
-                    <div class="row">
-                        <?php
-                        foreach ($related_products as $key => $value) {
-                            ?>
-                            <div class="col-md-6 ">
-                                <div class="panel panel-default">
-                                    <div class="media" style="    padding: 10px;">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                            <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                            <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        <?php }
-                        ?>
+        <!--        related products select
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Select Related Products
+                        </h3>
                     </div>
-                    <button class="btn btn-danger" type="submit" name="remove_realted_products">Remove Related Products</button>
-                </form>
-            </div>
-        </div>
-        end of related products
-
-
-        related products select
-        <div class="box box-danger">
-            <div class="box-header">
-                <h3 class="box-title">
-                    Select Related Products
-                </h3>
-            </div>
-            <div class="box-body">
-                <form action="#" method="post">
-                    <div class="row">
-                        <?php
-                        foreach ($related_products_check as $key => $value) {
-                            ?>
-                            <div class="col-md-6 ">
-                                <div class="panel panel-default">
-                                    <div class="media" style="    padding: 10px;">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                            </a>
+                    <div class="box-body">
+                        <form action="#" method="post">
+                            <div class="row">
+        <?php
+        foreach ($related_products as $key => $value) {
+            ?>
+                                        <div class="col-md-6 ">
+                                            <div class="panel panel-default">
+                                                <div class="media" style="    padding: 10px;">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                            <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                            <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
-                                        </div>
-                                    </div>
-                                </div>
+            
+            
+        <?php }
+        ?>
                             </div>
-
-
-                        <?php }
-                        ?>
+                            <button class="btn btn-danger" type="submit" name="remove_realted_products">Remove Related Products</button>
+                        </form>
                     </div>
-                    <button class="btn btn-primary" type="submit" name="add_realted_products">Add Related Products</button>
-                </form>
-            </div>
-        </div>
-        end of related products-->
+                </div>
+                end of related products
+        
+        
+                related products select
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Select Related Products
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <form action="#" method="post">
+                            <div class="row">
+        <?php
+        foreach ($related_products_check as $key => $value) {
+            ?>
+                                        <div class="col-md-6 ">
+                                            <div class="panel panel-default">
+                                                <div class="media" style="    padding: 10px;">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+            
+        <?php }
+        ?>
+                            </div>
+                            <button class="btn btn-primary" type="submit" name="add_realted_products">Add Related Products</button>
+                        </form>
+                    </div>
+                </div>
+                end of related products-->
         <?php
     }
     ?>
