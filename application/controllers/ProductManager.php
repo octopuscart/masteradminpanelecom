@@ -95,17 +95,17 @@ class ProductManager extends CI_Controller {
         $data['custome_items_price'] = $query->result();
 
 
-        if(isset($_POST['delete_category'])){
+        if (isset($_POST['delete_category'])) {
             $this->db->where('id', $this->input->post('category_id'));
             $this->db->delete('category_items');
-             redirect('ProductManager/categoryItems');
+            redirect('ProductManager/categoryItems');
         }
-        
-        if(isset($_POST['update_category'])){
+
+        if (isset($_POST['update_category'])) {
             $this->db->set('category_name', $this->input->post('category_name'));
             $this->db->where('id', $this->input->post('category_id'));
             $this->db->update('category_items');
-             redirect('ProductManager/categoryItems');
+            redirect('ProductManager/categoryItems');
         }
 
         if (isset($_POST['update_price'])) {
@@ -114,7 +114,7 @@ class ProductManager extends CI_Controller {
             $this->db->set('price', $p_item_price);
             $this->db->where('id', $p_item_id);
             $this->db->update('custome_items_price');
-             redirect('ProductManager/categoryItems');
+            redirect('ProductManager/categoryItems');
         }
 
 
@@ -139,7 +139,7 @@ class ProductManager extends CI_Controller {
                     );
                     $this->db->insert('custome_items_price', $category_item_price);
                 }
-                    redirect('ProductManager/categoryItems');
+                redirect('ProductManager/categoryItems');
 
 
 
@@ -597,18 +597,16 @@ class ProductManager extends CI_Controller {
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
 
-        $query = "select p.*, c.category_name, au.first_name, au.last_name, au.email, au.image from products as p"
-                . " join category as c on c.id = p.category_id "
-                . "left join admin_users as au on au.id = p.user_id ";
-        if ($this->user_type == 'Admin') {
-            $query = $query . "  order by id desc";
-            $data['product_data'] = $this->Product_model->query_exe($query);
-            $this->load->view('productManager/productReport', $data);
-        } else {
-            $query = $query . " where p.user_id='" . $this->user_id . "' order by p.id desc";
-            $data['product_data'] = $this->Product_model->query_exe($query);
-            $this->load->view('productManager/productReport', $data);
-        }
+        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id order by id desc";
+        $productslist = $this->Product_model->query_exe($query);
+        $return_array = array();
+        foreach ($productslist as $pkey => $pvalue) {
+           $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
+           array_push($return_array, $pvalue);
+           }
+
+        $data['product_data'] = $return_array;
+        $this->load->view('productManager/productReport', $data);
     }
 
     //Add product function

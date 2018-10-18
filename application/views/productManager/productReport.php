@@ -7,7 +7,7 @@ $this->load->view('layout/layoutTop');
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        width:350px
+        width:100px
     }
     .product_title {
         font-weight: 700;
@@ -22,6 +22,9 @@ $this->load->view('layout/layoutTop');
     .price_tag_final{
         width: 100%;
     }
+    .sub_item_table tr{
+            border-bottom: 1px solid #dbd3d3;
+    }
 </style>
 <!-- Main content -->
 <section class="content">
@@ -32,15 +35,16 @@ $this->load->view('layout/layoutTop');
                 <h3 class="box-title">Product Reports</h3>
             </div>
             <div class="box-body">
-                <table id="tableData" class="table table-bordered table-striped">
+                <table id="tableData" class="table table-bordered ">
                     <thead>
                         <tr>
                             <th style="width: 20px;">S.N.</th>
                             <th style="width:50px;">Image</th>
-                            <th style="width: 75px;">Category</th>
-                            <th style="width: 100px;">Product</th>
-
-                            <th style="width: 75px;">Stock Status</th>
+                            <th style="width:150px;">Category</th>
+                            <th style="width:100px;">Title</th>
+                            <th style="width:200px;">Short Description</th>
+                            <th >Items Prices</th>
+                            <th >Stock Status</th>
                             <th style="width: 75px;">Edit</th>
                         </tr>
                     </thead>
@@ -64,11 +68,23 @@ $this->load->view('layout/layoutTop');
                                         </span>
                                     </td>
                                     <td >
-                                        <span class="product_title  product_text"><?php echo $value['title']; ?></span>
-                                        <br/>
-                                        <span class="product_description product_text"><?php echo $value['short_description']; ?></span>
+                                        <?php echo $value['title']; ?>
                                     </td>
+                                    <td >
 
+                                        <?php echo $value['short_description']; ?>
+                                    </td>
+                                    <td style="width:200px;">
+                                        <table class='sub_item_table'>
+                                            <?php
+                                            $itemsprice = $value['items_price'];
+
+                                            foreach ($itemsprice as $iikey => $iivalue) {
+                                                echo "<tr><td>" . ($iivalue->item_name) . "</td><td>: {{" . ($iivalue->price) . "|currency:''}}</td></tr>";
+                                            }
+                                            ?>
+                                        </table>
+                                    </td>
                                     <td >
                                         <span class="">
                                             <?php echo $value['stock_status']; ?>

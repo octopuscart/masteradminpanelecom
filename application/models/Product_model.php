@@ -154,17 +154,23 @@ where pa.product_id=$product_id ";
         }
     }
 
+    function category_items_prices_id($category_items_id) {
+
+        $queryr = "SELECT cip.price, ci.item_name, cip.id FROM custome_items_price as cip
+                       join custome_items as ci on ci.id = cip.item_id
+                       where cip.category_items_id = $category_items_id";
+        $query = $this->db->query($queryr);
+        $category_items_price_array = $query->result();
+        return $category_items_price_array;
+    }
+
     function category_items_prices() {
         $query = $this->db->get('category_items');
         $category_items = $query->result();
         $category_items_return = array();
         foreach ($category_items as $citkey => $citvalue) {
             $category_items_id = $citvalue->id;
-            $queryr = "SELECT cip.price, ci.item_name, cip.id FROM custome_items_price as cip
-                       join custome_items as ci on ci.id = cip.item_id
-                       where cip.category_items_id = $category_items_id";
-            $query = $this->db->query($queryr);
-            $category_items_price_array = $query->result();
+            $category_items_price_array = $this->category_items_prices_id($category_items_id);
             $citvalue->prices = $category_items_price_array;
             array_push($category_items_return, $citvalue);
         }
