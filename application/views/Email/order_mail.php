@@ -312,7 +312,7 @@
                 <tr>
                     <td colspan="3"  rowspan="5" style="font-size: 12px">
                         <b>Total Amount in Words: </b><br/>
-                        <span style="text-transform: capitalize"> Only <?php echo $order_data->amount_in_word; ?></span>
+                        <span style="text-transform: capitalize"> <?php echo $order_data->amount_in_word; ?></span>
                     </td>
 
                 </tr>

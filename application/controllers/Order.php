@@ -249,7 +249,7 @@ class Order extends CI_Controller {
                 );
                 $this->db->insert('shipping_order', $shippingarray);
 
-                $remark = "Your order has been shipped";
+                $remark = "Your order has been shipped.";
                 $description1 = "Order Shipped By $shipping_company, Tracking No.: $tracking_no,<br/> Traking Link: <a href='$tracking_link' target='_blank'>$tracking_link</a>";
 
                 $productattr = array(
