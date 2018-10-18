@@ -10,7 +10,7 @@
                         <div class="btn-group pull-right">
                             <a class="btn btn-success  " href="<?php echo site_url("order/order_mail_send_direct/" . $ordersdetails['order_data']->order_key) ?>"><i class="fa fa-envelope"></i> Send Current Status Mail</a>
                             <a class="btn btn-success btn-bitbucket" href="<?php echo site_url("order/order_pdf_worker/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-cogs "></i> Worker Report</a>
-                            <a class="btn btn-success btn-google" href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-download "></i> Download</a>
+                            <a class="btn btn-success btn-google" href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i class="fa fa-download "></i> Order PDF</a>
                         </div>
                     </div>
                 </div>

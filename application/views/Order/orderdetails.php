@@ -71,10 +71,10 @@ $this->load->view('layout/layoutTop');
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Order Status</label>
-                                    <?php if ($status) { ?>
+                                    <?php if ($status!='Other') { ?>
                                         <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
                                     <?php } else { ?>
-                                        <input class="form-control"  name="status" value="<?php echo $status; ?>">
+                                        <input class="form-control"  name="status" value="<?php echo $status!='Other'?$status:''; ?>">
                                     <?php } ?>
 
                                 </div>

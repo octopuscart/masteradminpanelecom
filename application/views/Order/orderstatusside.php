@@ -27,5 +27,8 @@
         <a class="btn btn-block btn-social btn-instagram"  href="<?php echo site_url("Order/orderdetails/".$order_key."?status=Returned");?>">
             <i class="fa fa-reply"></i> Returned
         </a>
+        <a class="btn btn-block btn-social btn-info"  href="<?php echo site_url("Order/orderdetails/".$order_key."?status=Other");?>">
+            <i class="fa fa-question"></i> Other
+        </a>
     </div>
 </div>
