@@ -345,6 +345,9 @@ class ProductManager extends CI_Controller {
 
         $data['product_detail_attrs'] = $product_model->productAttributes($product_id);
 
+        $data['category_prices'] = $product_model->category_items_prices();
+
+
         $this->db->select('*');
         $this->db->where('id', $product_id);
         $query = $this->db->get('products');
@@ -356,6 +359,10 @@ class ProductManager extends CI_Controller {
             redirect('ProductManager/productReport');
         }
         $vproduct_id = $product_id;
+
+        $data['product_prices'] = $product_model->category_items_prices_id($productobj->category_items_id);
+
+
         if ($productobj->variant_product_of) {
             $vproduct_id = $productobj->variant_product_of;
         }
@@ -523,10 +530,10 @@ class ProductManager extends CI_Controller {
             $this->db->set('description', $this->input->post('description'));
             $this->db->set('title', $this->input->post('title'));
             $this->db->set('short_description', $this->input->post('short_description'));
-            $this->db->set('regular_price', $this->input->post('regular_price'));
-            $this->db->set('sale_price', $this->input->post('sale_price'));
-            $this->db->set('price', $this->input->post('price'));
-            $this->db->set('credit_limit', $this->input->post('credit_limit'));
+            $this->db->set('regular_price', "");
+            $this->db->set('sale_price', "");
+            $this->db->set('price', "");
+            $this->db->set('credit_limit', "");
             $this->db->set('stock_status', $this->input->post('stock_status'));
             $this->db->set('keywords', $this->input->post('keywords'));
             $this->db->set('video_link', $this->input->post('video_link'));
@@ -601,12 +608,38 @@ class ProductManager extends CI_Controller {
         $productslist = $this->Product_model->query_exe($query);
         $return_array = array();
         foreach ($productslist as $pkey => $pvalue) {
-           $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
-           array_push($return_array, $pvalue);
-           }
+            $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
+            array_push($return_array, $pvalue);
+        }
 
         $data['product_data'] = $return_array;
         $this->load->view('productManager/productReport', $data);
+    }
+
+    //Product API for data Table
+    public function productReportApi() {
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $product_model = $this->Product_model;
+        $data['product_model'] = $product_model;
+
+        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id order by id desc";
+        $query = $this->db->query($query);
+        $productslist = $query->result_array();
+        $return_array = array();
+        foreach ($productslist as $pkey => $pvalue) {
+            $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
+            array_push($return_array, $pvalue);
+        }
+        $output = array(
+            "draw" => $draw,
+            "recordsTotal" => $query->num_rows(),
+            "recordsFiltered" => $query->num_rows(),
+            "data" => $return_array
+        );
+        echo json_encode($output);
+        exit();
     }
 
     //Add product function

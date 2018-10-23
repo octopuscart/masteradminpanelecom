@@ -1,23 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Hong_Kong');
-error_reporting(0);
-$connect = mysql_connect("localhost", "j2k5e6r5_octopus", "India$2017");
-mysql_select_db("j2k5e6r5_bespoktailorhk", $connect);
-
-function resultAssociate($query) {
-    $resultSet = array();
-    $result = mysql_query($query);
-    if ($result === FALSE) {
-        die(mysql_error()); // TODO: better error handling
-    }
-    while ($row = mysql_fetch_assoc($result)) {
-        array_push($resultSet, $row);
-    }
-    return $resultSet;
-}
-
-
-$configuration = end(resultAssociate("select * from site_configuration"));
+require("configdbconnect.php");
+$configuration = $globleConnectDB;
 
 define('panelversion', "V0.9.5.18");
 
@@ -32,11 +16,9 @@ define('default_image', 'image/default_image.jpg');
 define('globle_currency', $configuration['currency']);
 define('sitename', $configuration['site_name']);
 define('site_logo', $configuration['site_logo']);
-
 define('siteurl', $configuration['site_url']);
 define('product_image_base', $configuration['product_images_url']);
-
-define('site_mail_logo', 'https://www.bespoketailorshk.com/assets/images/logo73.png');
+define('site_mail_logo', $configuration['site_logo']);
 
 
 

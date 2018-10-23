@@ -1,18 +1,6 @@
 <?php
-$connect = mysql_connect("localhost", "j2k5e6r5_octopus", "India$2017");
-mysql_select_db("j2k5e6r5_bespoktailorhk", $connect);
-
-$resultSet = array();
-$result = mysql_query("select * from site_configuration");
-if ($result === FALSE) {
-    die(mysql_error()); // TODO: better error handling
-}
-while ($row = mysql_fetch_assoc($result)) {
-    array_push($resultSet, $row);
-}
-
-
-$configuration = end($resultSet);
+require("configdbconnect.php");
+$configuration = $globleConnectDB;
 $config['useragent'] = 'CodeIgniter';
 $config['protocol'] = 'smtp';
 //$config['mailpath'] = '/usr/sbin/sendmail';

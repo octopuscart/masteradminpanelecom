@@ -60,7 +60,7 @@ $session_data = $this->session->userdata('logged_in');
         top: 0px;
         right: 20px;
     }
-    
+
     .custom_images{
         height: 100px;
     }
@@ -103,26 +103,31 @@ $session_data = $this->session->userdata('logged_in');
                                         <div class="product_image product_image_back_slider" style="background: url(<?php echo (product_image_base . 'coman/output/' . $product_obj->folder . "/cutting20001.png"); ?>)"  style="height:400px!important">
                                         </div>  
                                         <div class="tab-content">
-                                            <img class="custom_images" src="<?php echo product_image_base; ?>/shirt/output/<?php echo $product_obj->folder;?>/shirt_model10001.png">
-                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/s1_master_style60001.png"/>
-                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/pant_style10001.png"/>
-                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/style_buttons.png"/>
-                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder;?>/fabric20001.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/shirt/output/<?php echo $product_obj->folder; ?>/shirt_model10001.png">
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder; ?>/s1_master_style60001.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder; ?>/pant_style10001.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder; ?>/style_buttons.png"/>
+                                            <img class="custom_images" src="<?php echo product_image_base; ?>/jacket/output/<?php echo $product_obj->folder; ?>/fabric20001.png"/>
                                             <div style="clear: both"></div>
                                         </div>
-                             
+
 
 
                                     </div>
 
                                     <div class="col-md-6">
-                                        <h3><?php echo $product_obj->title; ?></h3>
-                                        <p>SKU:<?php echo $product_obj->sku; ?></p>
+                                        <h3><?php echo $product_obj->title; ?>  <small>(<?php echo $product_obj->sku; ?>)</small></h3>
+
                                         <p><?php echo $product_obj->short_description; ?></p>
-                                        <h4><small>Price</small> {{<?php echo (($product_obj->price | 0)); ?>|currency:'<?php echo globle_currency; ?>'}}</h4>
+                                        <h4>    <small>Prices:</small></h4>
+                                        <table class='table'>
+                                            <?php
+                                            foreach ($product_prices as $ppkey => $ppvalue) {
+                                                echo "<tr><th>", $ppvalue->item_name, "</td><td>", $ppvalue->price, "</td></tr>";
+                                            }
+                                            ?>
 
-                                        <h4><small>Credit Limit </small> {{<?php echo $product_obj->credit_limit | 0; ?>|currency:'<?php echo globle_currency; ?>'}}</h4>
-
+                                        </table>
                                         <?php
                                         if (count($product_detail_attrs)) {
                                             foreach ($product_detail_attrs as $key => $value) {
@@ -138,7 +143,7 @@ $session_data = $this->session->userdata('logged_in');
                                             }
                                         }
                                         ?>
-                                        <h4><small>Stock Status</small> <?php echo $product_obj->stock_status; ?></h4>
+                                        <h4><small>Stock Status: </small> <?php echo $product_obj->stock_status; ?></h4>
 
                                     </div>
                                 </div>
@@ -148,15 +153,19 @@ $session_data = $this->session->userdata('logged_in');
 
 
                             <div class="tab-pane " id="tab_1">
-
-                                <div class="form-group">
-                                    <label >SKU</label>
-                                    <span class="form-control" ><?php echo $product_obj->sku; ?></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label >Title</label>
-                                    <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->title; ?>">
+                                <div class='row'>
+                                    <div class='col-md-6'>
+                                        <div class="form-group">
+                                            <label >SKU</label>
+                                            <input type="text" class="form-control" name="sku" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->sku; ?>">
+                                        </div>
+                                    </div>
+                                    <div class='col-md-6'>
+                                        <div class="form-group">
+                                            <label >Title</label>
+                                            <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->title; ?>">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label >Short Description</label>
@@ -231,24 +240,64 @@ $session_data = $this->session->userdata('logged_in');
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_4">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label >Regular Price</label>
-                                            <input type="number" class="form-control price_tag_text" id='regular_price' name="regular_price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->regular_price; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label >Sale Price</label>
-                                            <input type="number" class="form-control price_tag_text" id='sale_price' name="sale_price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->sale_price; ?>"> 
-                                        </div>
-                                        <div class="form-group">
-                                            <label >Final Price</label>
-                                            <span class="final_price form-control" id='finalprice'><?php echo (($product_obj->price | 0)); ?></span>
-                                            <input type="hidden" class="form-control price_tag_text" id='finalprice1' name="price" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="<?php echo (($product_obj->price | 0)); ?>"> 
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label >Credit Can Used To Buy</label>
-                                            <input type="number" class="form-control price_tag_text" id='credit_limit' name="credit_limit"  aria-describedby="emailHelp" placeholder="" value="<?php echo $product_obj->credit_limit; ?>"> 
+
+                                    <div class="col-md-6">
+<!--                                        <table class='table'>
+                                        <?php
+                                        foreach ($product_prices as $ppkey => $ppvalue) {
+                                            echo "<tr><th>", $ppvalue->item_name, "</td><td>", $ppvalue->price, "</td></tr>";
+                                        }
+                                        ?>
+                                        </table>-->
+
+
+
+
+                                        <div class="box box-primary">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Change Price Group</h3>
+                                            </div>
+                                            <div class="box-body">
+
+
+                                                <table class='table' style='    font-size: 17px;'>
+                                                    <?php
+                                                    foreach ($category_prices as $key => $value) {
+                                                        ?>
+                                                        <tr class="item_headers items_row">
+                                                            <th colspan="3">
+
+
+                                                                <label>
+                                                                    <input type="radio" name='category_items_id' value='<?php echo $product_obj->category_items_id; ?>'> <?php echo $value->category_name; ?>
+                                                                </label>
+
+                                                            </th>
+
+                                                        </tr>
+                                                        <?php
+                                                        $category_prices = $value->prices;
+                                                        if ($category_prices) {
+                                                            foreach ($category_prices as $ckey => $cvalue) {
+                                                                ?>
+                                                                <tr class='items_row'>
+                                                                    <td> <?php echo $cvalue->item_name; ?></td>
+                                                                    <td><?php echo $cvalue->price; ?></td>
+
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                        } else {
+                                                            echo "<tr><td class='colspan4'>----</td></tr>";
+                                                        }
+                                                        ?>
+
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
@@ -260,6 +309,7 @@ $session_data = $this->session->userdata('logged_in');
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                             <!-- /.tab-pane -->
@@ -358,14 +408,14 @@ $session_data = $this->session->userdata('logged_in');
     <?php
     if (!$product_obj->variant_product_of) {
         ?>
-                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+                                                                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
         <?php
     }
     ?>
     <?php
     if ($product_obj->variant_product_of) {
         ?>
-                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+                                                                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
         <?php
     }
     ?>
@@ -377,39 +427,39 @@ $session_data = $this->session->userdata('logged_in');
     <?php
     foreach ($variant_products as $key => $value) {
         ?>
-                            <div class="col-md-3">                           
-                                <div class="thumbnail" >
-                                    <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
-                                    </div>               
-                                    <div class="caption">
-        
-                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
-        
-        
-                                        <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
-                                        <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
-                                        <P>
+                                                                            <div class="col-md-3">                           
+                                                                                <div class="thumbnail" >
+                                                                                    <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
+                                                                                    </div>               
+                                                                                    <div class="caption">
+                                                        
+                                                                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
+                                                                                            <i class="fa fa-edit"></i>
+                                                                                        </a>
+                                                                                        <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
+                                                        
+                                                        
+                                                                                        <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
+                                                                                        <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
+                                                                                        <P>
         <?php
         $attr = $attributefunction->variant_product_attr($value->product_id);
         foreach ($attr as $key => $value) {
             ?>
-                                                <li style="margin: 5px"><span class="attrkey">
+                                                                                                                                                <li style="margin: 5px"><span class="attrkey">
             <?php echo $value['attribute']; ?>
-                                                    </span>
-                                                    <span class="attrval">
+                                                                                                                                                    </span>
+                                                                                                                                                    <span class="attrval">
             <?php echo $value['attribute_value']; ?>
-                                                    </span>
-                                                </li>
+                                                                                                                                                    </span>
+                                                                                                                                                </li>
             <?php
         }
         ?>
-                                        </P>
-                                    </div>
-                                </div>
-                            </div>
+                                                                                        </P>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
     <?php }
     ?>
                 </div>
@@ -433,25 +483,25 @@ $session_data = $this->session->userdata('logged_in');
         <?php
         foreach ($related_products as $key => $value) {
             ?>
-                                        <div class="col-md-6 ">
-                                            <div class="panel panel-default">
-                                                <div class="media" style="    padding: 10px;">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-            
-            
+                                                                                        <div class="col-md-6 ">
+                                                                                            <div class="panel panel-default">
+                                                                                                <div class="media" style="    padding: 10px;">
+                                                                                                    <div class="media-left">
+                                                                                                        <a href="#">
+                                                                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <div class="media-body">
+                                                                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                            
+                                                            
         <?php }
         ?>
                             </div>
@@ -475,25 +525,25 @@ $session_data = $this->session->userdata('logged_in');
         <?php
         foreach ($related_products_check as $key => $value) {
             ?>
-                                        <div class="col-md-6 ">
-                                            <div class="panel panel-default">
-                                                <div class="media" style="    padding: 10px;">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-            
-            
+                                                                                        <div class="col-md-6 ">
+                                                                                            <div class="panel panel-default">
+                                                                                                <div class="media" style="    padding: 10px;">
+                                                                                                    <div class="media-left">
+                                                                                                        <a href="#">
+                                                                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <div class="media-body">
+                                                                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                            
+                                                            
         <?php }
         ?>
                             </div>

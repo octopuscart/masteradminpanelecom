@@ -23,7 +23,7 @@ $this->load->view('layout/layoutTop');
         width: 100%;
     }
     .sub_item_table tr{
-            border-bottom: 1px solid #dbd3d3;
+        border-bottom: 1px solid #dbd3d3;
     }
 </style>
 <!-- Main content -->
@@ -48,58 +48,7 @@ $this->load->view('layout/layoutTop');
                             <th style="width: 75px;">Edit</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        if (count($product_data)) {
-                            $count = 1;
-                            foreach ($product_data as $key => $value) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $count; ?></td>
-                                    <td>
-                                        <img src="<?php echo product_image_base . 'coman/output/' . $value['folder']; ?>/cutting20001.png" style="height:51px;">
-                                    </td>
-                                    <td >
-                                        <span class="">
-                                            <?php
-                                            $catarray = $product_model->parent_get($value['category_id']);
-                                            echo $catarray['category_string'];
-                                            ?>
-                                        </span>
-                                    </td>
-                                    <td >
-                                        <?php echo $value['title']; ?>
-                                    </td>
-                                    <td >
-
-                                        <?php echo $value['short_description']; ?>
-                                    </td>
-                                    <td style="width:200px;">
-                                        <table class='sub_item_table'>
-                                            <?php
-                                            $itemsprice = $value['items_price'];
-
-                                            foreach ($itemsprice as $iikey => $iivalue) {
-                                                echo "<tr><td>" . ($iivalue->item_name) . "</td><td>: {{" . ($iivalue->price) . "|currency:''}}</td></tr>";
-                                            }
-                                            ?>
-                                        </table>
-                                    </td>
-                                    <td >
-                                        <span class="">
-                                            <?php echo $value['stock_status']; ?>
-                                        </span>
-                                    </td>
-                                    <td >
-                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value['id']); ?>" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>
-                                    </td>
-                                </tr>
-                                <?php
-                                $count++;
-                            }
-                        }
-                        ?>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -118,12 +67,12 @@ $this->load->view('layout/layoutFooter');
     $(function () {
 
         $('#tableData').DataTable({
-//      'paging'      : true,
-//      'lengthChange': false,
-//      'searching'   : false,
-//      'ordering'    : true,
-//      'info'        : true,
-//      'autoWidth'   : false
+              "processing": true,
+        "serverSide": true,
+            "ajax": {
+                url: "<?php echo site_url("ProductManager/productReportApi") ?>",
+                type: 'GET'
+            },
         })
     })
 

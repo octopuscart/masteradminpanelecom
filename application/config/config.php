@@ -12,13 +12,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
   |	http://example.com/
   |
-  | If this is not set then CodeIgniter will try guess the protocol, domain
+  | If this is not set then CodeIgniter will try guess the protocol, domain 
   | and path to your installation. However, you should always configure this
   | explicitly and never rely on auto-guessing, especially in production
   | environments.
   |
  */
-$baselink = 'http://' . $_SERVER['SERVER_NAME'];
+$baselink = 'https://' . $_SERVER['SERVER_NAME'];
 
 $baselinkmain = strpos($baselink, '192.168') ? $baselink . '/adminpanel_main' : $baselink . '/';
 
