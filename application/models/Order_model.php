@@ -173,7 +173,7 @@ class Order_model extends CI_Model {
             $this->email->from($emailsender, $sendername);
             $this->email->to($order_details['order_data']->email);
             $this->email->bcc(email_bcc);
-            $subject = "Bespoke Tailors - " . $currentstatus->remark;
+            $subject = sitename." - " . $currentstatus->remark;
             $this->email->subject($subject);
             
             $checkcode = report_mode;
