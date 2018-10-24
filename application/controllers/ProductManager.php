@@ -669,7 +669,15 @@ class ProductManager extends CI_Controller {
         foreach ($productslist as $pkey => $pvalue) {
             $temparray = array();
             $temparray['s_n'] = $pkey + 1;
-            $temparray['image'] = "<img src='" . product_image_base . 'coman/output/' . $pvalue['folder'] . "/cutting20001.png' style='height:51px;'>";
+            
+            $product_folders = explode(", ", product_folders);
+            $imageurl = "";
+             if(count($product_folders)){
+               $imageurl =product_image_base.  str_replace("folder", $pvalue['folder'] , $product_folders[0]);
+             }
+            
+            
+            $temparray['image'] = "<img src='$imageurl' style='height:51px;'>";
             $temparray['sku'] = $pvalue['sku'];
             $temparray['title'] = $pvalue['title'];
             
