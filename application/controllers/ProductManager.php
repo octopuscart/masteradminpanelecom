@@ -633,15 +633,7 @@ class ProductManager extends CI_Controller {
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
 
-        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id order by id desc";
-        $productslist = $this->Product_model->query_exe($query);
-        $return_array = array();
-        foreach ($productslist as $pkey => $pvalue) {
-            $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
-            array_push($return_array, $pvalue);
-        }
 
-        $data['product_data'] = $return_array;
         $this->load->view('productManager/productReport', $data);
     }
 
