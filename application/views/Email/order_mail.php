@@ -79,19 +79,7 @@
           background: rgb(225, 225, 225);
           font-family: sans-serif;">
         <div class="" style="padding:50px 0px">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #000;padding: 0 20px">
-                <tr>
-                    <td >
-                        <center><img src="<?php echo site_mail_logo; ?> " style="margin: 10px;
-                                     height: 50px;
-                                     width: auto;"/><br/>
-                            <h4 style="color: white;"> Order No.: <?php echo $order_data->order_no; ?></h4>
-                        </center>
-                    </td>
-
-                </tr>
-
-            </table>
+            <?php echo email_header;?>
             <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff">
                 <tr>
                     <td style="font-size: 12px;width: 50%" >
@@ -339,44 +327,13 @@
 
 
 
+<?php
 
+echo email_footer;
 
+?>
 
-
-                        <p>For any order related queries, please email us at info@bespoketailorshk.com</p>
-
-                        <p>We assure you of best services at all times.</p>
-
-                        <div style="height: 200px;">Kindest Regards,<br />
-                            <img src="<?php echo site_mail_logo; ?>" style="height: 30px;  background: #000 ;margin: 5px 0px 10px ;"><br/>
-                                <span style="float: left; font-size: 12px;">
-
-                                    <address>
-                                        <b>Address 1</b><br/>
-                                        2nd Floor, 45 Haiphong Road,<br/> 
-                                        Tsim Sha Tsui, Kowloon, Hong Kong
-                                        <br/><br/>
-                                        <b>Address 2</b><br/>
-                                        Shop D, Ground Floor, Hanyee Building, 19-21 Hankow Road, <br/>
-                                        Tsim Sha Tsui, Kowloon, Hong Kong                                        <br/>
-                                        <b>Tel#</b>: +(852) 2730 8566  <b>Fax#</b>: +(852) 2730 8577<br/>
-                                        <b>Email</b>: info@bespoketailorshk.com  
-                                        <b>Web</b>: www.bespoketailorshk.com</b>
-
-
-                                    </address>
-                                </span>
-                        </div>
-
-                        <br/>
-                        <span style="    text-align: center;
-                              width: 100%;
-                              float: left;
-                              margin-top: 24px;
-                              background-color: white;
-                              color: black;
-                              font-size: 10px;"> (This is computer generated receipt and does not require physical signature.)</span>
-                    </td>
+ </td>
                 </tr>
 
             </table>

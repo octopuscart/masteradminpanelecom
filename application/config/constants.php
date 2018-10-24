@@ -31,6 +31,14 @@ define('email_sender_name', $configuration['email_sender_name']);
 define('email_bcc', $configuration['email_bcc']);
 
 
+//reporting
+define('pdf_report_header', $globleConnectReport['pdf_report_header']);
+define('email_header', $globleConnectReport['email_header']);
+define('email_footer', $globleConnectReport['email_footer']);
+define('message_header', $globleConnectReport['message_header']);
+define('report_mode', $globleConnectReport['report_mode']);
+
+
 
 /*
   |--------------------------------------------------------------------------

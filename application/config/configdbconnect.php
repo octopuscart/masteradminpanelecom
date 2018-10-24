@@ -10,6 +10,14 @@ try {
     while($row = $stmt->fetch()) {
         $globleConnectDB = $row;
     }
+    
+    $stmt = $conn->prepare('SELECT * FROM report_configuration');
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+        $globleConnectReport = $row;
+    }
+    
+    
 } catch(PDOException $e) {
  
 }

@@ -176,7 +176,7 @@ class Order_model extends CI_Model {
             $subject = "Bespoke Tailors - " . $currentstatus->remark;
             $this->email->subject($subject);
             
-            $checkcode = 1;
+            $checkcode = report_mode;
             if ($checkcode == 0) {
                 echo $this->load->view('Email/order_mail', $order_details, true);
             } else {
@@ -196,7 +196,7 @@ class Order_model extends CI_Model {
             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . ".pdf";
-            $checkcode = 1;
+            $checkcode = report_mode;
             if ($checkcode == 0) {
                 echo $html;
             } else {
@@ -219,7 +219,7 @@ class Order_model extends CI_Model {
             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . "_worker_report.pdf";
-            $checkcode = 1;
+            $checkcode = report_mode;
             if ($checkcode == 0) {
                 echo $html;
             } else {
