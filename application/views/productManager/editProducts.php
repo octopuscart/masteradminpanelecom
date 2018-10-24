@@ -332,26 +332,30 @@ $session_data = $this->session->userdata('logged_in');
                                                 $atid = $value->id;
                                                 $attr = $value->attribute;
                                                 $attribuites = $product_model->category_attribute_list($atid);
-                                                ?>
-                                                <li class='list-group-item'>
-                                                    <?php echo $attr; ?> 
-                                                    <input type="hidden" name="attr_name[]" value="<?php echo $attr; ?>">
-                                                    <input type="hidden" name="attr_id[]" value="<?php echo $atid; ?>">
-                                                    <button type="button" class="btn btn-success btn-xs" style="margin-left: 10px" ng-click="addAttribute('<?php echo $atid; ?>', '<?php echo $attr; ?>')" data-toggle="modal" data-target="#attributeModel">Add New</button>
+                                                if ($value->widget == 'color') {
+                                                    ?>
 
-                                                    <select  name='attr_value[]' class='form-control' style="margin-top: 10px;">
-                                                        <?php
-                                                        foreach ($attribuites as $key => $value) {
-                                                            $atv = $value['attribute_value'];
-                                                            $atid = $value['attribute_id'];
-                                                            $atvid = $value['id'];
-                                                            $preatter = $product_attributes[$atid]['attribute_value_id'] == $atvid ? 'selected' : '';
-                                                            echo "<option value='$atvid' $preatter>$atv</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </li>
-                                                <?php
+                                                    <li class='list-group-item'>
+                                                        <?php echo $attr; ?> 
+                                                        <input type="hidden" name="attr_name[]" value="<?php echo $attr; ?>">
+                                                        <input type="hidden" name="attr_id[]" value="<?php echo $atid; ?>">
+                                                        <button type="button" class="btn btn-success btn-xs" style="margin-left: 10px" ng-click="addAttribute('<?php echo $atid; ?>', '<?php echo $attr; ?>')" data-toggle="modal" data-target="#attributeModel">Add New</button>
+
+                                                        <select  name='attr_value[]' class='form-control' style="margin-top: 10px;">
+                                                            <?php
+                                                            foreach ($attribuites as $key => $value) {
+                                                                $atv = $value['attribute_value'];
+                                                                $atid = $value['attribute_id'];
+                                                                $attav = $value['additional_value'];
+                                                                $atvid = $value['id'];
+                                                                $preatter = $product_attributes[$atid]['attribute_value_id'] == $atvid ? 'selected' : '';
+                                                                echo "<option value='$atvid' $preatter style='background:$attav'>$atv</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </li>
+                                                    <?php
+                                                }
                                             }
                                             ?>
                                         </ul>
@@ -408,14 +412,14 @@ $session_data = $this->session->userdata('logged_in');
     <?php
     if (!$product_obj->variant_product_of) {
         ?>
-                                                                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+                                                                                <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->id); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
         <?php
     }
     ?>
     <?php
     if ($product_obj->variant_product_of) {
         ?>
-                                                                            <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
+                                                                                <a class="btn btn-success" href="<?php echo site_url('ProductManager/variant_product/' . $product_obj->variant_product_of); ?>" style="margin-left: 50px"><i class="fa fa-plus"></i> Add New</a>
         <?php
     }
     ?>
@@ -427,39 +431,39 @@ $session_data = $this->session->userdata('logged_in');
     <?php
     foreach ($variant_products as $key => $value) {
         ?>
-                                                                            <div class="col-md-3">                           
-                                                                                <div class="thumbnail" >
-                                                                                    <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
-                                                                                    </div>               
-                                                                                    <div class="caption">
-                                                        
-                                                                                        <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
-                                                                                            <i class="fa fa-edit"></i>
-                                                                                        </a>
-                                                                                        <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
-                                                        
-                                                        
-                                                                                        <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
-                                                                                        <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
-                                                                                        <P>
+                                                                                <div class="col-md-3">                           
+                                                                                    <div class="thumbnail" >
+                                                                                        <div class="product_image product_image_back" style="background: url(<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>)">
+                                                                                        </div>               
+                                                                                        <div class="caption">
+                                                            
+                                                                                            <a href="<?php echo site_url('ProductManager/edit_product/' . $value->product_id); ?>" class="editbutonproduct">
+                                                                                                <i class="fa fa-edit"></i>
+                                                                                            </a>
+                                                                                            <h4 style="font-size: 15px"> <?php echo $value->title; ?></h4>
+                                                            
+                                                            
+                                                                                            <h4 style="font-size: 15px">{{<?php echo $value->price | 0; ?>|currency:" "}}</h4>
+                                                                                            <p style="font-size: 12px;"><b>SKU</b>:<?php echo $value->sku; ?></p>
+                                                                                            <P>
         <?php
         $attr = $attributefunction->variant_product_attr($value->product_id);
         foreach ($attr as $key => $value) {
             ?>
-                                                                                                                                                <li style="margin: 5px"><span class="attrkey">
+                                                                                                                                                        <li style="margin: 5px"><span class="attrkey">
             <?php echo $value['attribute']; ?>
-                                                                                                                                                    </span>
-                                                                                                                                                    <span class="attrval">
+                                                                                                                                                            </span>
+                                                                                                                                                            <span class="attrval">
             <?php echo $value['attribute_value']; ?>
-                                                                                                                                                    </span>
-                                                                                                                                                </li>
+                                                                                                                                                            </span>
+                                                                                                                                                        </li>
             <?php
         }
         ?>
-                                                                                        </P>
+                                                                                            </P>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
     <?php }
     ?>
                 </div>
@@ -483,25 +487,25 @@ $session_data = $this->session->userdata('logged_in');
         <?php
         foreach ($related_products as $key => $value) {
             ?>
-                                                                                        <div class="col-md-6 ">
-                                                                                            <div class="panel panel-default">
-                                                                                                <div class="media" style="    padding: 10px;">
-                                                                                                    <div class="media-left">
-                                                                                                        <a href="#">
-                                                                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div class="media-body">
-                                                                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                                                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                                                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                                                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
+                                                                                            <div class="col-md-6 ">
+                                                                                                <div class="panel panel-default">
+                                                                                                    <div class="media" style="    padding: 10px;">
+                                                                                                        <div class="media-left">
+                                                                                                            <a href="#">
+                                                                                                                <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                        <div class="media-body">
+                                                                                                            <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                                                                            <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                                                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                                                                            <input type="checkbox" name="related_product_id[]" value="<?php echo $value->related_product_id; ?>">
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </div>
-                                                            
-                                                            
+                                                                
+                                                                
         <?php }
         ?>
                             </div>
@@ -525,25 +529,25 @@ $session_data = $this->session->userdata('logged_in');
         <?php
         foreach ($related_products_check as $key => $value) {
             ?>
-                                                                                        <div class="col-md-6 ">
-                                                                                            <div class="panel panel-default">
-                                                                                                <div class="media" style="    padding: 10px;">
-                                                                                                    <div class="media-left">
-                                                                                                        <a href="#">
-                                                                                                            <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div class="media-body">
-                                                                                                        <h4 class="media-heading"><?php echo $value->title; ?></h4>
-                                                                                                        <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
-                                                                                                        <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
-                                                                                                        <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
+                                                                                            <div class="col-md-6 ">
+                                                                                                <div class="panel panel-default">
+                                                                                                    <div class="media" style="    padding: 10px;">
+                                                                                                        <div class="media-left">
+                                                                                                            <a href="#">
+                                                                                                                <img class="media-object" src="<?php echo ($value->file_name ? base_url() . "assets_main/productimages/" . $value->file_name : base_url() . "assets_main/" . default_image); ?>" alt="..." style="    width: auto; height: 93px;">
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                        <div class="media-body">
+                                                                                                            <h4 class="media-heading"><?php echo $value->title; ?></h4>
+                                                                                                            <p style="font-size: 12px;"><?php echo $value->short_description; ?></p>
+                                                                                                            <p >{{<?php echo $value->price | 0; ?>|currency:" "}}</p>
+                                                                                                            <input type="checkbox" name="related_product_id[]" value="<?php echo $value->product_id; ?>">
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </div>
-                                                            
-                                                            
+                                                                
+                                                                
         <?php }
         ?>
                             </div>

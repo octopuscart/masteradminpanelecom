@@ -185,6 +185,27 @@ class ProductManager extends CI_Controller {
         }
         return array('category_attribute' => $categorylistattr, 'category_id' => $category_id, 'category_str' => $categorystr['category_string']);
     }
+    
+    
+    
+    //Attribute Command
+    function attributeCategoryListComman() {
+
+        $categorylistattr = array();
+        
+            $this->db->from('category_attribute');
+            $this->db->where('category_id', 'cm');
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $temp = $query->result();
+                foreach ($temp as $key => $value) {
+                    $categorylistattr[$value->id] = $value;
+                }
+            }
+        
+        return array('category_attribute' => $categorylistattr, 'category_id' => $category_id, 'category_str' => $categorystr['category_string']);
+    }
+    
 
     //
     function createAttribute($category_id) {
@@ -395,7 +416,15 @@ class ProductManager extends CI_Controller {
         $this->db->select('id, category_name');
         $query = $this->db->get('category');
         $data['category_data'] = $query->result();
-        $catarobj = $this->attributeCategoryList($productobj->category_id);
+        
+//        $catarobj = $this->attributeCategoryList($productobj->category_id);
+//        $data['category_id'] = $catarobj['category_id'];
+//        $data['category_attribute'] = $catarobj['category_attribute'];
+//        $data['category_str'] = $catarobj['category_str'];
+        
+        
+         $catarobj = $this->attributeCategoryListComman();
+        
         $data['category_id'] = $catarobj['category_id'];
         $data['category_attribute'] = $catarobj['category_attribute'];
         $data['category_str'] = $catarobj['category_str'];
@@ -621,21 +650,63 @@ class ProductManager extends CI_Controller {
         $draw = intval($this->input->get("draw"));
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
+
+        $searchqry = "";
+
+        $search = $this->input->get("search")['value'];
+        if ($search) {
+            $searchqry = " where p.title like '%$search%' ";
+        }
+
+
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
 
-        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id order by id desc";
-        $query = $this->db->query($query);
-        $productslist = $query->result_array();
+        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id  $searchqry  order by id desc ";
+        $query1 = $this->db->query($query);
+        $productslistcount = $query1->result_array();
+
+        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id $searchqry  order by id desc limit  $start, $length";
+        $query2 = $this->db->query($query);
+        $productslist = $query2->result_array();
+
+
+
+
         $return_array = array();
         foreach ($productslist as $pkey => $pvalue) {
-            $pvalue['items_price'] = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
-            array_push($return_array, $pvalue);
+            $temparray = array();
+            $temparray['s_n'] = $pkey + 1;
+            $temparray['image'] = "<img src='" . product_image_base . 'coman/output/' . $pvalue['folder'] . "/cutting20001.png' style='height:51px;'>";
+            $temparray['sku'] = $pvalue['sku'];
+            $temparray['title'] = $pvalue['title'];
+            
+            $temparray['short_description'] = $pvalue['short_description'];
+
+            $catarray = $this->Product_model->parent_get($pvalue['category_id']);
+            $temparray['category'] = $catarray['category_string'];
+            $temparray['edit'] = "";
+            $itemsprice = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
+
+            $pricetable = '<table class="sub_item_table">';
+
+
+            foreach ($itemsprice as $iikey => $iivalue) {
+
+                $pricetable .= "<tr><td style='width:50px;'>" . ($iivalue->item_name) . "</td><td>" . ($iivalue->price) . "</td></tr>";
+            }
+
+            $pricetable .= '</table>';
+            $temparray['items_prices'] = $pricetable;
+
+            $temparray['edit'] = '<a href="' . site_url('ProductManager/edit_product/' . $pvalue['id']) . '" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>';
+
+            array_push($return_array, $temparray);
         }
         $output = array(
             "draw" => $draw,
-            "recordsTotal" => $query->num_rows(),
-            "recordsFiltered" => $query->num_rows(),
+            "recordsTotal" => $query2->num_rows(),
+            "recordsFiltered" => $query1->num_rows(),
             "data" => $return_array
         );
         echo json_encode($output);

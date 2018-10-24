@@ -25,6 +25,7 @@ $this->load->view('layout/layoutTop');
     .sub_item_table tr{
         border-bottom: 1px solid #dbd3d3;
     }
+
 </style>
 <!-- Main content -->
 <section class="content">
@@ -41,10 +42,10 @@ $this->load->view('layout/layoutTop');
                             <th style="width: 20px;">S.N.</th>
                             <th style="width:50px;">Image</th>
                             <th style="width:150px;">Category</th>
+                            <th style="width:50px;">SKU</th>
                             <th style="width:100px;">Title</th>
                             <th style="width:200px;">Short Description</th>
                             <th >Items Prices</th>
-                            <th >Stock Status</th>
                             <th style="width: 75px;">Edit</th>
                         </tr>
                     </thead>
@@ -67,12 +68,21 @@ $this->load->view('layout/layoutFooter');
     $(function () {
 
         $('#tableData').DataTable({
-              "processing": true,
-        "serverSide": true,
+            "processing": true,
+            "serverSide": true,
             "ajax": {
                 url: "<?php echo site_url("ProductManager/productReportApi") ?>",
                 type: 'GET'
             },
+            "columns": [
+                {"data": "s_n"},
+                {"data": "image"},
+                {"data": "category"},
+                {"data": "sku"},
+                {"data": "title"},
+                {"data": 'short_description'},
+                {"data": "items_prices"},
+                {"data": "edit"}]
         })
     })
 

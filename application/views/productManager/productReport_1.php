@@ -78,7 +78,6 @@ $this->load->view('layout/layoutTop');
                                         <table class='sub_item_table'>
                                             <?php
                                             $itemsprice = $value['items_price'];
-
                                             foreach ($itemsprice as $iikey => $iivalue) {
                                                 echo "<tr><td>" . ($iivalue->item_name) . "</td><td>: {{" . ($iivalue->price) . "|currency:''}}</td></tr>";
                                             }

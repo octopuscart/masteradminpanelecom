@@ -19,8 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
  */
 $baselink = 'https://' . $_SERVER['SERVER_NAME'];
-
-$baselinkmain = strpos($baselink, '192.168') ? $baselink . '/adminpanel_main' : $baselink . '/';
+$baselinkurl = $_SERVER['SERVER_NAME'];
+$baselinkmain = strpos($baselink, '192.168') ? 'http://' .$baselinkurl . '/adminpanel_main' : 'https://' .$baselinkurl . '/';
 
 $config['base_url'] = $baselinkmain;
 
