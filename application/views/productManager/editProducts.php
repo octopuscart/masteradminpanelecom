@@ -600,7 +600,8 @@ $session_data = $this->session->userdata('logged_in');
                         <h4 class="modal-title" id="myModalLabel">{{attributeSelected.title}}</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="text" class="form-control" name="attribute_value">
+                        <input type="text" class="form-control" name="attribute_value" placeholder="Color Name">
+                        <input type="text" class="form-control" name="additional_value" placeholder="Color Code: #000fff">
                         <input type="hidden" class="form-control" name="attribute_name" ng-model="attributeSelected.title" value="{{attributeSelected.title}}">
                         <input type="hidden" class="form-control" name="attribute_id" ng-model="attributeSelected.id" value="{{attributeSelected.id}}">
                     </div>

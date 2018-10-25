@@ -434,6 +434,7 @@ class ProductManager extends CI_Controller {
             $category_attr_array = array(
                 'attribute_id' => $this->input->post('attribute_id'),
                 'attribute_value' => $this->input->post('attribute_value'),
+                'additional_value' => $this->input->post('additional_value'),
             );
             $this->db->insert('category_attribute_value', $category_attr_array);
             $last_id = $this->db->insert_id();
