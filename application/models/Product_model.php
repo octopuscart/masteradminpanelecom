@@ -127,7 +127,7 @@ where pa.product_id = $product_id group by attribute_value_id";
     }
 
     function productAttributes($product_id) {
-        $pquery = "SELECT pa.attribute, cav.attribute_value FROM product_attribute as pa
+        $pquery = "SELECT pa.attribute, cav.attribute_value, cav.additional_value FROM product_attribute as pa
       join category_attribute_value as cav on cav.id = pa.attribute_value_id
       where pa.product_id = $product_id";
         $attr_products = $this->query_exe($pquery);

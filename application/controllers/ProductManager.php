@@ -185,27 +185,24 @@ class ProductManager extends CI_Controller {
         }
         return array('category_attribute' => $categorylistattr, 'category_id' => $category_id, 'category_str' => $categorystr['category_string']);
     }
-    
-    
-    
+
     //Attribute Command
     function attributeCategoryListComman() {
 
         $categorylistattr = array();
-        
-            $this->db->from('category_attribute');
-            $this->db->where('category_id', 'cm');
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $temp = $query->result();
-                foreach ($temp as $key => $value) {
-                    $categorylistattr[$value->id] = $value;
-                }
+
+        $this->db->from('category_attribute');
+        $this->db->where('category_id', 'cm');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $temp = $query->result();
+            foreach ($temp as $key => $value) {
+                $categorylistattr[$value->id] = $value;
             }
-        
+        }
+
         return array('category_attribute' => $categorylistattr, 'category_id' => $category_id, 'category_str' => $categorystr['category_string']);
     }
-    
 
     //
     function createAttribute($category_id) {
@@ -416,15 +413,15 @@ class ProductManager extends CI_Controller {
         $this->db->select('id, category_name');
         $query = $this->db->get('category');
         $data['category_data'] = $query->result();
-        
+
 //        $catarobj = $this->attributeCategoryList($productobj->category_id);
 //        $data['category_id'] = $catarobj['category_id'];
 //        $data['category_attribute'] = $catarobj['category_attribute'];
 //        $data['category_str'] = $catarobj['category_str'];
-        
-        
-         $catarobj = $this->attributeCategoryListComman();
-        
+
+
+        $catarobj = $this->attributeCategoryListComman();
+
         $data['category_id'] = $catarobj['category_id'];
         $data['category_attribute'] = $catarobj['category_attribute'];
         $data['category_str'] = $catarobj['category_str'];
@@ -670,24 +667,32 @@ class ProductManager extends CI_Controller {
         foreach ($productslist as $pkey => $pvalue) {
             $temparray = array();
             $temparray['s_n'] = $pkey + 1;
-            
+
             $product_folders = explode(", ", product_folders);
             $imageurl = "";
-             if(count($product_folders)){
-               $imageurl =product_image_base.  str_replace("folder", $pvalue['folder'] , $product_folders[0]);
-             }
-            
-            
+            if (count($product_folders)) {
+                $imageurl = product_image_base . str_replace("folder", $pvalue['folder'], $product_folders[0]);
+            }
+
+
             $temparray['image'] = "<img src='$imageurl' style='height:51px;'>";
             $temparray['sku'] = $pvalue['sku'];
             $temparray['title'] = $pvalue['title'];
-            
+
             $temparray['short_description'] = $pvalue['short_description'];
 
             $catarray = $this->Product_model->parent_get($pvalue['category_id']);
             $temparray['category'] = $catarray['category_string'];
             $temparray['edit'] = "";
             $itemsprice = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
+
+            $productattr = $this->Product_model->productAttributes($pvalue['id']);
+            $colorbutton = "<button class='btn btn-default btn-xs btn-block'>Add/Change</button>";
+           $temparray['color'] =  "";
+            if(count($productattr)){
+                $temparray['color'] = "<span class='colorbox' title='".$productattr[0]['attribute_value']."' style='background:".$productattr[0]['additional_value']."'>".$productattr[0]['attribute_value']."</span><br/>$colorbutton";
+            }
+            
 
             $pricetable = '<table class="sub_item_table">';
 
