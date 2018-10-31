@@ -26,13 +26,13 @@ $this->load->view('layout/layoutTop');
         border-bottom: 1px solid #dbd3d3;
     }
     span.colorbox {
-    float: left;
-    width: 100%;
-    padding: 5px;
-    text-align: center;
-    color: white;
-    text-shadow: 0px 2px 4px #fff;
-}
+        float: left;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+        color: white;
+        text-shadow: 0px 2px 4px #fff;
+    }
 
 </style>
 <!-- Main content -->
@@ -69,6 +69,25 @@ $this->load->view('layout/layoutTop');
 <!-- end col-6 -->
 </div>
 
+<div class="modal fade" id="attributeModel" tabindex="-1" role="dialog" aria-labelledby="attributeModel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <form action="#" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add/Change Color</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="save_attr" value="save_attr" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <?php
 $this->load->view('layout/layoutFooter');
