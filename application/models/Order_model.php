@@ -170,7 +170,7 @@ class Order_model extends CI_Model {
         if ($order_details) {
             $currentstatus = $order_details['order_status'][0];
             $order_no = $order_details['order_data']->order_no;
-            $this->email->from($emailsender, $sendername);
+            $this->email->from(email_bcc, $sendername);
             $this->email->to($order_details['order_data']->email);
             $this->email->bcc(email_bcc);
             $subject = sitename." - " . $currentstatus->remark;
