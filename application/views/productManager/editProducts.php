@@ -363,7 +363,7 @@ $session_data = $this->session->userdata('logged_in');
 
 
     <!--veriant products-->
-    <!--    <div class="box box-danger">
+        <div class="box box-danger">
             <div class="box-header">
                 <h3 class="box-title">
                     Products Variant
@@ -426,13 +426,13 @@ $session_data = $this->session->userdata('logged_in');
     ?>
                 </div>
             </div>
-        </div>-->
+        </div>
     <!--end of verient products-->
 
 
     <?php if ($session_data['user_type'] == 'Admin') { ?>
 
-        <!--        related products select
+                related products select
                 <div class="box box-danger">
                     <div class="box-header">
                         <h3 class="box-title">
@@ -471,10 +471,10 @@ $session_data = $this->session->userdata('logged_in');
                         </form>
                     </div>
                 </div>
-                end of related products
+                <!--end of related products-->
         
         
-                related products select
+                <!--related products select-->
                 <div class="box box-danger">
                     <div class="box-header">
                         <h3 class="box-title">
@@ -513,7 +513,7 @@ $session_data = $this->session->userdata('logged_in');
                         </form>
                     </div>
                 </div>
-                end of related products-->
+                <!--end of related products-->
         <?php
     }
     ?>
