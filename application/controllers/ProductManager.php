@@ -378,7 +378,7 @@ class ProductManager extends CI_Controller {
         }
         $vproduct_id = $product_id;
 
-        $data['product_prices'] = $product_model->category_items_prices_id($productobj->category_items_id);
+        $data['product_prices'] = array();
 
 
         if ($productobj->variant_product_of) {
@@ -557,9 +557,9 @@ class ProductManager extends CI_Controller {
             $this->db->set('description', $this->input->post('description'));
             $this->db->set('title', $this->input->post('title'));
             $this->db->set('short_description', $this->input->post('short_description'));
-            $this->db->set('regular_price', "");
-            $this->db->set('sale_price', "");
-            $this->db->set('price', "");
+            $this->db->set('regular_price', $this->input->post('regular_price'));
+            $this->db->set('sale_price', $this->input->post('sale_price'));
+            $this->db->set('price', $this->input->post('price'));
             $this->db->set('credit_limit', "");
             $this->db->set('stock_status', $this->input->post('stock_status'));
             $this->db->set('keywords', $this->input->post('keywords'));
@@ -684,7 +684,6 @@ class ProductManager extends CI_Controller {
             $catarray = $this->Product_model->parent_get($pvalue['category_id']);
             $temparray['category'] = $catarray['category_string'];
             $temparray['edit'] = "";
-            $itemsprice = $this->Product_model->category_items_prices_id($pvalue['category_items_id']);
 
             $productattr = $this->Product_model->productAttributes($pvalue['id']);
             $colorbutton = "<button class='btn btn-default btn-xs btn-block'>Add/Change</button>";
@@ -694,16 +693,8 @@ class ProductManager extends CI_Controller {
             }
             
 
-            $pricetable = '<table class="sub_item_table">';
-
-
-            foreach ($itemsprice as $iikey => $iivalue) {
-
-                $pricetable .= "<tr><td style='width: 74px;float: left;'>" . ($iivalue->item_name) . "</td><td>" . ($iivalue->price) . "</td></tr>";
-            }
-
-            $pricetable .= '</table>';
-            $temparray['items_prices'] = $pricetable;
+            
+            $temparray['items_prices'] =   $pvalue['price'];;
 
             $temparray['edit'] = '<a href="' . site_url('ProductManager/edit_product/' . $pvalue['id']) . '" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>';
 
