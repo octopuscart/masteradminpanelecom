@@ -478,6 +478,9 @@ class ProductManager extends CI_Controller {
                     $uploadData = $this->upload->data();
                     $file_newname = $uploadData['file_name'];
                     $this->db->set('file_name', $file_newname);
+                 
+                    $this->db->where('id', $product_id); //set column_name and value in which row need to update
+                    $this->db->update('products'); //
                 }
             }
 
