@@ -117,11 +117,11 @@ function checkPermission($session_data) {
                 </a>
                 <ul class="treeview-menu">
 
-                    <!--                    <li>
+                                        <li>
                                             <a href="<?php echo base_url(); ?>index.php/ProductManager/add_product">
                                                 <i class="active fa fa-plus "></i> <span>Add Product</span>
                                             </a>
-                                        </li>   -->
+                                        </li>   
                     <li>
                         <a href="<?php echo base_url(); ?>index.php/ProductManager/productReport">
                             <i class="active fa fa-plus "></i> <span>Product Reports</span>
