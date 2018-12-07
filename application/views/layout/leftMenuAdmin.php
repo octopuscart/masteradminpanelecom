@@ -200,10 +200,10 @@ function checkPermission($session_data) {
                         <!--Admin Access-->
 
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Services/newslatter/1">
+                            <a href="<?php echo site_url("Messages/getContactList")?>">
                                 <i class="active fa fa-plus "></i> <span>Send Mail/Newsletter</span>
                             </a>
-                        </li>   
+                        </li>  
                         <!--end of admin access-->
                     </ul>
                 </li>
