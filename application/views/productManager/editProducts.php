@@ -264,8 +264,7 @@ $session_data = $this->session->userdata('logged_in');
                                         </div>
                                         <div class="form-group">
                                             <label >Final Price</label>
-                                            <span class="final_price form-control" id='finalprice'>{{price.price}}</span>
-                                            <input type="hidden" class="form-control price_tag_text" id='finalprice1' name="price" ng-model="price.price" aria-describedby="emailHelp" placeholder="" > 
+                                            <input type="number" class="form-control price_tag_text" id='finalprice1' name="price" ng-model="price.price" aria-describedby="emailHelp" placeholder="" > 
                                         </div>
 
                                         <div class="form-group">
