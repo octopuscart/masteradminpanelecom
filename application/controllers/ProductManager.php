@@ -674,11 +674,11 @@ class ProductManager extends CI_Controller {
             $product_folders = explode(", ", product_folders);
             $imageurl = "";
             if (count($product_folders)) {
-                $imageurl = product_image_base . str_replace("folder", $pvalue['folder'], $product_folders[0]);
+                $imageurl = $pvalue['file_name'];
             }
 
 
-            $temparray['image'] = "<img src='$imageurl' style='height:51px;'>";
+            $temparray['image'] = "<img src='https://admin.octopuscart.com/assets_main/productimages/$imageurl' style='height:51px;'>";
             $temparray['sku'] = $pvalue['sku'];
             $temparray['title'] = $pvalue['title'];
 
