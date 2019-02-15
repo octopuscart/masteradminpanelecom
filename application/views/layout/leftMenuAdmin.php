@@ -144,17 +144,13 @@ function checkPermission($session_data) {
                             </a>
                         </li>  
                         
-                        <?php
-                        if($session_data['user_type']=='Developer'){
-                        ?>
+                      
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/ProductManager/createAttribute">
                                 <i class="active fa fa-plus "></i> <span>Attributes</span>
                             </a>
                         </li>   
-                        <?php
-                        }
-                        ?>
+                      
                         <!--end of admin access-->
 
                         <?php

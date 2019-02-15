@@ -168,6 +168,7 @@ class ProductManager extends CI_Controller {
     //----------------------------
     //Attribute 
     function attributeCategoryList($category_id) {
+      
         $categorystr = $this->Product_model->parent_get($category_id);
         $categorylist = $categorystr['category_array'];
         $categorylistattr = array();
@@ -178,7 +179,9 @@ class ProductManager extends CI_Controller {
             $query = $this->db->get();
             if ($query->num_rows() > 0) {
                 $temp = $query->result();
+              
                 foreach ($temp as $key => $value) {
+                  
                     $categorylistattr[$value->id] = $value;
                 }
             }
@@ -414,13 +417,13 @@ class ProductManager extends CI_Controller {
         $query = $this->db->get('category');
         $data['category_data'] = $query->result();
 
-//        $catarobj = $this->attributeCategoryList($productobj->category_id);
-//        $data['category_id'] = $catarobj['category_id'];
-//        $data['category_attribute'] = $catarobj['category_attribute'];
-//        $data['category_str'] = $catarobj['category_str'];
+        $catarobj = $this->attributeCategoryList($productobj->category_id);
+        $data['category_id'] = $catarobj['category_id'];
+        $data['category_attribute'] = $catarobj['category_attribute'];
+        $data['category_str'] = $catarobj['category_str'];
 
 
-        $catarobj = $this->attributeCategoryListComman();
+//        $catarobj = $this->attributeCategoryList();
 
         $data['category_id'] = $catarobj['category_id'];
         $data['category_attribute'] = $catarobj['category_attribute'];
