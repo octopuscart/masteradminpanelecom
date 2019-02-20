@@ -177,4 +177,18 @@ where pa.product_id=$product_id ";
         return $category_items_return;
     }
 
+    function stringCategories($category_id) {
+        $this->db->where('parent_id', $category_id);
+        $query = $this->db->get('category');
+        $category = $query->result_array();
+        $container = "";
+        foreach ($category as $ckey => $cvalue) {
+            $container .= $this->stringCategories($cvalue['id']);
+            $container .=", " . $cvalue['id'];
+        }
+        return $container;
+    }
+    
+    
+    
 }
