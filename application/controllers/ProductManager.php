@@ -681,7 +681,7 @@ class ProductManager extends CI_Controller {
             }
 
 
-            $temparray['image'] = "<img src='https://admin.octopuscart.com/assets_main/productimages/$imageurl' style='height:51px;'>";
+            $temparray['image'] = "<img src='".product_image_base.$imageurl."' style='height:51px;'>";
             $temparray['sku'] = $pvalue['sku'];
             $temparray['title'] = $pvalue['title'];
 
