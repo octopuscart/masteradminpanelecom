@@ -693,10 +693,7 @@ class ProductManager extends CI_Controller {
 
             $productattr = $this->Product_model->productAttributes($pvalue['id']);
             $colorbutton = "<button class='btn btn-default btn-xs btn-block'>Add/Change</button>";
-           $temparray['color'] =  "$colorbutton";
-            if(count($productattr)){
-                $temparray['color'] = "<span class='colorbox' title='".$productattr[0]['attribute_value']."' style='background:".$productattr[0]['additional_value']."'>".$productattr[0]['attribute_value']."</span><br/>$colorbutton";
-            }
+          
             
 
             

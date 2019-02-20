@@ -52,7 +52,6 @@ $this->load->view('layout/layoutTop');
                             <th style="width:150px;">Category</th>
                             <th style="width:50px;">SKU</th>
                             <th style="width:100px;">Title</th>
-                            <th style="width:100px;">Color</th>
                             <th style="width:200px;">Short Description</th>
                             <th >Items Prices</th>
                             <th style="width: 75px;">Edit</th>
@@ -108,7 +107,6 @@ $this->load->view('layout/layoutFooter');
                 {"data": "category"},
                 {"data": "sku"},
                 {"data": "title"},
-                {"data": "color"},
                 {"data": 'short_description'},
                 {"data": "items_prices"},
                 {"data": "edit"}]
