@@ -138,11 +138,12 @@ function checkPermission($session_data) {
                         </li>    
                         
                         
+                         
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/ProductManager/categoryItems">
-                                <i class="active fa fa-plus "></i> <span>Items Prices</span>
+                            <a href="<?php echo base_url(); ?>index.php/ProductManager/productSorting">
+                                <i class="active fa fa-plus "></i> <span>Product Sorting</span>
                             </a>
-                        </li>  
+                        </li> 
                         
                       
                         <li>
