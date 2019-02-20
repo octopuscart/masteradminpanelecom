@@ -376,4 +376,24 @@ class Configuration extends CI_Controller {
         $this->load->view('Configuration/add_barcode', $data);
     }
 
+    
+    
+    public function migration() {
+    
+        
+        if ($this->db->field_exists('display_index', 'category')) {
+            // table exists
+        } else {
+            $this->db->query('ALTER TABLE `category` ADD `display_index` INT NOT NULL AFTER `parent_id`;');
+        }
+        
+        if ($this->db->field_exists('display_index', 'products ')) {
+            // table exists
+        } else {
+            $this->db->query('ALTER TABLE `products` ADD `display_index` INT NOT NULL AFTER `folder`;');
+        }
+        
+        
+    }
+    
 }

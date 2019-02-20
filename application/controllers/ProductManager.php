@@ -715,6 +715,11 @@ class ProductManager extends CI_Controller {
         echo json_encode($output);
         exit();
     }
+    
+    
+    
+    
+    
 
     //Add product function
     function add_sliders() {
@@ -757,5 +762,72 @@ class ProductManager extends CI_Controller {
         }
         $this->load->view('productManager/add_sliders', $data);
     }
+    
+    
+       public function productSortingChangeIndexApi($id, $displayindex) {
+        $this->db->set('display_index', ($displayindex));
+        $this->db->where('id', $id);
+        $this->db->update('products');
+    }
+
+    public function productSortingChangeStatusApi($id, $status) {
+        $this->db->set('status', $status);
+        $this->db->where('id', $id);
+        $this->db->update('products');
+    }
+
+    public function productSortingApi($category_id) {
+        $startp = $this->input->get('start_page');
+        $endp = $this->input->get('end_page');
+        if ($endp) {
+            
+        } else {
+            $endp = 0;
+        }
+        if ($category_id) {
+            
+        } else {
+            $category_id = 0;
+        }
+        $categoriesString = $this->Product_model->stringCategories($category_id) . ", " . $category_id;
+        $categoriesString = ltrim($categoriesString, ", ");
+        $sqldata = "select *, 'false' as checked from products where category_id in ($categoriesString) and status =1 order by display_index desc";
+        $query = $this->db->query($sqldata);
+        $product_result = $query->result();
+        
+        $productarray = array();
+        $product_folders = explode(", ", product_folders);
+            
+        foreach ($product_result as $rkey => $rvalue) {
+            $imageurl = "";
+            if (count($product_folders)) {
+                $imageurl = product_image_base . str_replace("folder", $rvalue->folder, $product_folders[0]);
+            }
+            $rvalue->image = $imageurl;
+            array_push($productarray, $rvalue);
+        }
+        
+        
+        
+        
+        $productListFinal = $productarray; //array_slice($product_result, $endp, 16);
+        $productarray = array("total_products" => count($product_result), "products" => $productListFinal);
+        echo json_encode($productarray);
+    }
+
+    function productSorting() {
+
+        if (isset($_POST['apply_category'])) {
+            $productids = $this->input->post('product_id');
+            $this->db->set('category_id', $this->input->post('category_id'));
+            $this->db->where_in('id', $productids);
+            $this->db->update('products');
+        }
+
+
+        $data['product_model'] = $product_model;
+        $this->load->view('productManager/productSorting', $data);
+    }
+
 
 }
