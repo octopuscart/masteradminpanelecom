@@ -108,7 +108,9 @@ $this->load->view('layout/layoutTop');
                             <div class="thumbnail">
                                 <img src="{{product.image}}" alt="..." style="height: 150px">
                                 <div class="caption">
-                                    <h3>{{product.title}}</h3>
+                                    <h3 style=" white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;">{{product.title}}</h3>
                                     <p>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-btn">
