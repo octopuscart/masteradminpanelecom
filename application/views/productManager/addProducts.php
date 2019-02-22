@@ -65,8 +65,7 @@ $this->load->view('layout/layoutTop');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label >Final Price</label>
-                                <span class="final_price form-control" id='finalprice'></span>
-                                <input type="hidden" class="form-control price_tag_text" id='finalprice1' name="price"  aria-describedby="emailHelp" placeholder="" value=""> 
+                                <input type="text" class="form-control price_tag_text" id='finalprice1' name="price"  aria-describedby="emailHelp" placeholder="" value=""> 
 
                             </div>
                         </div>
